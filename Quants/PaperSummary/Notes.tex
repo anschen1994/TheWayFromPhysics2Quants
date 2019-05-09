@@ -1,0 +1,182 @@
+
+\documentclass[11pt,a4paper]{article}
+\usepackage{jheppub,amsmath, amsthm, amssymb,slashed,url,diagram,bm}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\def\t{\widetilde} 
+\def\ct{{\cmmib t}}
+\def\btau{{\bm \tau}}
+\def\s{{s}}
+\def\tr{\mathrm{Tr}}
+\def\NSthree{{\mathrm{NS}}^3}
+\def\NSRR{{\mathrm{NS}}\cdot{\mathrm{R}}^2}
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+\def\bt{{{t}}}
+\def\frakn{{\mathfrak N}}
+\def\frakl{{\mathfrak L}}
+\def\eusmn{{\eusm N}}
+\def\Im{{\mathrm{Im}}}
+\def\PGL{{\mathrm{PGL}}}
+\def\OSp{{\mathrm{OSp}}}
+\def\hat{\widehat}
+\def\tilde{\widetilde}
+\def\frak{\mathfrak}
+\def\D{{\mathcal D}}
+\def\S{{\mathcal S}}
+\def\RP{{\Bbb{RP}}}
+\def\NS{{\mathrm{NS}}}
+\def\Ra{{\mathrm{R}}}
+\def\W{{\mathcal W}}
+\def\WW{\mathfrak W}
+\def\MM{\mathfrak M}
+\def\euq{{\eusm F}}
+\def\O{{\mathcal O}}
+\def\V{{\mathcal V}}
+\def\k{{\cmmib k}}
+\def\w{{u}}
+\def\dzzt{\D(\t z,z|\theta)}
+\def\dzztt{\D(\t z,z|\t\theta,\theta)}
+\def\Bbb{\mathbb}
+\def\SIgma{\Sigma}
+\def\red{{\mathrm{red}}}
+\def\A{{\mathcal A}}
+\def\d{{\mathrm d}}
+\def\tW{{W}}
+\def\intt{{\mathrm{int}}}
+\def\b{\overlineAn}
+\def\R{{\mathbb R}}
+\def\RR{{\mathcal R}}
+\def\C{{\mathbb C}}
+\def\U{{\mathcal U}}
+\def\D{{\mathcal D}}
+\def\B{{\mathcal B}}
+\def\G{{\mathcal G}}
+\def\[{\bigl [}
+\def\Spin{{\mathrm{Spin}}}
+\def\]{\bigr ]}
+\def\CP{{\mathbb{CP}}}
+\def\N{{\mathcal N}}
+\def\T{{\mathcal T}}
+\def\p{{'}}
+\def\Z{{\mathbb Z}}
+\def\Q{{\mathbb Q}}
+\def\half{{\frac{1}{2}}}
+\def\CC{{\mathcal C}}
+\def\ad{{\mathrm{ad}}}
+\def\Btriv{{\mathcal B}_{\mathrm{triv}}}
+\def\L{{\eusm L}}
+\def\h{\hat }
+\def\h{\widehat}
+\def\Bcc{{\mathcal B_{\mathrm{cc}}}}
+\def\K{{\mathcal K}}
+\def\V{{\mathcal V}}
+\def\J{{\mathcal J}}
+\def\I{{\mathcal I}}
+\def\P{{\mathcal P}}
+\def\B{{\mathcal B}}
+\def\Boper{{\mathcal B_{\mathrm{oper}}}}
+\def\M{{\mathcal M}}
+\def\W{{\mathcal W}}
+\def\X{\mathcal X}
+\def\Y{\mathcal Y}
+\def\P{{\mathcal P}}
+\def\l{\langle}
+\def\r{\rangle}
+\def\H{{\mathcal H}}
+\def\ZZ{\eusm B}
+\def\cZ{\mathcal Z}
+\def\sW{{ W}}
+\def\epsilon{\varepsilon}
+\def\sY{{ Y}}
+\def\nY{{\mathcal Y}}
+\def\ca{{\cmmib a}}
+\def\ss{{d}}
+\def\sf{{\mathfrak s}}
+\def\e{{\mathbf e}}
+\def\i{{\mathbf i}}
+\def\spin{{\mathrm{spin}}}
+\def\m{\cmmib m}
+\def\tilde{\widetilde}
+\def\bar{\overline}
+\def\neg{\negthinspace}
+\def\Ber{{\mathrm {Ber}}}
+\def\BBer{{\text{\it{Ber}}}}
+\def\TT{{\mathrm T}}
+\def\Tr{{\mathrm {Tr}}}
+\font\teneurm=eurm10 \font\seveneurm=eurm7 \font\eighteurm=eurm8 \font\fiveeurm=eurm5
+\newfam\eurmfam
+\textfont\eurmfam=\teneurm \scriptfont\eurmfam=\seveneurm
+\scriptscriptfont\eurmfam=\fiveeurm
+\def\eurm#1{{\fam\eurmfam\relax#1}}
+%\font\teneurm=eurm10 \font\seveneurm=eurm7 \font\fiveeurm=eurm5
+%\newfam\eurmfam
+%\textfont\eurmfam=\teneurm \scriptfont\eurmfam=\seveneurm
+%\scriptscriptfont\eurmfam=\fiveeurm
+%\def\eurm#1{{\fam\eurmfam\relax#1}}
+\font\teneusm=eusm10 \font\seveneusm=eusm7 \font\fiveeusm=eusm5
+\newfam\eusmfam
+\textfont\eusmfam=\teneusm \scriptfont\eusmfam=\seveneusm
+\scriptscriptfont\eusmfam=\fiveeusm
+\def\eusm#1{{\fam\eusmfam\relax#1}}
+\font\tencmmib=cmmib10 \skewchar\tencmmib='177
+\font\sevencmmib=cmmib7 \skewchar\sevencmmib='177
+\font\fivecmmib=cmmib5 \skewchar\fivecmmib='177
+\newfam\cmmibfam
+\textfont\cmmibfam=\tencmmib \scriptfont\cmmibfam=\sevencmmib
+\scriptscriptfont\cmmibfam=\fivecmmib
+\def\cmmib#1{{\fam\cmmibfam\relax#1}}
+\def\F{\eusm F}
+\def\Pi{\varPi}
+\def\g{\text{{\teneurm g}}}
+\def\sg{\text{{\eighteurm g}}}
+\def\ssg{\text{{\seveneurm g}}}
+\def\n{\text{{\teneurm n}}}
+\def\sn{\text{{\eighteurm n}}}
+\def\ssn{\text{{\seveneurm n}}}
+\def\m{\text{{\teneurm m}}}
+\def\sm{\text{{\eighteurm m}}}
+\def\ssm{\text{{\seveneurm m}}}
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{lemma}{Lemma}[subsection]
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{problem}{Problem}
+
+\title{Notes}
+
+ \author{Yu Chen}
+\affiliation{The Chinese University of HongKong, Department of Mechanical and Automation Engineering}
+\emailAdd{anschen@link.cuhk.edu.hk}
+
+
+
+
+\begin{document}\maketitle
+%-------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
