@@ -1,0 +1,10 @@
+\begin{thebibliography}{1}
+
+\bibitem{sutton2000policy}
+Richard~S Sutton, David~A McAllester, Satinder~P Singh, and Yishay Mansour.
+\newblock Policy gradient methods for reinforcement learning with function
+  approximation.
+\newblock In {\em Advances in neural information processing systems}, pages
+  1057--1063, 2000.
+
+\end{thebibliography}

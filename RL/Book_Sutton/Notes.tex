@@ -1,0 +1,677 @@
+
+\documentclass[11pt,a4paper]{article}
+\usepackage{jheppub,amsmath, amsthm, amssymb,slashed,url,diagram,bm}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{tcolorbox}
+\def\t{\widetilde} 
+\def\ct{{\cmmib t}}
+\def\btau{{\bm \tau}}
+\def\s{{s}}
+\def\tr{\mathrm{Tr}}
+\def\NSthree{{\mathrm{NS}}^3}
+\def\NSRR{{\mathrm{NS}}\cdot{\mathrm{R}}^2}
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+\def\bt{{{t}}}
+\def\frakn{{\mathfrak N}}
+\def\frakl{{\mathfrak L}}
+\def\eusmn{{\eusm N}}
+\def\Im{{\mathrm{Im}}}
+\def\PGL{{\mathrm{PGL}}}
+\def\OSp{{\mathrm{OSp}}}
+\def\hat{\widehat}
+\def\tilde{\widetilde}
+\def\frak{\mathfrak}
+\def\D{{\mathcal D}}
+\def\S{{\mathcal S}}
+\def\RP{{\Bbb{RP}}}
+\def\NS{{\mathrm{NS}}}
+\def\Ra{{\mathrm{R}}}
+\def\W{{\mathcal W}}
+\def\WW{\mathfrak W}
+\def\MM{\mathfrak M}
+\def\euq{{\eusm F}}
+\def\O{{\mathcal O}}
+\def\V{{\mathcal V}}
+\def\k{{\cmmib k}}
+\def\w{{u}}
+\def\dzzt{\D(\t z,z|\theta)}
+\def\dzztt{\D(\t z,z|\t\theta,\theta)}
+\def\Bbb{\mathbb}
+\def\SIgma{\Sigma}
+\def\red{{\mathrm{red}}}
+\def\A{{\mathcal A}}
+\def\d{{\mathrm d}}
+\def\tW{{W}}
+\def\intt{{\mathrm{int}}}
+\def\b{\overlineAn}
+\def\R{{\mathbb R}}
+\def\RR{{\mathcal R}}
+\def\C{{\mathbb C}}
+\def\U{{\mathcal U}}
+\def\D{{\mathcal D}}
+\def\B{{\mathcal B}}
+\def\G{{\mathcal G}}
+\def\[{\bigl [}
+\def\Spin{{\mathrm{Spin}}}
+\def\]{\bigr ]}
+\def\CP{{\mathbb{CP}}}
+\def\N{{\mathcal N}}
+\def\T{{\mathcal T}}
+\def\p{{'}}
+\def\Z{{\mathbb Z}}
+\def\Q{{\mathbb Q}}
+\def\half{{\frac{1}{2}}}
+\def\CC{{\mathcal C}}
+\def\ad{{\mathrm{ad}}}
+\def\Btriv{{\mathcal B}_{\mathrm{triv}}}
+\def\L{{\eusm L}}
+\def\h{\hat }
+\def\h{\widehat}
+\def\Bcc{{\mathcal B_{\mathrm{cc}}}}
+\def\K{{\mathcal K}}
+\def\V{{\mathcal V}}
+\def\J{{\mathcal J}}
+\def\I{{\mathcal I}}
+\def\P{{\mathcal P}}
+\def\B{{\mathcal B}}
+\def\Boper{{\mathcal B_{\mathrm{oper}}}}
+\def\M{{\mathcal M}}
+\def\W{{\mathcal W}}
+\def\X{\mathcal X}
+\def\Y{\mathcal Y}
+\def\P{{\mathcal P}}
+\def\l{\langle}
+\def\r{\rangle}
+\def\H{{\mathcal H}}
+\def\ZZ{\eusm B}
+\def\cZ{\mathcal Z}
+\def\sW{{ W}}
+\def\epsilon{\varepsilon}
+\def\sY{{ Y}}
+\def\nY{{\mathcal Y}}
+\def\ca{{\cmmib a}}
+\def\ss{{d}}
+\def\sf{{\mathfrak s}}
+\def\e{{\mathbf e}}
+\def\i{{\mathbf i}}
+\def\spin{{\mathrm{spin}}}
+\def\m{\cmmib m}
+\def\tilde{\widetilde}
+\def\bar{\overline}
+\def\neg{\negthinspace}
+\def\Ber{{\mathrm {Ber}}}
+\def\BBer{{\text{\it{Ber}}}}
+\def\TT{{\mathrm T}}
+\def\Tr{{\mathrm {Tr}}}
+\font\teneurm=eurm10 \font\seveneurm=eurm7 \font\eighteurm=eurm8 \font\fiveeurm=eurm5
+\newfam\eurmfam
+\textfont\eurmfam=\teneurm \scriptfont\eurmfam=\seveneurm
+\scriptscriptfont\eurmfam=\fiveeurm
+\def\eurm#1{{\fam\eurmfam\relax#1}}
+%\font\teneurm=eurm10 \font\seveneurm=eurm7 \font\fiveeurm=eurm5
+%\newfam\eurmfam
+%\textfont\eurmfam=\teneurm \scriptfont\eurmfam=\seveneurm
+%\scriptscriptfont\eurmfam=\fiveeurm
+%\def\eurm#1{{\fam\eurmfam\relax#1}}
+\font\teneusm=eusm10 \font\seveneusm=eusm7 \font\fiveeusm=eusm5
+\newfam\eusmfam
+\textfont\eusmfam=\teneusm \scriptfont\eusmfam=\seveneusm
+\scriptscriptfont\eusmfam=\fiveeusm
+\def\eusm#1{{\fam\eusmfam\relax#1}}
+\font\tencmmib=cmmib10 \skewchar\tencmmib='177
+\font\sevencmmib=cmmib7 \skewchar\sevencmmib='177
+\font\fivecmmib=cmmib5 \skewchar\fivecmmib='177
+\newfam\cmmibfam
+\textfont\cmmibfam=\tencmmib \scriptfont\cmmibfam=\sevencmmib
+\scriptscriptfont\cmmibfam=\fivecmmib
+\def\cmmib#1{{\fam\cmmibfam\relax#1}}
+\def\F{\eusm F}
+\def\Pi{\varPi}
+\def\g{\text{{\teneurm g}}}
+\def\sg{\text{{\eighteurm g}}}
+\def\ssg{\text{{\seveneurm g}}}
+\def\n{\text{{\teneurm n}}}
+\def\sn{\text{{\eighteurm n}}}
+\def\ssn{\text{{\seveneurm n}}}
+\def\m{\text{{\teneurm m}}}
+\def\sm{\text{{\eighteurm m}}}
+\def\E{\mathbb{E}}
+\def\ssm{\text{{\seveneurm m}}}
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{lemma}{Lemma}[subsection]
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{problem}{Problem}
+
+\title{Mathematical details of Book-Reinforcement Learning: an introduction}
+
+ \author{Yu Chen}
+\affiliation{The Chinese University of HongKong, Department of Mechanical and Automation Engineering}
+\emailAdd{anschen@link.cuhk.edu.hk}
+
+
+
+
+\begin{document}\maketitle
+%-------------------------------------------------------------------------------------------------------------------------------------------------
+\section{Gradient banits}
+For gradient banits, we do not use estimated rewards to choose current action, instead, we use a local score $H_t(a)$ to evaluate the goodness of action $a$. Specificly, we introduce a softmax-like distribution,
+\begin{equation}
+\pi_t(a) = \frac{e^{H_t(a)}}{\sum_b e^{H_t(b)}}.
+\end{equation}
+\begin{theorem}[Updating strategy]
+\begin{eqnarray}
+ & H_{t+1}(A_t) = H_t(A_t) + \alpha(R_t-\bar{R}_t)(1-\pi_t(A_t)), \\ & H_{t+1}(a) = H_t(a) - \alpha(R_t-\bar{R}_t)\pi_t(a),\forall a \neq A_t, 
+\end{eqnarray}
+where $\alpha$ is stepsize, and $\bar{R}_t$ is the averaged rewards up through and including time $t$.
+\end{theorem}
+\emph{Proof}: The above the updating strategy is the direct result of gradient ascent algorithm. Whatever action takes, we can update the local score by the following formulas,
+\begin{equation}
+H_{t+1}(a) = H_t(a) + \alpha \frac{\partial\E[R_{t}]}{\partial {H_t(a)}},
+\end{equation}
+where $\E[R_t] = \sum_b \pi_t(b)q(b)$, here $q(b)$ is the true value of action $b$. Although we may not know what true $q(b)$ is, we can derive it updating rule, which is advantage of gradient banits.
+\begin{align}
+\frac{\partial\E[R_{t}]}{\partial {H_t(a)}} & = \sum_b q(b) \frac{\partial \pi_t(b)}{\partial H_t(a)} \\ & = \sum_b q(b) \sum_{c}\frac{\delta_{a,b}e^{H_t(a)}\sum_{c}e^{H_t(c)}-e^{H_t(b)}e^{H_t(a)}}{(\sum_{c}e^{H_t(c)})^2} \\ & = \sum_{b} q(b) \pi_t(b)(\delta_{a,b} - \pi_t(a)).
+\end{align}
+Since $\sum_n \frac{\partial\pi_t(b)}{\partial {H_t(a)}} = 0$, we can add a constant $-\bar{R}_t$ in the above equation, which means,
+\begin{equation}
+\frac{\partial\E[R_{t}]}{\partial {H_t(a)}} = \sum_b (q(b) - \bar{R}_t)\pi_t(b)(\delta_{a,b} - \pi_t(a)).
+\end{equation}
+We can regard $b$ is yummy varible of random variable of $A_t$, and then,
+\begin{equation}
+\frac{\partial\E[R_{t}]}{\partial {H_t(a)}} = \E[(q(A_t)-\bar{R}_t)(1_{A_t=a}-\pi_t(a))] = \E[(R_t-\bar{R}_t)(1_{A_t=a}-\pi_t(a))],
+\end{equation}
+where the second equality is because $R_t = \E[q(A_t)]$ and other variables are not random. And now we can justified the theorem.
+
+\section{Markov Decision Process}
+Markov decision process is composed of environment, agent. Mathematially, it contains a state space $\S$ describing the environment state, which can not be described exactly in many applications, an actions space $\A(s)$, which can be dependent on the current state, and a reward process, which is also stochastic. And the 'transition' probability can be described by the following tensor,
+\begin{equation}
+p(s',r|s,a) = Pr(S_{t+1}=s',R_{t+1}=r|S_t= s, A_t= a),
+\end{equation}
+which satifies Markovian property. Also, we can define some rewards functions,
+\begin{definition}
+\begin{equation}
+r(s,a) = \E[R_{t+1}|S_t = s, A_t = a] = \sum_{r}r\sum_{s'}p(s',r|s,a)
+\end{equation}
+\begin{equation}
+r(s',s,a) = \E[R_{t+1}|S_t=s,A_t=a,S_{t+1}=s'] = \frac{\E[R_{t+1}1_{S_{t+1}=s'}|S_t=s,A_t=a]}{Pr(S_{t+1}=s')|S_t=s,A_t=a} = \frac{\sum_{r}rp(s',r|s,a)}{\sum_{r}p(s',r|s,a)}.
+\end{equation}
+\end{definition}
+For a episodic process, we can define returns as,
+\begin{equation}
+G_t = R_{t+1} + R_{t+2} + \cdots + R_T.
+\end{equation}
+And for a continuous process, we can define the returns as,
+\begin{equation}
+G_t = \sum_{k=0}^{+\infty}\gamma^kR_{t+k+1}
+\end{equation}
+If we define the terminal state of episodic process as an absorbing set with reward 0, we can unify the retunr expression as,
+\begin{equation}
+G_t = \sum_{k=0}^{T-t-1}\gamma^k R_{t+k+1},
+\end{equation}
+where $T = \infty$ corresponding to continuous process, and $\gamma = 1$ and finite $T$ corresponding to eposidic process. Here, we should note that $T = +\infty$ and $\gamma = 1$ can not hold on simultaneously.(There are some research focus on it.)
+
+\begin{definition}{Value function}
+Given a policy $\pi$, we define state value function of this policy as,
+\begin{equation}
+v_{\pi}(s) = \E[G_t |S_t = a].
+\end{equation}
+Also, we define state-action pair function of this policy as,
+\begin{equation}
+q_{\pi}(s,a) = \E[G_t|S_t=s,A_t= a].
+\end{equation}
+\end{definition}
+
+\begin{theorem}[Bellman equation]
+\begin{equation}
+v_{\pi}(s) = \sum_{a}\pi(a|s)\sum_{s',r}p(s',r|s,a)(r+\gamma v_{\pi}(s'))
+\end{equation}
+\end{theorem}
+With the help of Bellman equation, we can find value function for a given policy and state by iteration.
+\begin{definition}{Optimal value function}
+\begin{equation}
+v_*(s) = \max_{\pi} v_{\pi}(s), \forall s \in \S.
+\end{equation}
+\begin{equation}
+q_*(s,a) = \max_{\pi}q_{\pi}(s,a), \forall s\in \S, a\in \A.
+\end{equation}
+\end{definition}
+From this definition, we can find the below relation easily,
+\begin{equation}
+q_{*}(s,a) = \E[R_{t+1} + \gamma v_*(S_{t+1})|S_t=s,A_t=a].
+\end{equation}
+
+Also, we can find the Bellman optimality equation as,
+\begin{theorem}[Bellman optimality equation]
+\begin{equation}
+v_*(s) = \max_{a}\sum_{s',r}p(s',r|s,a)(r+\gamma v_{*}(s')),
+\end{equation}
+\begin{equation}
+q_{*}(s,a) = \sum_{s',r} p(s',r|s,a) (r+\gamma \max_{a'}q_{*}(s',a')).
+\end{equation}
+\end{theorem}
+\emph{Proof}:
+\begin{align}
+v_*(s) & = \max_a q_{*}(s,a) \\ & = \max_a \E_*[R_{t+1}+\gamma G_{t+1}|S_t=s,A_t=a] \\ & = \max_a \sum_{s',r}rp(s',r|s,a) + \gamma v_*(s')p(s',r|s,a).
+\end{align}
+\begin{align}
+q_{*}(s,a) & = \E[R_{t+1}+\gamma v_{*}(S_{t+1})|S_t=s,A_t=a]\\ & = \sum_{s',r} rp(s',r|s,a) + \gamma \sum_{r,s'}p(s',r|s,a)\E[v_{*}(s')|S_t=a,A_t =a, S_{t+1} =s'] \\ & = \sum_{s',r}p(s',r|s,a)(r + \gamma\max_{a'} q_{*}(s',a'))
+\end{align}
+
+\section{Dynamic programming}
+Dynamics programming for reinforce learning is divide into two parts: 1. Policy evaluation, 2. Policy iteration. \par 
+\subsection{Policy evaluation}
+Policy evaluation is used Bellman equation to compute the value function for a given policy $\pi$.
+\begin{tcolorbox}
+Input $\pi$, the policy to be evaluated. \\
+Initialize $V(s)$, such as, $V(s) \leftarrow 0$. \\ 
+Repeat\par 
+\hspace{1cm} $\Delta \leftarrow 0$. \par
+\hspace{1cm} For $s \in \S$ \par
+\hspace{2cm} $v \leftarrow V(s)$, \par
+\hspace{2cm} $V(s) = \sum \pi(a|s)\sum_{s',r}p(s',r|s,a)(r+\gamma v_{\pi}(s')) \textbf{*}$.\par
+\hspace{2cm} $\Delta \leftarrow \max(0,v-V(s))$\par
+\hspace{1cm}
+until $\Delta < \theta$(a small positive number)\par
+return $V(s)$.
+\end{tcolorbox}
+where $*$ step, we can choose inplace operation, or two-array version. In most cases, in-place converges more rapidly. For in-place case, the order in which states are backed up during the sweep has a significant influence on converging rate.\par
+
+\subsection{Policy iteration}
+\begin{theorem}[Policy improvement theorem]
+For two deterministic policies $\pi,\pi'$, if 
+\begin{equation}
+q_{\pi}(s,\pi'(s)) \ge v_{\pi}(s), \forall s \in \S,
+\end{equation}
+then, we have,
+\begin{equation}
+v_{\pi'}(s) \ge v_{\pi}(s).
+\end{equation}
+\end{theorem}
+\emph{Proof:}
+\begin{align}
+v_{\pi}(s) & \le q_{\pi}(s,\pi'(s)) \\
+& = \E_{\pi'}[R_{t+1}+\gamma v_{\pi}(S_{t+1})|S_t=s] \\ 
+& \le \E_{\pi'}[R_{t+1} +\gamma q_{\pi}(S_{t+1},\pi'(S_{t+1}))|S_t=s] \\
+& = \E_{\pi'}[R_{t+1} + \gamma \E_{\pi'}[R_{t+2}+\gamma v_{\pi}(S_{t+2})]|S_t=s] \\ 
+& \cdots \\ & \le \E_{\pi'}[R_{t+1}+\gamma R_{t+2}+\gamma^2R_{t+3}+\cdots |S_t = s] \\ 
+& = v_{\pi'}(s)
+\end{align}
+Using this theorem, we can design a greedy algorithm to update our policy such that the short term is very large.
+\begin{equation}
+\pi'(s) = \arg\max_{a} q_{\pi}(s,a)
+\end{equation}
+And now, we can prove that this short term optimal updating rule will make our policy converge to one satisfying Bellman optimality equation.
+\begin{equation}
+v_{\pi'}(s) = \max_{a} q_{\pi}(s,a) = \max_a q_{\pi'}(s,a),
+\end{equation}
+where the second equality is because the convergence.\\ 
+\emph{Notes}: Everything here in the deterministic scheme can be extended to random policy. We just need to keep all submaximal actions has zero probability.
+\begin{tcolorbox}
+policy stable $\leftarrow$ true. \par 
+For each $s \in \S$ \par 
+\hspace{1cm} $a \leftarrow \pi(s)$ \par 
+\hspace{1cm} $\pi(s) \leftarrow \arg\max_{a'}\sum_{s',r}p(s',r|s,a')(r+\gamma V(s'))$ \par 
+\hspace{1cm} if $a \neq \pi(s)$, policy stable $\leftarrow$ false.\par 
+If policy stable is true, return $\pi,V$.
+\end{tcolorbox}
+
+\subsection{Practical implement}
+The simplest algorithm to combine these two process, policy evaluation and policy iteration is,\\ 
+$$ \pi_0 \to v_{\pi_0} \to \pi_1 \to v_{\pi_1} \to .... \pi_* \to v_* $$
+However, this trivial algorithm has obivious disadvantage. To obtain value function, we need to iterate Bellman equation many many times, theoretically infinite, but in most cases, the approximate value function $\tilde{v}$ is enough to do policy improvement. Hence, we can use the following algorithm \\
+$$\pi_0 \to \tilde{v}_{\pi_0} \to \pi_1 \to \tilde{v}_{\pi_1} \to \cdots \to \pi_* \to v_{*}$$
+However, if the state is very large, for each iteration, we need to sweep through the whole space, which is very expensive, we can just update value function for one state, by the formula
+\begin{equation}
+v_{k+1}(s) = \max_{a}\sum_{s',r}p(s',r|s,a)(r+\gamma v_k(s'))
+\end{equation}
+This algorithm does not decrease complexity generally. But in some problems, if we only are interested in partial state of the state, we can choose proper state sequences $\{s_k\}$ for this algorithm.
+
+\section{Monte Carlo Methods}
+In most applications, we can not know the environment very exactly, which means the ture transistion probability $p(s',r|s,a)$ is unknown. Hence, we need to do estimation and Monte Carlo Methods using sampling method to estimate state-value function and state-action value function. In this setting, whatever Monte Carlo Methods or TD methods, policy evalution can be divided in to two kinds, on-policy and off-policy.
+
+\subsection{On-policy}
+\begin{tcolorbox}
+Initialize:\par 
+\hspace{1cm} $\pi \leftarrow$ policy to be evaluated \par 
+\hspace{1cm} $V \leftarrow$ an arbitrary state-value function \par 
+\hspace{1cm} $Returns(s) \leftarrow$ an empty list, for all $s \in S$ \par 
+
+Repeat forever:\par 
+\hspace{1cm} Generate an episode using $\pi$\par 
+\hspace{1cm} For each state $s$ appearing in the episode:\par 
+\hspace{2cm} $G \leftarrow$ return following the first occurence of $s$ \par
+\hspace{2cm} Append $G$ to $Returns(s)$ \par 
+\hspace{2cm} $V(s) \leftarrow$ Average of $Returns(s)$
+\end{tcolorbox}
+Here, we have used first-visit MC methods. Also every-visit MC method extends more naturally to function approximation and eligibility traces. This algorithms can be extended to estimate state-action value function. For control problems, we also use GPI(general policy iteration) scheme, which is induced by greedy algorithm,
+\begin{equation}
+\pi_0 \to q_{\pi_0} \to \pi_1 \to q_{\pi_1} \to \pi_2 \to \cdots \to \pi_* \to q_{*}
+\end{equation}
+And policy iteration is updated by the following formula,
+\begin{equation}
+\pi_{k+1}(s)= \arg\max_aq_{\pi_k}(s,a).
+\end{equation}
+\emph{Notes: Here we have two assumptions: 1. policy evaluation can be done with infinite number of episodes; 2. episodes have exploring starts.} To remove the first assumptions, we have two ways: The first one is to evaluate value function as much steps as you can, and then you will obtain a function very close to true value function, but it wastes much resources. The second one is to use GPI scheme. For Monte Carlo policy evaluation it is natural to alternate between evaluation and improvement on an episode-by-episode basis. To remove the second assumption, we can always method, so called $\varepsilon-$greedy. Before we explain it, we should introduce an important concept-\emph{soft}. A policy is called soft, meaning that $\pi(a|s) > 0. \forall a\in S, \forall a\in \A(s)$, but gradually shifted closer and closer to a deterministic optimal policy. Now, we can introduce $\varepsilon$-greedy algorithm. That is, all nongreedy actions are given the minimal probability of selcetion, $\frac{\varepsilon}{|\A(s)|}$, and the remaining bulk of the probability, $1 - \varepsilon + \frac{\varepsilon}{|\A(s)|}$, is given to the greedy action. Afterall, the algorithm can be written as,
+\begin{tcolorbox}
+Initialize, for all $s\in \S, a \in \A(s)$: \par
+\hspace{1cm} $Q(s,a) \leftarrow$ arbitrary \par 
+\hspace{1cm} $Returns(s,a) \leftarrow$ empty list \par 
+\hspace{1cm} $\pi(s|a) \leftarrow$ an arbitrary $\varepsilon$-soft policy.\par 
+Repeat forever:\par 
+\hspace{1cm} Generate an episode using $\pi$\par 
+\hspace{1cm} For each pari $s,a$ appearing in the epsiode:\par
+\hspace{2cm} $G \leftarrow$ return following the first occurrence of $s,a$ \par 
+\hspace{2cm} Append $G$ to $Returns(s,a)$\par 
+\hspace{2cm} $Q(s,a) \leftarrow$ average of $Returns(s,a)$.\par 
+\hspace{1cm} For each $s$ in the episode:\par 
+\hspace{2cm} $a^* \leftarrow \arg\max_{a}Q(s,a)$\par 
+\hspace{2cm} For all $a \in \A(s)$:\par 
+\hspace{3cm} \begin{equation}
+				\pi(a|s) \leftarrow \left\{ \begin{array}{c}1 - \varepsilon + \varepsilon/ |\A(s)|, a = a^*, \\\varepsilon/ |\A(s)|, a\neq a^* \end{array}\right.
+			 \end{equation}
+\end{tcolorbox}
+
+\subsection{Off-policy}
+Off-policy is method using samples generated by a different policy $\mu$, to estimate value function of interested policy $\pi$. In order to implement this method, we must have the following assumption--\emph{coverage}: If $\pi(a|s)>0$, and then $\mu(a|s)>0$. For a particular trajectory $A_t,S_{t+1},A_{t+1},\cdots,S_T$, we can find the relative probability, called \emph{importance-sampling ratio}. The absolute probability of this trajectory is,
+$$
+\prod_{j=t}^{T-1}\pi(A_{j}|S_j)p(S_{j+1}|S_j,A_j)
+$$
+And now, we can compute the relative probability,
+\begin{equation}
+\rho_{t}^T = \frac{\prod_{j=t}^{T-1}\pi(A_{j}|S_j)p(S_{j+1}|S_j,A_j)}{\prod_{j=t}^{T-1}\mu(A_{j}|S_j)p(S_{j+1}|S_j,A_j)} = \prod_{j=t}^{T-1}\frac{\pi(A_j|S_j)}{\mu(A_j|S_j)},
+\end{equation}
+which is independent of transition proability, which usually is unknown for us.
+And then, we have two approaches to do sampling, one is \emph{ordinary importance sampling}:
+\begin{equation}
+V(s) = \frac{\sum_{t \in \T(s)}\rho_{t}^{T(t)}G_t}{|\T(s)|},
+\end{equation}
+where $\T(s)$ is the collection of first occurence time for all samples. The other is \emph{weighted importance sampling},
+\begin{equation}
+V(s) = \frac{\sum_{t \in \T(s)}\rho_{t}^{T(t)}G_t}{\sum_{t\in \T(s)}\rho_t^{T(t)}}.
+\end{equation}
+The first algorithm can be understood very easily by large number law,
+\begin{align}
+\E_{\pi}[G] & = \int \D\phi p_{\pi}(\phi)G(\phi) \\ 
+& = \int \D \phi p_{\mu}(\phi)\frac{p_{\pi}(\phi)}{p_{\mu}(\phi)}G(\phi) \\ 
+& \approx \frac{1}{|\Omega|}\sum_{\phi \in \Omega}\frac{p_{\pi}(\phi)}{p_{\mu}(\phi)}G(\phi)
+\end{align}
+And the second is can be understood as,
+\begin{equation}
+1 = \int \D\phi p_{\mu}(\phi)\frac{p_{\pi}(\phi)}{p_{\mu}(\phi)} = \frac{1}{|\Omega|}\sum_{\phi\in \Omega}\frac{p_{\pi}(\phi)}{p_{\mu}(\phi)}
+\end{equation}
+The summation are all sampled with measure $p_{\mu}$.
+\emph{Notes:} The first one is unbiased, but has possibility with diverged variance. The second is biased, but with bounded variance. But if we directly use this algorithm, the memory cost is very large, since we need to store each $G_t$. To solve it, we use incremental implementation by introducing another quantity $C_n$. Then we can iterate value function $V_n= \frac{\sum_{k=1}^{n-1}W_kG_k}{\sum_{k=1}^{n-1}W_k}$ by,
+\begin{eqnarray}
+& V_{n+1} = V_n + \frac{W_n}{C_n}(G_n-V_n), \\ 
+& C_{n+1} = C_n + W_{n+1},
+\end{eqnarray}
+where $C_0=0$.
+\begin{tcolorbox}
+Initialize, for all $s \in \S, a\in \A(s)$:\par 
+\hspace{1cm} $Q(s,a) \leftarrow$ arbitrary \par 
+\hspace{1cm} $C(s,a) \leftarrow 0$ \par 
+\hspace{1cm} $\mu(a|s) \leftarrow$ an arbitrary soft behavior policy \par 
+\hspace{1cm} $\pi(a|s) \leftarrow$ an arbitrary target policy \par 
+
+Repeat forever:\par 
+\hspace{1cm} Generate an episode using $\mu$: \par 
+\hspace{2cm} $S_0,A_0,R_1,\cdots,S_{T-1},A_{T-1},R_T,S_T$\par 
+\hspace{1cm} $G \leftarrow 0$ \par 
+\hspace{1cm} $W \leftarrow 1$ \par 
+\hspace{1cm} For $t = T-1, T-2, \cdots$ downto $0$:\par 
+\hspace{2cm} $G \leftarrow \gamma G + R_{t+1}$\par 
+\hspace{2cm} $C(S_t,A_t) \leftarrow C(S_t,A_t) + W$ \par 
+\hspace{2cm} $Q(S_t,A_t) \leftarrow Q(S_t,A_t) + \frac{W}{C(A_t,S_t)(G - Q(S_t,A_t))}$ \par 
+\hspace{2cm} $W \leftarrow W \frac{\pi(A_t|S_t)}{\mu(A_t|S_t)}$ \par 
+\hspace{2cm} If $W = 0$ then ExitForLoop
+\end{tcolorbox}
+For control problem, we need not obtain an very exact value function. Instead, we can alternate exploration and exploitation episode-by-episode.
+\begin{tcolorbox}
+Initialize, for all $s\in \S, a\in \A(s)$:\par 
+\hspace{1cm} $Q(s,a) \leftarrow$ arbitrary \par 
+\hspace{1cm} $C(s,a) \leftarrow 0$ \par 
+\hspace{1cm} $\pi(s) \leftarrow$ a deterministic policy that is greedy with respect to $Q$ \par 
+
+Repeat forever: \par 
+\hspace{1cm} Generate an episode using any soft policy $\mu$: \par 
+\hspace{2cm} $S_0,A_0,R_1,\cdots, S_{T-1},A_{T-1},R_T,S_T$ \par 
+\hspace{1cm} $G \leftarrow 0$ \par 
+\hspace{1cm} $W \leftarrow 1$ \par 
+\hspace{1cm} For $t = T-1, T-2, \cdots$ downto $0$:\par 
+\hspace{2cm} $G \leftarrow \gamma G + R_{t+1}$\par
+\hspace{2cm} $C(S_t,A_t) \leftarrow C(S_t,A_t) + W$ \par 
+\hspace{2cm} $Q(S_t,A_t) \leftarrow Q(S_t,A_t) + \frac{W}{C(S_t,A_t)}(G - Q(S_t,A_t))$ \par 
+\hspace{2cm} $\pi(S_t) \leftarrow \arg\max_a Q(S_t,a)$ \par
+\hspace{2cm} $W \leftarrow W \frac{\pi(A_t|S_t)}{\mu(A_t|S_t)}$ \par
+\hspace{2cm} If $W = 0$ then ExitForLoop.
+\end{tcolorbox}
+
+
+\section{Temporal-Difference learning}
+If one had to identify one idea as central and novel to reinforcement learning, it would undoubtedly be temporal-difference(TD) learning. As we known, Monte Carlo use the following formula to do evaluation,
+\begin{equation}
+V(S_t) \leftarrow V(t) + \alpha (G_t - V(S_t))
+\end{equation}
+which requires us to wait for termination of one episode. And TD methods only need us wait unitl next time. For example, the simplest TD method, $TD(0)$, is 
+\begin{equation}
+V(S_t) \leftarrow V(t) + \alpha(R_{t+1} + \gamma V(S_{t+1}) - V(S_t)).
+\end{equation}
+Since TD method bases its update in part on an existing estimate, we say it is a bootstrapping method, like DP. And now we can compare these three methods,
+\begin{align}
+v_{\pi}(s) & = \E_{\pi}[G_t | S_t = s] \\ 
+& = \E_{\pi}[\sum_{k=0}\gamma^k R_{t+k+1} | S_ts] \\ 
+& = \E_{\pi}[R_{t+1} + \gamma v_{\pi}(S_{t+1})|S_t = s].
+\end{align}
+Monte Carlo use the first line to do estimation. Since we do not exact transition probability, we use return $G_t$ in each episode to replace 'true' $G_t$, and obtain the expectation with many many samples. DP actually use the last equation, and in DP setting, we know the exact transition probability, so we can find $v_{\pi}(s)$ by back-up iteration directly. TD method uses the last equation too, instead, we do not know transition probability. Hence, we use $R_{t+1}, v_{\pi}(S_{t+1})$ appears in each sampled episode to represent the true random variable.
+\begin{tcolorbox}
+Input: the policy $\pi$ to be evaluated \par 
+Initialize $V(s)$ arbitrarily\par 
+Repeat for each epsiode: \par 
+\hspace{1cm} Initialize $S$ \par
+\hspace{1cm} Repeat for each step of episode: \par 
+\hspace{2cm} $A \leftarrow$ action given by $\pi$ for $S$ \par 
+\hspace{2cm} Take action $A$: observe reward, $R$, and next state, $S'$ \par 
+\hspace{2cm} $V(S) \leftarrow V(S) + \alpha(R + \gamma V(S') - V(S))$ \par 
+\hspace{2cm} $S \leftarrow S'$\par 
+\hspace{1cm} until $S$ is terminal.
+\end{tcolorbox}
+\emph{Notes:} The advantage of TD methods have an advantage over DP methods in that they do not require a model of the environment, of its reward and next-state probability distributions. The next advantage of TD methods over Monte Carlo is that they are naturally implemented in an on-line, fully incremental fashion. \par 
+Also, fot the control problems, TD control is divided into two: on-policy(SARSA), off-policy(Q-learning):
+\subsection{SARSA}
+SARSA means,
+$$
+S_{t} \to A_{t} \to R_{t+1} \to S_{t+1} \to A_{t+1} \to \cdots 
+$$
+\begin{tcolorbox}
+Initialize $Q(s,a), \forall s\in \S, a\in \A$, arbitrarily, and $Q(terminal state, \cdot) = 0$ \par 
+Repeat for each episode: \par 
+\hspace{1cm} Initialize $S$ \par 
+\hspace{1cm} Choose $A$ from $\A(S)$ using policy derived from $Q$(e.g. $\varepsilon-$ greedy) \par 
+\hspace{1cm} Repeat for each step of episode: \par 
+\hspace{2cm} Take action $A$, observe $R, S'$ \par 
+\hspace{2cm} Choose $A'$ from $S'$ using policy derived from $Q$($\varepsilon-$ greedy)\par 
+\hspace{2cm} $Q(S,A) \leftarrow Q(S,A) + \alpha(R + \gamma Q(S',A')-Q(S,A))$ \par 
+\hspace{2cm} $S \leftarrow S', A \leftarrow A'$\par 
+\hspace{1cm} until $S$ is terminal.
+\end{tcolorbox}
+From the above, we can see SARSA is on-policy control.
+
+\subsection{Q-learning}
+Q-learning is the most important breakthroughs in reinforce learning, which can be stated by,
+\begin{equation}
+Q(S_t,A_t) \leftarrow Q(S_t,A_t) + \alpha(R_{t+1} + \gamma\max_a Q(S_{t+1},a) - Q(S_t,A_t)).
+\end{equation}
+The advantage of this algorithm is early convergence to $q_{*}$.
+\begin{tcolorbox}
+Initialize $Q(s,a), \forall s\in \S, a\in \A$, arbitrarily, and $Q(terminated,\cdot) = 0$ \par 
+Repeat for each episode \par 
+\hspace{1cm} Initialize $S$ \par 
+\hspace{1cm} Repeat for each step of episode: \par 
+\hspace{2cm} Choose $A$ from $\A(S)$ using policy derived from $Q$(i.e $\varepsilon-$ greedy) \par 
+\hspace{2cm} Take action $A$, observe $R, S'$\par 
+\hspace{2cm} $Q(S,A) \leftarrow Q(S,A) + \alpha(R + \gamma \max_a Q(S',a) - Q(S,A))$ \par 
+\hspace{2cm} $S \leftarrow S'$ \par 
+\hspace{1cm} until $S$ is terminal.
+\end{tcolorbox}
+
+\section{Eligibility Traces}
+$TD(0)$ and Monte Carlo uses one step and one episode date to update value function. How about intermediate methods? For example, we use $n$ steps rewards to update.
+\begin{equation}
+G_{t}^{t+n}(c) = R_{t+1} + \gamma R_{t+2} + \cdots + \gamma^{n-1} R_{t+n} + \gamma^n c,
+\end{equation}
+where $c$ is a quantity we use to offset the difference between $G_t$ and $R_{t+1} + \gamma R_{t+2} + \cdots + \gamma^n R_{t+n}$. Normally, the choise is $c=V_t(S_{t+n})$. As usual, we can update the value function on-line(step-by-step) or off-line(episode-by-episode). Specificly, on-line updating formula is,
+\begin{equation}
+V_{t+1}(s) = V_t(s) + \Delta_t(s),
+\end{equation}
+where,
+\begin{equation}
+\Delta_t(S_t) = \alpha[G_{t}^{t+n}(V_t(S_{t+n}))-V_t(S_t)]
+\end{equation}
+Off-line updating formula is given as,
+\begin{equation}
+V_{t+1}(s) = V_t(s), t< T-1, V_{T}(s) = V_{T-1} + \sum_{t=1}^{T-1}\Delta_t(s).
+\end{equation}
+
+\subsection{Forward TD($\lambda$)}
+In general, we extend the above idea to an approach which seems to be more comprehensive. We do average over all $1$-step, $2$-step... For example, we can choose $\Delta_t(S_t) = \alpha(\frac{1}{2}G_t^{t+2} + \frac{1}{2}G_{t+1}^{t+5} - V_t(S_t))$. Any weighted choice is OK. However, the normal choice is,
+\begin{equation}
+L_t = (1-\lambda)\sum_{n=1}^{+\infty}\lambda^{n-1}G_t^{t+n}(V_t(S_{t+n}))
+\end{equation}
+If process is terminated at finite $T$, we can do as the previous section by defining terminated state as self-absorbing state with reward $0$, then we have,
+\begin{equation}
+L_t = (1-\lambda)\sum_{n=1}^{T-t-1}\lambda^{n-1}G_t^{t+n}(V_t(S_{t+n})) + \lambda^{T-t-1}G_t.
+\end{equation}
+And then increment is,
+\begin{equation}
+\Delta_t(S_t) = \alpha(L_t - V_t(S_t)).
+\end{equation}
+\emph{Notes:} Why we use TD$(\lambda)$ instead of n-steps TD is the latter is very difficult to implement in practise, since if we want update $V_t$, we should look forward $n$ steps. So far, TD$(\lambda)$ seems to have the same disadvantages, but there were some excellent people, who developed an equivalent, practical algorithm to TD$(\lambda)$, whatever off-line, on-line updating. on-line updating equivalence is a very new result appeared in 2014.
+
+\subsection{Backward TD$(\lambda)$}
+We introduce a quantity, called eligibility trace $E_t(s)$, which updated as,
+\begin{eqnarray}
+& E_t(S_t) = (1-\beta)\lambda\gamma E_t(S_t) + 1, \\ 
+& E_t(s) = \lambda \gamma E_t(s), \forall s \neq S_t.
+\end{eqnarray}
+This eligibility trace is called \emph{dutch traces}, and if $\beta = 1$, it is called \emph{replacing traces}, if $\beta = 0$, it is called \emph{accumulating traces}. Also we define,
+\begin{equation}
+\delta_t = R_{t+1} + \gamma V_{t}(S_{t+1}) - V_t(S_t),
+\end{equation}
+where, we should emphasis to obtain $\delta_t$, we just need to look forward one step. And then TD error is,
+\begin{equation}
+\Delta V_t(s) = \alpha \delta_t E_t(s), \forall s\in \S.
+\end{equation}
+And now, we can prove the equivalence, when we use off-line updating. To this end, we should prove,
+\begin{equation}
+\sum_{t=1}^{+\infty} \Delta_t(s) = \sum_{t=1}^{+\infty}\Delta V_t(s) \leftrightarrow \sum_{t=1}^{+\infty}L_t-V_t(s) = \sum_{t=1}^{+\infty}\delta_t E_t(s).
+\end{equation}
+For simplicity, we assume $s$ only has one click at time $\tau$, which can be extended to many clicks easily and $\beta = 0$. Then,
+\begin{equation}
+E_t(s) = (\lambda\gamma)^{t-\tau}1_{\tau\le t<T}, \forall t<T
+\end{equation}
+\begin{align}
+\mathrm{LHS} & = L_{\tau} - V_t(s) \\ 
+& = (1-\lambda)\sum_{n=1}^{+\infty}\lambda^{n-1}G_{\tau}^{\tau+n}(V(S_{\tau +n})) - V(s) \\ 
+& = (1-\lambda)\sum_{n=1}^{+\infty}\lambda^{n-1}\left(\sum_{k=0}^{n-1}\gamma^k R_{\tau+k+1} + \gamma^n V(S_{\tau +n})\right) - V(s)
+\end{align}
+\begin{align}
+\mathrm{RHS} & = \sum_{n=1}^{+\infty}(R_{\tau+n} + \gamma V(S_{\tau +n})-V(S_{\tau+n-1}))(\lambda\gamma)^{n-1} \\ 
+& = \sum_{n=1}^{+\infty}(\lambda\gamma)^{n-1}R_{\tau+n} + \lambda^{n-1}\gamma^n(1-\lambda) V(S_{\tau+n}) - V(s).
+\end{align}
+
+And now, we need to do simplification,
+\begin{align}
+(1-\lambda)\sum_{n=1}^{+\infty}\lambda^{n-1}\sum_{k=1}^{n}\gamma^{k-1}R_{\tau+k} & = (1-\lambda)\sum_{k=1}^{+\infty}\sum_{n=k}^{+\infty}\lambda^{n-1}\gamma^{k-1}R_{\tau+k} \\ & = \sum_{k=1}^{+\infty}\lambda^{k-1}\gamma^{k-1}R_{\tau+k}
+\end{align}
+Hence, we have proved equivalence bewtween forward TD$(\lambda)$ and backward TD$(\lambda)$, when using off-line updating. The on-line proof is more difficult, since $V_t$ changes at each time. Whatever, we can write the alogrithm as,
+\begin{tcolorbox}
+Initialize $V(s)$ arbitrarily(but set to $0$ if $s$ is terminated)\par 
+Repeat for each episode: \par 
+\hspace{1cm} Initialize $E(s) = 0$, for all $s \in \S$ \par 
+\hspace{1cm} Initialize $S$ \par 
+\hspace{1cm} Repeat for each step of episode:\par 
+\hspace{2cm} Take action $A$, observe reward $R$, and next state, $S'$\par 
+\hspace{2cm} $\delta \leftarrow R + \gamma V(S') - V(S)$ \par 
+\hspace{2cm} $E(S) \leftarrow (1-\beta)E(S) + 1$\par 
+\hspace{2cm} For all $s \in S$: \par 
+\hspace{3cm} $V(s) \leftarrow V(s) + \alpha \delta E(s)$ \par
+\hspace{3cm} $E(s) \leftarrow \gamma \lambda E(s)$\par
+\hspace{2cm} $S \leftarrow S'$\par 
+\hspace{1cm} until $S$ is terminal.
+\end{tcolorbox}
+Also, there is an improved version, called \emph{True online TD$(\lambda)$}.
+\begin{equation}
+V_{t+1}(s) = V_t(s) + \alpha[\delta_t + V_t(S_t) - V_{t-1}(S_t)]E_t(s) - \alpha 1_{s=S_t}[V_t(S_t)-V_{t-1}(S_t)].
+\end{equation}
+\begin{tcolorbox}
+Initialize $V(s)$ arbitrarily(but set to $0$ if $s$ is terminated) \par 
+$V_{\mathrm{old}} \leftarrow 0$ \par 
+Repeat for each episode:\par 
+\hspace{1cm} Initialize $E(s) =0, \forall s \in \S$ \par 
+\hspace{1cm} Initialize $S$ \par 
+\hspace{1cm} Repeat for each step of episode:\par 
+\hspace{2cm} $A \leftarrow$ action given by $\pi$ for $S$ \par 
+\hspace{2cm} Take action $A$, observe reward, $R$, and next state, $S'$ \par 
+\hspace{2cm} $\Delta \leftarrow V(S)-V_{\mathrm{old}}$ \par 
+\hspace{2cm} $V_{\mathrm{old}} \leftarrow V(S')$ \par 
+\hspace{2cm} $\delta \leftarrow R + \gamma V(S') -V(S)$ \par 
+\hspace{2cm} $E(S) \leftarrow (1-\alpha)E(S) + 1$ \par 
+\hspace{2cm} For all $s \in \S$: \par 
+\hspace{3cm} $V(s) \leftarrow V(s) + \alpha(\delta + \Delta)E(s)$ \par 
+\hspace{3cm} $E(s) \leftarrow \gamma \lambda E(s)$ \par 
+\hspace{2cm} $V(S) \leftarrow V(S) -\alpha \Delta$ \par 
+\hspace{2cm} $S \leftarrow S'$ \par 
+\hspace{1cm} until $S$ is terminal.
+\end{tcolorbox}
+
+\subsection{SARSA$(\lambda)$}
+For control problem, we use the following formulas to compute state-action function,
+\begin{eqnarray}
+& E_t(s,a) = \gamma\lambda E_{t-1}(s,a) + 1_{s=S_t}1_{a=A_t}, \textbf{accumulating} \\ 
+& E_t(s,a) = (1-\alpha)\gamma\lambda E_{t-1}(s,a) + 1_{s=S_t}1_{a=A_t}, \textbf{dutch} \\ 
+& E_t(s,a) = (1- 1_{s=S_t}1_{a=A_t})\gamma\lambda E_{t-1}(s,a) + 1_{s=S_t}1_{a=A_t} \textbf{replacing} 
+\end{eqnarray}
+And
+\begin{equation}
+Q_{t+1}(s,a) = Q_t(s,a) + \alpha \delta_t E_t(s,a),
+\end{equation}
+where,
+\begin{equation}
+\delta_t = R_{t+1} + \gamma Q_t(S_{t+1},A_{t+1}) -Q_t(S_t,A_t)
+\end{equation}
+
+\begin{tcolorbox}
+Initialize $Q(s,a)$ arbitrarily, for all $s\in\S, a\in A$\par 
+Repeat for each episode:\par 
+\hspace{1cm} $E(s,a) = 0,\forall s\in\S, a\in\A$ \par 
+\hspace{1cm} Initialize $S,A$ \par 
+\hspace{1cm} Repeat for each step of episode: \par 
+\hspace{2cm} Take action $A$, observe $R,S'$ \par 
+\hspace{2cm} Choose $A'$ from $S'$ using policy derived from $Q$ (e.g. $\varepsilon$-greedy) \par 
+\hspace{2cm} $\delta \leftarrow R + \gamma Q(S',A') - Q(S,A)$ \par 
+\hspace{2cm} $E(S,A) \leftarrow E(S,A) + 1$ \par 
+\hspace{2cm} or $E(S,A) \leftarrow (1-\alpha)E(S,A) + 1$ \par 
+\hspace{2cm} or $E(S,A) \leftarrow 1$ \par 
+\hspace{2cm} For all $s\in \S, a\in \A$: \par 
+\hspace{3cm} $Q(s,a) \leftarrow Q(s,a) + \alpha \delta E(s,a)$ \par 
+\hspace{3cm} $E(s,a) \leftarrow \lambda\gamma E(s,a)$ \par 
+\hspace{2cm} $S \leftarrow S', A \leftarrow A'$ \par 
+\hspace{1cm} until $S$ is terminal.
+\end{tcolorbox}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

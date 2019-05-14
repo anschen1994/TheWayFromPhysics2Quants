@@ -1,0 +1,281 @@
+
+\documentclass[11pt,a4paper]{article}
+\usepackage{jheppub,amsmath, amsthm, amssymb,slashed,url,diagram,bm}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\def\t{\widetilde} 
+\def\ct{{\cmmib t}}
+\def\btau{{\bm \tau}}
+\def\s{{s}}
+\def\tr{\mathrm{Tr}}
+\def\NSthree{{\mathrm{NS}}^3}
+\def\NSRR{{\mathrm{NS}}\cdot{\mathrm{R}}^2}
+\def\be{\begin{equation}}
+\def\ee{\end{equation}}
+\def\bt{{{t}}}
+\def\frakn{{\mathfrak N}}
+\def\frakl{{\mathfrak L}}
+\def\eusmn{{\eusm N}}
+\def\Im{{\mathrm{Im}}}
+\def\PGL{{\mathrm{PGL}}}
+\def\OSp{{\mathrm{OSp}}}
+\def\hat{\widehat}
+\def\tilde{\widetilde}
+\def\frak{\mathfrak}
+\def\D{{\mathcal D}}
+\def\S{{\mathcal S}}
+\def\RP{{\Bbb{RP}}}
+\def\NS{{\mathrm{NS}}}
+\def\Ra{{\mathrm{R}}}
+\def\W{{\mathcal W}}
+\def\WW{\mathfrak W}
+\def\MM{\mathfrak M}
+\def\euq{{\eusm F}}
+\def\O{{\mathcal O}}
+\def\V{{\mathcal V}}
+\def\k{{\cmmib k}}
+\def\w{{u}}
+\def\dzzt{\D(\t z,z|\theta)}
+\def\dzztt{\D(\t z,z|\t\theta,\theta)}
+\def\Bbb{\mathbb}
+\def\SIgma{\Sigma}
+\def\red{{\mathrm{red}}}
+\def\A{{\mathcal A}}
+\def\d{{\mathrm d}}
+\def\tW{{W}}
+\def\intt{{\mathrm{int}}}
+\def\b{\overlineAn}
+\def\R{{\mathbb R}}
+\def\RR{{\mathcal R}}
+\def\C{{\mathbb C}}
+\def\U{{\mathcal U}}
+\def\D{{\mathcal D}}
+\def\B{{\mathcal B}}
+\def\G{{\mathcal G}}
+\def\[{\bigl [}
+\def\Spin{{\mathrm{Spin}}}
+\def\]{\bigr ]}
+\def\CP{{\mathbb{CP}}}
+\def\N{{\mathcal N}}
+\def\T{{\mathcal T}}
+\def\p{{'}}
+\def\Z{{\mathbb Z}}
+\def\Q{{\mathbb Q}}
+\def\half{{\frac{1}{2}}}
+\def\CC{{\mathcal C}}
+\def\ad{{\mathrm{ad}}}
+\def\Btriv{{\mathcal B}_{\mathrm{triv}}}
+\def\L{{\eusm L}}
+\def\h{\hat }
+\def\h{\widehat}
+\def\Bcc{{\mathcal B_{\mathrm{cc}}}}
+\def\K{{\mathcal K}}
+\def\V{{\mathcal V}}
+\def\J{{\mathcal J}}
+\def\I{{\mathcal I}}
+\def\P{{\mathcal P}}
+\def\B{{\mathcal B}}
+\def\Boper{{\mathcal B_{\mathrm{oper}}}}
+\def\M{{\mathcal M}}
+\def\W{{\mathcal W}}
+\def\X{\mathcal X}
+\def\Y{\mathcal Y}
+\def\P{{\mathcal P}}
+\def\l{\langle}
+\def\r{\rangle}
+\def\H{{\mathcal H}}
+\def\ZZ{\eusm B}
+\def\cZ{\mathcal Z}
+\def\sW{{ W}}
+\def\epsilon{\varepsilon}
+\def\sY{{ Y}}
+\def\nY{{\mathcal Y}}
+\def\ca{{\cmmib a}}
+\def\ss{{d}}
+\def\sf{{\mathfrak s}}
+\def\e{{\mathbf e}}
+\def\i{{\mathbf i}}
+\def\spin{{\mathrm{spin}}}
+\def\m{\cmmib m}
+\def\tilde{\widetilde}
+\def\bar{\overline}
+\def\neg{\negthinspace}
+\def\Ber{{\mathrm {Ber}}}
+\def\BBer{{\text{\it{Ber}}}}
+\def\TT{{\mathrm T}}
+\def\Tr{{\mathrm {Tr}}}
+\def\E{\mathbb{E}}
+
+\font\teneurm=eurm10 \font\seveneurm=eurm7 \font\eighteurm=eurm8 \font\fiveeurm=eurm5
+\newfam\eurmfam
+\textfont\eurmfam=\teneurm \scriptfont\eurmfam=\seveneurm
+\scriptscriptfont\eurmfam=\fiveeurm
+\def\eurm#1{{\fam\eurmfam\relax#1}}
+%\font\teneurm=eurm10 \font\seveneurm=eurm7 \font\fiveeurm=eurm5
+%\newfam\eurmfam
+%\textfont\eurmfam=\teneurm \scriptfont\eurmfam=\seveneurm
+%\scriptscriptfont\eurmfam=\fiveeurm
+%\def\eurm#1{{\fam\eurmfam\relax#1}}
+\font\teneusm=eusm10 \font\seveneusm=eusm7 \font\fiveeusm=eusm5
+\newfam\eusmfam
+\textfont\eusmfam=\teneusm \scriptfont\eusmfam=\seveneusm
+\scriptscriptfont\eusmfam=\fiveeusm
+\def\eusm#1{{\fam\eusmfam\relax#1}}
+\font\tencmmib=cmmib10 \skewchar\tencmmib='177
+\font\sevencmmib=cmmib7 \skewchar\sevencmmib='177
+\font\fivecmmib=cmmib5 \skewchar\fivecmmib='177
+\newfam\cmmibfam
+\textfont\cmmibfam=\tencmmib \scriptfont\cmmibfam=\sevencmmib
+\scriptscriptfont\cmmibfam=\fivecmmib
+\def\cmmib#1{{\fam\cmmibfam\relax#1}}
+\def\F{\eusm F}
+\def\Pi{\varPi}
+\def\g{\text{{\teneurm g}}}
+\def\sg{\text{{\eighteurm g}}}
+\def\ssg{\text{{\seveneurm g}}}
+\def\n{\text{{\teneurm n}}}
+\def\sn{\text{{\eighteurm n}}}
+\def\ssn{\text{{\seveneurm n}}}
+\def\m{\text{{\teneurm m}}}
+\def\sm{\text{{\eighteurm m}}}
+\def\ssm{\text{{\seveneurm m}}}
+\newtheorem{theorem}{Theorem}[subsection]
+\newtheorem{lemma}{Lemma}[subsection]
+\newtheorem{definition}{Definition}[subsection]
+\newtheorem{problem}{Problem}
+
+\title{Paper Summary}
+
+ \author{Yu Chen}
+\affiliation{The Chinese University of HongKong, Department of Mechanical and Automation Engineering}
+\emailAdd{anschen@link.cuhk.edu.hk}
+
+
+
+
+\begin{document}\maketitle
+%-------------------------------------------------------------------------------------------------------------------------------------------------
+\section{Policy Gradient Methods for Reinforcement Learning with Function Approximation}
+This article\cite{sutton2000policy} show theoretical possibility of using approximator to encode a policy. In this paper, the author prove the results for both two value functions, one is average reward,
+\begin{align}
+& V^{\pi}(s) = \lim_{n\to \infty}\frac{1}{n}\E[r_1+r_2+\ldots+r_n|s,\pi] \\ 
+& Q^{\pi}(s,a) = \E[\sum_{t=1}^{+\infty}r_t-V^{\pi}(s)|s,a,\pi],
+\end{align}
+the other is state-by-state reward,
+\begin{align}
+& V^{\pi}(s) = \E[\sum_{t=1}^{\infty}\gamma^{t-1}r_t|s,\pi],\\
+& Q^{\pi}(s,a) = \E[\sum_{k=1}^{\infty}\gamma^{k-1}r_{t+k}|s_t=s,a_t=a,\pi]
+\end{align}
+We use parameters $\theta$ to approximate policy $\pi$, which means $\pi(s,a) = \pi(s,a;\theta)$.
+\begin{theorem}[Policy Gradient]
+For any MDP, in either the average-reward or state-state formulatios,
+\begin{equation}
+\frac{\partial V^{\pi}(s)}{\partial \theta} = \int dsda\rho^{\pi}(s)\frac{\partial \pi(s,a)}{\partial \theta} Q^{\pi}(s,a),
+\end{equation}
+where $\rho^{\pi}(s)$ is discounted density for state $s$, defined as,
+\begin{align}
+& \rho^{\pi}(s) = \lim_{t\to\infty}p(s_t|s_0,\pi), \mathrm{stationary \ distribution\ for\ average\ reward}, \\ 
+& \rho^{\pi}(s) = \sum_{t=0}^{\infty}\gamma^t p(s_t=s|s_0,\pi), \mathrm{state-state\ formulation}.
+\end{align}
+\end{theorem}
+\emph{Proof}:
+\begin{lemma}
+The state value function can be written as,
+\begin{equation}
+V^{\pi}(s) = \int dsda \rho^{\pi}(s)\pi(s,a)R_{s}^{a},
+\end{equation}
+where $R_{s}^a = \int ds' rp(r,s'|s,a)$, where $p(r,s'|s,a)$ is transition probability of MDPs.
+\end{lemma}
+Now, we firstly prove average-reward scheme.
+\begin{align}
+\frac{\partial V^{\pi}(s)}{\partial \theta} & = \frac{\partial}{\partial \theta}\sum_a \pi(s,a)Q^{\pi}(s,a) \\ 
+& = \sum_a \partial_{\theta}\pi Q^{\pi} + \pi \partial_{\theta}Q^{\pi} \\ 
+& = \sum_a \partial_{\theta}\pi Q^{\pi} + \pi \partial_{\theta}\left(R_{s}^a - V^{\pi}(s)+\sum_{s'}p(s'|s,a)V^{\pi}(s')\right)\\ 
+& = \sum_{a}\left(\partial_{\theta}\pi Q^{\pi} + \pi\sum_{s'}p(s'|s,a)\partial_{\theta}V^{\pi}(s')\right) - \partial_{\theta}V^{\pi}(s).
+\end{align}
+Since, for averaged reward, the value function depends on the final stationary distribution, we can,
+\begin{equation}
+\aligned
+\sum_{s}\rho^{\pi}(s)\partial_{\theta}V^{\pi}(s) = &\sum_{s,a}\rho^{\pi}(s)Q^{\pi}(s,a)\partial_{\theta}\pi(s,a) + \sum_{s,a,s'}p(s'|s,a)\pi(s,a)\rho^{\pi}(s)\partial_{\theta}V^{\pi}(s')\\ & - \sum_{s}\rho^{\pi}(s)\partial_{\theta}V^{\pi}(s)\\ 
+= & \sum_{s,a}\rho^{\pi}(s)Q^{\pi}(s,a)\partial_{\theta}\pi(s,a) + \sum_{s'}\rho^{\pi}(s')\partial_{\theta}V^{\pi}(s') - \sum_{s}\rho^{\pi}(s)\partial_{\theta} V^{\pi}(s)\\ 
+= & \sum_{s,a}\rho^{\pi}(s)Q^{\pi}(s,a)\partial_{\theta}\pi(s,a).
+\endaligned
+\end{equation}
+QED.\\ 
+For state-state formulation, we can compute as,
+\begin{align}
+\partial_{\theta}V^{\pi}(s) & = \sum_{a}\partial_{\theta}\pi Q^{\pi} + \pi \partial_{\theta}Q^\pi \\ 
+& = \sum_a \partial_{\theta}\pi Q^{\pi} + \pi \partial_{\theta}\sum_{s'}rp(r,s'|s,a)+\gamma p(s'|s,a)V^{\pi}(s')\\ 
+& = \sum_a \partial_{\theta}\pi(s,a) Q^{\pi}(s,a) + \pi(s,a) \gamma p(s'|s,a)\partial_{\theta}V^{\pi}(s') \\ 
+& \ddots \\ 
+& = \sum_{s}\rho^{\pi}(s)\sum_{a}Q^{\pi}(s,a)\partial_{\theta}\pi(s,a).
+\end{align}
+From the above, we can find gradient of policy depends only on $Q^{\pi}(s,a)$ and is independent of $\partial_{\theta}Q^{\pi}$, which brings greate convinience. Then, we can introduce another approximation with parameters $\omega$ to approximate $Q$ value function, denoted by $f_{w}(s,a)$. To make $f_w \to Q$, the following equation should be satisfied,
+\begin{equation}
+\aligned 
+& \partial_w \sum_{s}\sum_{a}\rho^\pi(s,a)\pi(s,a)(Q(s,a)-f_w(s,a))^2 = 0 \\ 
+\label{eq:approx_q}
+& \Leftrightarrow \sum_{s}\sum_{a}\rho^\pi(s,a)\pi(s,a)(Q(s,a)-f_w(s,a))\partial_w f_w(s,a) = 0.
+\endaligned
+\end{equation}
+\begin{theorem}[Policy Gradient with Function Approximation]
+If $f_{\omega}$ satisfies Eq.(\ref{eq:approx_q}) and,
+\begin{equation}
+\label{eq: cons}
+\frac{\partial f_w(s,a)}{\partial \omega} = \frac{\partial \pi(s,a)}{\partial \theta}\frac{1}{\pi(s,a)},
+\end{equation}
+then,
+\begin{equation}
+\frac{\partial V^{\pi}(s)}{\partial \theta} = \sum_{s}\rho^{s}(\pi)\sum_{a}\frac{\partial \pi(s,a)}{\partial \theta}f_w(s,a).
+\end{equation}
+\end{theorem}
+The proof is obivous. In the following, we can discuss Eq.(\ref{eq: cons}), and construct approximators satisfying it. For example, we use a Gibbs distribution to parameterize $\pi(s,a)$ as,
+\begin{equation}
+\pi(s,a;\theta) = \frac{e^{\theta^T \phi(s,a)}}{\sum_{a'}e^{\theta^T\phi(s,b)}}.
+\end{equation}
+And then, we obtain,
+\begin{equation}
+\frac{1}{\pi(s,a)}\frac{\partial \pi(s,a)}{\partial \theta} = \phi(s,a) - \sum_{b}\pi(s,b)\phi(s,b)
+\end{equation}
+Hence, we just need to parameterize $f_w(s,a)$ as,
+\begin{equation}
+f_w(s,a) = w^T(\phi(s,a)-\sum_b \pi(s,b)\phi(s,b)).
+\end{equation}
+
+\begin{theorem}[Policy Iteration with Function Approxmimation]
+Let $\pi$ and $f_w$ be any differential function approximators for the policy and value function respectively that satisfy the compatibility condition\ref{eq: cons} and for which $\max_{\theta,s,a,i,j}|\frac{\partial^2\pi(s,a)}{\partial\theta_I\partial\theta_j}|<B<\infty$. Let $\{\alpha_k\}_{k=0}^{+\infty}$ be any step-size sequence such that $\lim_{k\to\infty} \alpha_k =0$ and $\sum_k \alpha_k = \infty$. Then for any MDP with bounded rewards, the sequence $\{V^{\pi_k}\}$, defined by any $\theta_0, \pi_k$, and,
+\begin{align}
+& w_k = w\ \mathrm{such\ that}\ \sum_{s}\rho^{\pi_k}\sum_a\pi_k(s,a)(Q^{\pi_k}(s,a)-f_w(s,a))\partial_w f_w(s,a) = 0, \\ 
+& \theta_{k+1} = \theta + \alpha_k \sum_{s}\rho^{\pi_k}(s)\sum_af_{w_k}(s,a)\partial_{\theta}\pi_k(s,a),
+\end{align}
+converges such that $\lim_{k\to \infty}\frac{\partial V^{\pi_k}(s)}{\partial \theta} = 0$
+\end{theorem}
+
+
+
+\clearpage
+\bibliographystyle{unsrt}
+\bibliography{RL}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}

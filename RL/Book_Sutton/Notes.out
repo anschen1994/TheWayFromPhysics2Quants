@@ -1,0 +1,16 @@
+\BOOKMARK [1][-]{section.1}{Gradient banits}{}% 1
+\BOOKMARK [1][-]{section.2}{Markov Decision Process}{}% 2
+\BOOKMARK [1][-]{section.3}{Dynamic programming}{}% 3
+\BOOKMARK [2][-]{subsection.3.1}{Policy evaluation}{section.3}% 4
+\BOOKMARK [2][-]{subsection.3.2}{Policy iteration}{section.3}% 5
+\BOOKMARK [2][-]{subsection.3.3}{Practical implement}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{Monte Carlo Methods}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{On-policy}{section.4}% 8
+\BOOKMARK [2][-]{subsection.4.2}{Off-policy}{section.4}% 9
+\BOOKMARK [1][-]{section.5}{Temporal-Difference learning}{}% 10
+\BOOKMARK [2][-]{subsection.5.1}{SARSA}{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.2}{Q-learning}{section.5}% 12
+\BOOKMARK [1][-]{section.6}{Eligibility Traces}{}% 13
+\BOOKMARK [2][-]{subsection.6.1}{Forward TD\(\)}{section.6}% 14
+\BOOKMARK [2][-]{subsection.6.2}{Backward TD\(\)}{section.6}% 15
+\BOOKMARK [2][-]{subsection.6.3}{SARSA\(\)}{section.6}% 16

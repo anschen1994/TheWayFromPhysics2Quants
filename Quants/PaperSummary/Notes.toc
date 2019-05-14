@@ -1,0 +1,2 @@
+\contentsline {section}{\numberline {1}Adapting to a Market Shock: Optimal Sequential Market-Making}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Model}{1}{subsection.1.1}

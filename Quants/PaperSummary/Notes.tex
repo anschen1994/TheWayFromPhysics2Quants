@@ -104,6 +104,8 @@
 \def\BBer{{\text{\it{Ber}}}}
 \def\TT{{\mathrm T}}
 \def\Tr{{\mathrm {Tr}}}
+\def\E{\mathbb{E}}
+
 \font\teneurm=eurm10 \font\seveneurm=eurm7 \font\eighteurm=eurm8 \font\fiveeurm=eurm5
 \newfam\eurmfam
 \textfont\eurmfam=\teneurm \scriptfont\eurmfam=\seveneurm
@@ -142,7 +144,7 @@
 \newtheorem{definition}{Definition}[subsection]
 \newtheorem{problem}{Problem}
 
-\title{Notes}
+\title{Paper Summary}
 
  \author{Yu Chen}
 \affiliation{The Chinese University of HongKong, Department of Mechanical and Automation Engineering}
@@ -153,6 +155,47 @@
 
 \begin{document}\maketitle
 %-------------------------------------------------------------------------------------------------------------------------------------------------
+\section{Adapting to a Market Shock: Optimal Sequential Market-Making}
+The main result of this article is optimal bid-ask price under the strong assumption given by author.
+\subsection{Model}
+We use random variable $V$, obeying $p_V(v)$, to denote the underlying value of asset. At time $t$, the markert-maker raise its bid price $b_t$ and ask price $a_t$. Then a trader comes in to find whether there exists some trading chance. Besides, the trader expect the value of asster is $w_t = V + \epsilon$, where $\epsilon$ is random variable with CDF $F_{\epsilon}$. For example, if $w_t < b_t$, then trader will sell asset; if $w_t > a_t$, then trader will buy the asset. Furthermore, we use $x_t$ to denote the signal such that $x \in \{-1,0,1\}$ means trader buying, no action, selling. Hence, we can find signal distribution as,
+\begin{equation}
+p(x|v;a_t,b_t) = \left\{\begin{array}{cc} F_{\epsilon}(b_t-v) & x = 1\\   F_{\epsilon}(a_t - v)- F_{\epsilon}(b_t -v) &x= 0\\  1 - F_{\epsilon}(a_t -v) &x = -1\\ 
+\end{array}\right.
+\end{equation}
+If the bid price is aceepted at time $t$, we can obtain a bid reward,
+\begin{equation}
+r_t^{\mathrm{bid}} = \int dv(v-b_t) F_{\epsilon}(b_t -v)p_t(v) = \int dv v F_{\epsilon}(-v)p_t(v+b_t)
+\end{equation}
+Similarly, we can obtain an ask reward,
+\begin{equation}
+r_t^{\mathrm{ask}} = \int dv(a_t -v)(1-F_{\epsilon}(a_t-v))p_t(v) = \int dv v F_{\epsilon}(-v)p_t(a_t-v),
+\end{equation}
+where we have used the assumption that distribution of $\epsilon$ is symmetric, i.e. $F_{\epsilon}(x) = 1 - F_{\epsilon}(-x)$.
+Hence,
+\begin{align}
+r_t & = r_t^{\mathrm{bid}} + r_t^{\mathrm{ask}} \\ 
+& = \int dv v F_{\epsilon}(-v)(p_t(v+b_t)+p_t(a_t-v)).
+\end{align}
+For a zero-profit market, the sequential decision $\{a_t,b_t\}$ is very simple, given by equations $r_t^{\mathrm{bid}} = r_t^{\mathrm{ask}} = 0$, which means,
+\begin{align}
+& b_t = \frac{\int dv v F_{\epsilon}(b_t-v)p_t(v)}{\int dv F_{\epsilon}(b_t -v)p_t(v)}, \\ 
+& a_t = \frac{\int dv v F_{\epsilon}(v-a_t)p_t(v)}{\int dv F_{\epsilon}(v-a_t)p_t(v)}.
+\end{align}
+However, more interesting thing is that we want to be a monopolist in this market, which means we should maximize our reward.
+\begin{equation}
+\frac{\partial r_t^{\mathrm{ask}}}{\partial a_t} = 0, \frac{\partial r_t^{\mathrm{bid}}}{\partial b_t} = 0.
+\end{equation}
+Analytically, it is,
+\begin{align}
+& b_t = \frac{\int dv p_t(v)(vf_{\epsilon}(b_t-v)-F_{\epsilon}(b_t-v))}{\int dv p_t(v)f_{\epsilon}(b_t-v)}, \\ 
+& a_t = \frac{\int dv p_t(v)(vf_{\epsilon}(a_t-v)+F_{\epsilon}(v-a_t))}{\int dv p_t(v)f_{\epsilon}(a_t-v)},
+\end{align}
+where $f_{\epsilon}(x) = F_{\epsilon}'(x)$. Here is a problem stated in as: If you believer your current knowledge of random variable $V$, i.e. $p_t(v)$, you can choose the short time optimal decision at least numerically. However, the belief of $p_t(v)$ should not be very high, we also need to choose other decisions such that we can update our knowledge of $V$ more quickly. This is `explore-exploit' problem. Formally, we can restate our problem in more mathematical language instead of maximizing our local reward. Our aim to become a monopolist is to maximize the following value function,
+\begin{equation}
+V(p_t;\pi) = \E[r_t|p_t,a_t^{\pi}(p_t),b_t^{\pi}(p_t)] + \gamma V(p_{t+1};\pi). 
+\end{equation}
+
 
 
 
