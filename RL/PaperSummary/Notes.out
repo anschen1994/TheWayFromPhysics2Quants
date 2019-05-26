@@ -1,1 +1,8 @@
 \BOOKMARK [1][-]{section.1}{Policy Gradient Methods for Reinforcement Learning with Function Approximation}{}% 1
+\BOOKMARK [1][-]{section.2}{GTD\205gradient temporal difference}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{ Policy gradient methods for reinforcement learning with function approximation}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Fast Gradient-Descent Methods for Temporal-Difference Learning with Linear Function Approximation}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.3}{GTD\(\)}{section.2}% 5
+\BOOKMARK [1][-]{section.3}{Off Policy Actor-Critic}{}% 6
+\BOOKMARK [1][-]{section.4}{DDPG}{}% 7
+\BOOKMARK [2][-]{subsection.4.1}{Determinisitic Policy Gradient Algorithms}{section.4}% 8

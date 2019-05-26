@@ -3,6 +3,7 @@
 \usepackage{jheppub,amsmath, amsthm, amssymb,slashed,url,diagram,bm}
 \usepackage{graphicx}
 \usepackage{epstopdf}
+\usepackage{tcolorbox}
 \def\t{\widetilde} 
 \def\ct{{\cmmib t}}
 \def\btau{{\bm \tau}}
@@ -105,6 +106,7 @@
 \def\TT{{\mathrm T}}
 \def\Tr{{\mathrm {Tr}}}
 \def\E{\mathbb{E}}
+\def\i{\mathbb{I}}
 
 \font\teneurm=eurm10 \font\seveneurm=eurm7 \font\eighteurm=eurm8 \font\fiveeurm=eurm5
 \newfam\eurmfam
@@ -143,6 +145,7 @@
 \newtheorem{lemma}{Lemma}[subsection]
 \newtheorem{definition}{Definition}[subsection]
 \newtheorem{problem}{Problem}
+\newtheorem{algorithm}{Algorithm}[subsection]
 
 \title{Paper Summary}
 
@@ -250,6 +253,479 @@ Let $\pi$ and $f_w$ be any differential function approximators for the policy an
 \end{align}
 converges such that $\lim_{k\to \infty}\frac{\partial V^{\pi_k}(s)}{\partial \theta} = 0$
 \end{theorem}
+
+%-------------------------------------------------------
+
+\section{GTD--gradient temporal difference}
+\subsection{ Policy gradient methods for reinforcement learning with function approximation}
+The article\cite{NIPS2008_3626} firstly raises idea for off-policy gradient temporal difference with a linear function approximator. We denote the stationary distribution of behavior policy $b$ as $\rho^{b}(s)$. The observation of state $s$ is given by $\phi_s \in \mathbb{R}^n$, so the $\delta_t$ is,
+\begin{equation}
+\delta_t = r_{t} + \gamma V_t(s_{t+1}) - V_t(s_t) = r_t + \gamma \theta^T\phi_{t+1} -\theta^T \phi_t.
+\end{equation}
+Intutively, we wish the $\delta_t$ approaches to $0$, when we reach a local minimum or maximum. In other words, we can define our obejective function as $L2$ norm,
+\begin{equation}
+J(\theta) = \E[\delta \phi]^T \E[\delta \phi],
+\end{equation}
+where $\E$ is over the stationary distribution $\rho^b(s)$. The gradient is,
+\begin{align}
+\nabla_{\theta}J(\theta)& = 2 \nabla_{\theta}\E[\delta \phi^T] \E[\delta \phi] \\ 
+& = -2\E[(\phi-\gamma\phi')\phi^T]\E[\delta\phi].
+\end{align}
+where $\phi' = \phi_{t+1}$. Hence, there are two approaches two find this gradient. Firstly, it stores the expectation of the first term and samples the second term; secondly, it stores the expectation of the second term and samples the first term. (Note: why we do not stores both expectation is that it will introduce bias brought by the correlation of these two terms). Mathematically, we have $\phi_1,r_1,\phi_2,r_2,\cdots, \phi_k, r_k,\phi_{k+1},r_{k+1}$,
+\begin{align}
+& A_k = \frac{1}{k}\sum_{j=1}^k(\phi_j-\gamma\phi_{j+1})\phi_j^T, \\ 
+& \theta_{k+1} = \theta_k + \alpha_k A_k \delta_k\phi_k,
+\end{align}
+where $\delta_k = r_k + \gamma \theta_k^T\phi_{k+1}-\theta_k^T\phi_k$. The disadvantage of this method is that finding $A_k \in \mathbb{R}^{n\times n}$ costs our $n^2$ complexity. Hence, the most case we use the second approach,
+\begin{align}
+& w_{k+1} = w_k + \beta_k (\delta_k\phi_k - w_k), \\ 
+& \theta_{k+1} = \theta_k + \alpha_k(\phi_k-\gamma\phi_{k+1})\phi_k^T w_k
+\end{align}
+\subsection{Fast Gradient-Descent Methods for Temporal-Difference Learning with Linear Function Approximation}
+This article \cite{sutton2009fast} give an improvement of the above algorithm, named GTD2 and TDC(TD with gradient correction). GTD2 uses a different obejcetive function,
+\begin{equation}
+J(\theta) = \E[\delta \phi]^T \E[\phi \phi^T]^{-1} \E[\delta\phi].
+\end{equation}
+The idea of this objective function comes from the following facts. The ultimate goal of these algorithm is to find an approximator $V_{\theta}$, which can approximates $V$ as exactly as possible. As we known, the true $V$ satisfies the Bellman equation,
+\begin{equation}
+V = TV,
+\end{equation}
+where $T$ is Bellman transition matrix. Hence, we hope our approximator can satisfies this property too, in other wrods, we wish $\|V_{\theta}-TV_{\theta}\|^2_{\rho^b} \equiv \int ds \rho^b(s)|V_{\theta}(s)-TV_{\theta}(s)|^2 \to 0$. Unfornuately, $TV_{\theta}$ may not stay in the space $V_{\theta}$. Instead, we denote a projector $\Pi$, which projects any $v$ to space $V_{\theta}$ as $\Pi v$. To find $\Pi$, we firstly find $\theta$ minimizing $\|v-\Phi\theta\|_D$, where $D \in \mathbb{R}^{|\mathcal{S}|\times |\mathcal{S}|}$ is diagonal matrix with element $\rho^{b}(s)$, and $\Phi$ with rows $\phi_s$.
+\begin{equation}
+\nabla_{\theta} \|v - \Phi\theta\|_D^2 = -2\Phi^TD(v-\Phi\theta),
+\end{equation}
+which means $\theta = (\Phi^TD\Phi)^{-1}\Phi^TDv$, and we know $\Pi v=\Phi\theta, \forall v$. Hence,
+\begin{equation}
+\Pi = \Phi(\Phi^TD\Phi)^{-1}\Phi^TD
+\end{equation}
+We define mean-squared projected Bellman error as,
+\begin{equation}
+\mathrm{MSPBE}(\theta) \equiv \|V_{\theta}-\Pi TV_{\theta}\|^2_D.
+\end{equation}
+By using the facts,
+\begin{equation}
+\aligned 
+&\E[\phi \phi^T] = \sum_s d_s\phi_s\phi_s^T = \Phi^T D \Phi,\\
+& \E[\delta\phi] = \sum_s d_s\phi_s(R_s+\gamma \sum_{s'}p_{s,s'}V_{\theta}(s')-V_{\theta}(s)) = \Phi^T D (TV_{\theta} - V_{\theta}), \\ 
+& \Pi^T D \Pi = D^T \Phi(\Phi^T D \Phi)^{-1} \Phi^T D.
+\endaligned 
+\end{equation}
+we can simplify $\mathrm{MSPBE}(\theta)$ as
+\begin{equation}
+\aligned 
+\mathrm{MSPBE}(\theta) & = \|V_{\theta}-\Pi T V_{\theta}\|_D^2 \\ & = (V_{\theta} -\Pi T V_{\theta})^T D (V_{\theta} -\Pi T V_{\theta}) \\ & = (V_{\theta}-TV_{\theta})^T\Pi^TD\Pi(V_{\theta}-TV_{\theta}) \\ & = (V_{\theta}-TV_{\theta})^TD^T \Phi(\Phi^T D \Phi)^{-1} \Phi^T D(V_{\theta}-TV_{\theta}) \\ 
+& = \E[\delta \phi]^T \E[\phi\phi^T]^{-1} \E[\delta\phi].
+\endaligned 
+\end{equation}
+The gradient is,
+\begin{equation}
+\nabla_{\theta}\mathrm{MSPBE}(\theta) = -2\E[(\phi-\gamma\phi')\phi^T]\E[\phi\phi^T]^{-1}\E[\delta\phi].
+\end{equation}
+We use $w$ to approximate $\E[\phi\phi^T]^{-1}\E[\delta\phi]$, so the update rule is,
+\begin{align}
+& w_{k+1} = w_k + \beta_k(\delta_k - \phi_k^Tw_k)\phi_k, \\ 
+& \theta_{k+1} = \theta_k + \alpha_k(\phi_k-\gamma\phi_k')(\phi_k^Tw_k).
+\end{align}
+TDC apprixmates this gradient more exactly,
+\begin{align}
+-\frac{1}{2}\nabla_{\theta}\mathrm{MSPBE}(\theta) & =\E[(\phi-\gamma\phi')\phi^T]\E[\phi\phi^T]^{-1}\E[\delta\phi] \\ 
+& = \E[\delta\phi]-\gamma \E[\phi'\phi^T]\E[\phi\phi^T]^{-1}\E[\delta\phi] \\ 
+& \approx  \E[\delta\phi] - \gamma \E[\phi'\phi^T]w
+\end{align}
+Hence, TDC update $\theta$ as,
+\begin{equation}
+\theta_{k+1} = \theta_k + \alpha_k\delta_k\phi_k - \alpha \gamma \phi_k'(\phi_k^Tw_k).
+\end{equation}
+
+\begin{tcolorbox}[title=Gradient Temporal Diffierence]
+\begin{align}
+& w_{k+1} = w_k + \beta_k(\delta_k - \phi_k^Tw_k)\phi_k, \\ 
+& \theta_{k+1} = \theta_k + \alpha_k(\phi_k-\gamma\phi_k')(\phi_k^Tw_k)\quad \textbf{(GTD2)}, \\ 
+& \theta_{k+1} = \theta_k + \alpha_k\delta_k\phi_k - \alpha \gamma \phi_k'(\phi_k^Tw_k) \quad \textbf{(TDC)}.
+\end{align}
+\end{tcolorbox}
+
+\subsection{GTD$(\lambda)$}
+Above two algorithms are about GTD$(0)$, in these section, the author introduce the final version of GTD--GTD$(\lambda)$\cite{maei2011gradient}. Firstly, we can write $\lambda-$return as,
+\begin{equation}
+G_t^{\lambda} = r_{t+1} + \gamma\left((1-\lambda)V(s_{t+1})+\lambda G_{t+1}^{\lambda}\right).
+\end{equation}
+Obviously, when $\lambda=1$ it is MC method, $\lambda=0$ is dynamical programming. For simiplicity, we also use linear approximation, so the $\delta$ return is,
+\begin{align}
+& G_t^\lambda = r_{t+1} + \gamma(1-\lambda) \theta^T\phi_{t+1} + \gamma \lambda G_{t+1}^{\lambda},\\
+& \delta_t^{\lambda} = G_{t}^\lambda - \theta^T\phi_t
+\end{align}
+Similarly, we can define a new operator as,
+\begin{equation}
+\P_{b}^{\pi}\delta_t^{\lambda}\phi_t := \sum_s \rho^b(s)\E[\delta_t^\lambda|S_t=s,\pi]\phi(s)
+\end{equation}
+We can find it has the following properties,
+\begin{equation}
+\E[\delta_t^\lambda|S_t=s,\pi] = \E[G_{t}^{\lambda}-\theta^T\phi_s|S_t=s,\pi] = TV_{\theta}(s) - V_{\theta}(s)
+\end{equation}
+then,
+\begin{align}
+\P_{b}^{\pi}\delta_t^{\lambda}\phi_t &= \sum_s \rho^b(s)\E[\delta_t^\lambda|S_t=s,\pi]\phi(s)\\ 
+& = \sum_s \rho^b(s)(TV_{\theta}(s)-V_{\theta}(s))\phi(s) \\ 
+& = \Phi^T D (TV_{\theta}-V_{\theta}).
+\end{align}
+Hence,
+\begin{equation}
+\mathrm{MSPBE}(\theta) = \|V_{\theta} - \Pi TV_{\theta}\|_D^2 = (\P_{b}^{\pi}\delta_t^\lambda \phi_t)^T \E[\phi_t\phi_t^T]^{-1}\P_{b}^{\pi}\delta_t^\lambda \phi_t.
+\end{equation}
+Here there is a problem $\P_{b}^{\pi}\delta_t^\lambda \phi_t$ is along trajectory by $\pi$, but our sample is along $b$. Hence we need to use importance sampling to solve it. To this end, we define,
+\begin{align}
+& G_{t}^{\lambda\rho}(\theta) = \rho_t(r_{t+1}+\gamma((1-\lambda)\theta^T\phi_t + \lambda G_{t}^{\lambda\rho}(\theta))),\\ 
+& \delta_{t}^{\lambda \rho}(\theta) = G_t^{\lambda \rho}(\theta) - \theta^T\phi_t.
+\end{align}
+where $\rho_t = \frac{\pi(S,A)}{b(S,A)}$.
+\begin{theorem}[Off-policy with importance sampling]
+\begin{equation}
+\P_{b}^{\pi}\delta_t^\lambda(\theta) \phi_t = \E[\delta_t^{\lambda\rho}(\theta)\phi_t].
+\end{equation}
+\end{theorem}
+\emph{Proof}:
+To prove this, we only need to prove the following,
+\begin{equation}
+\E[G_t^{\lambda\rho}\phi_t|S_t=s] = \E[G_t^{\lambda}\phi_t|S_t=s,\pi].
+\end{equation}
+We compute the left side,
+\begin{equation}
+\aligned 
+\E[G_t^{\lambda\rho}|S_t=s]  =& \E[\rho_t R_{t+1} + \rho_t\gamma(1-\lambda)\theta^T\phi_t|S_t=s] + \gamma\lambda \E[\rho_tG_{t+1}^{\lambda\rho}|S_t=s] \\ 
+ =& \E[R_{t+1}+\gamma(1-\lambda)\theta^T\phi_t|S_t=s,\pi] + \\
+ & + \gamma\lambda\sum_{s'}p(s'|s,a)b(s,a)\frac{\pi(s,a)}{b(s,a)}\E[G_{t+1}^{\lambda}|S_{t+1}=s'] \\ 
+ = & \E[R_{t+1}+\gamma(1-\lambda)\theta^T\phi_t|S_t=s,\pi] + \lambda \gamma \E[G_{t+1}^{\lambda}|S_t=s,\pi] \\ 
+ = & \E[G_{t}^\lambda|S_t=s,\pi].
+\endaligned 
+\end{equation}
+Hence,
+\begin{equation}
+\mathrm{MSPBE}(\theta) = \E[\delta_t^{\lambda\rho}\phi_t]^T\E[\phi_t\phi_t^T]^{-1}\E[\delta_t^{\lambda\rho}\phi_t].
+\end{equation}
+This is forward view, to implement this algorithm, we need to find $e_t$ such that $\E[\delta_t^{\lambda\rho} \phi_t] = \E[\delta_t e_t]$, where $\delta_t$ is common TD difference $\delta_t = r_{t+1} + \gamma \theta^T\phi_{t+1}-\theta^T\phi_t$.
+\begin{theorem}[Equivalence of the TD forward-view and backward-view] The forward-view is equivalent to the following backward-view:
+\begin{equation}
+\E[\delta_t^{\lambda\rho} \phi_t] = \E[\delta_t e_t]
+\end{equation}
+with updating rule,
+\begin{equation}
+e_t = \rho_t (\phi_t + \gamma\lambda e_{t-1}).
+\end{equation}
+\end{theorem}
+\emph{Proof}:
+We simplify $\delta_t^{\lambda\rho} = G_{t}^{\lambda\rho}-\theta^T\phi_t$ step by step.
+\begin{align}
+G_{t}^{\lambda\rho} & = \rho_t(r_{t+1}+\gamma \theta^T\phi_{t+1}-\theta^T\phi_t)+\rho_t\theta^T\phi_t - \lambda\gamma\rho_t\theta^T\phi_{t+1}+\lambda\gamma\rho_tG_{t+1}^{\lambda\rho} \\ 
+& = \rho_t\delta_t(\theta)+\rho_t\theta^T\phi_t+\lambda\gamma\rho_t\delta_{t+1}^{\lambda\rho}. 
+\end{align}
+Hence,
+\begin{equation}
+\delta_t^{\lambda\rho} = \rho_t\delta_t + (\rho_t-1)\theta^T\phi_t + \lambda\gamma\rho_t\delta_{t+1}^{\lambda\rho}.
+\end{equation}
+We firstly prove the second term vanishes under expectation,
+\begin{align}
+\E[(1-\rho_t)\theta^T\phi_t\phi_t] & = \sum_{s,a} b(s,a)\rho^b(s)(1-\frac{\pi(s,a)}{b(s,a)})\theta^T\phi_s\phi_s \\ 
+& = \sum_{s,a} \rho^b(s)(b(s,a)-\pi(s,a))\theta^T\phi_s\phi_s \\ & = \sum_s \rho^b(s)(1-1)\theta^T\phi_s\phi_s = 0. 
+\end{align}
+Hence,
+\begin{equation}
+\aligned
+ \E[\delta_t^{\lambda\rho}\phi_t] &= \E[\rho_t\delta_t\phi_t + \lambda\gamma\rho_t\delta_{t+1}^{\lambda\rho}\phi_t] \\ 
+& = \E[\rho_t\delta_t\phi_t] + \lambda\gamma\E[\rho_{t-1}\delta_{t}^{\lambda\rho}\phi_{t-1}] \\ 
+& = \E[\rho_t\delta_t\phi_t + \lambda\gamma \rho_{t-1}\phi_{t-1}\rho_t\phi_t] + \gamma^2\lambda^2\E[\rho_{t-1}\rho_t\delta_{t+1}^{\lambda\rho}\phi_{t-1}\phi_t] \\ 
+& \ddots \\ 
+& = \E[\delta_t\rho_t(\phi_t+\lambda\gamma\phi_{t-1}\rho_{t-1}+\cdots)]\\ 
+& = \E[\delta_t e_t],
+\endaligned 
+\end{equation}
+with $e_t = \rho_t(\phi_t + \gamma\lambda e_{t-1})$.\\ 
+Now, we can find gradient of $\mathrm{MSPBE}(\theta) = \E[\delta_te_t]^T\E[\phi_t\phi_t^T]^{-1}\E[\delta_te_t]$.
+\begin{equation}
+-\frac{1}{2}\nabla_{\theta}\mathrm{MSPBE}(\theta) = -\E[\gamma(\phi_{t+1}-\phi_t)e_t^T]\E[\phi_t\phi_t^T]^{-1}\E[\delta_te_t].
+\end{equation}
+To simplify it, we use the following equalities,
+\begin{equation}
+\aligned
+\E[\phi_t\rho_t\phi_t^T] = \E[\phi_t\phi_t^T], \E[\phi_{t+1}\rho_te_t^T] = \E[\phi_{t+1}e_t^T]
+\endaligned 
+\end{equation}
+\begin{align}
+\E[\phi_t e_t^T] & = \E[\phi_t\rho_t(\phi_t^T+\lambda\gamma e_{t-1}^T)] \\ 
+& = \E[\phi_t\phi_t^T] + \gamma\lambda\E[\phi_{t+1}e_t^T].
+\end{align}
+\begin{equation}
+\aligned 
+-\frac{1}{2}\nabla_{\theta}\mathrm{MSPBE}(\theta) & = \E[\delta_t e_t] - \gamma(1-\lambda)\E[\phi_{t+1}e_t^T]\E[\phi_t\phi_t^T]^{-1}\E[\delta_te_t] \\ 
+& \approx \E[\delta_t e_t] - \gamma(1-\lambda)\E[\phi_{t+1}e_t^T]w.
+\endaligned
+\end{equation}
+Hence updating rule is,
+\begin{align}
+& \theta_{t+1} = \theta_t + \alpha_t(\delta_t e_t - \gamma(1-\lambda)(e_t^T w_t)\phi_{t+1}), \\ 
+& w_{t+1} = w_t + \beta_t (\delta_t e_t -(w_t^T\phi_t)\phi_t),\\ 
+& e_{t+1} = \rho_t(\phi_t + \gamma \lambda e_{t-1}).
+\end{align}
+\begin{tcolorbox}[title=GTD$(\lambda)$ with linear function approximation]
+Initialize $w_0$ to $0$, and $\theta_0$ arbitarily. \par 
+Choose $\alpha,\beta,\gamma,\lambda$ \par 
+Reapeat for each episode:\par 
+\hspace{1cm} Initilize $e=0$ \par 
+\hspace{1cm} Take $A_t$ from $S_t$ according to $b(a|s)$ and observe $(\phi_t,r_{t+1},\phi_{t+1})$ \par 
+\hspace{1cm} Update as:
+\hspace{1cm} 
+\begin{equation*}
+\aligned 
+& \delta_t \leftarrow r_{t+1} + \gamma \theta^T \phi_{t+1} - \theta^T\phi_t. \\ 
+& \rho_t \leftarrow \frac{\pi(a_t|s_t)}{b(a_t|s_t)} \\ 
+& e_t \leftarrow \rho_t (\phi_t + \lambda\gamma e_{t-1}) \\ 
+& \theta_{t+1} \leftarrow \theta_t + \alpha_t[\delta_t e_t -\gamma(1-\lambda)(e_t^Tw_t)\phi_{t+1}] \\ 
+& w_{t+1} \leftarrow w_t + \beta_t(\delta_t e_t - (\phi_t^T w_t)\phi_t).
+\endaligned
+\end{equation*}
+\end{tcolorbox}
+%-------------------------------------------------------------
+
+\section{Off Policy Actor-Critic}
+This article\cite{degris2012off} introduce the first actor-critic method that can be applied off-policy, give off-policy gradient theorem and convergence proof. In this paper, author use $b$ to denote the behaviour policy, and stationary distribution or discounted distribution is $\rho^{b}(s)$ in our notations. The objective function is,
+\begin{equation}
+J(\pi_{\theta}) = \int \d s \rho^b(s)V^{\pi_\theta}(s).
+\end{equation}
+Obviously, we should updata $\theta$ along the direction $\nabla_{\theta}J(\pi_{\theta})$, which is given by,
+\begin{equation}
+\aligned 
+\nabla_{\theta} J(\pi_{\theta}) & = \int \d s \d a \rho^b(s) \nabla_{\theta}(\pi_{\theta}(s,a)Q^{\pi_{\theta}}(s,a)) \\ 
+& = \int \d s\d a \rho^b(s)\left(\nabla \pi_{\theta}Q + \pi_{\theta}\nabla_{\theta}Q\right) \\ 
+& \equiv g(\theta) + \int \d s \d a \rho^b(s)\pi_{\theta}\nabla_\theta Q.
+\endaligned 
+\end{equation}
+Actually, the second term is very difficult to compute, the following theorem proves that ignoring it is good approximation.
+\begin{theorem}[Policy Improvement]
+Given any policy with parameters $\theta$, let,
+\begin{equation}
+\theta' = \theta + \alpha g(\theta).
+\end{equation}
+Then there exists an $\epsilon > 0$ such that, for all possible $\alpha < \epsilon$,
+\begin{equation}
+J(\pi_{\theta'}) > J(\pi_{\theta}).
+\end{equation}
+Further, if $\pi$ has a tabular representation, then
+\begin{equation}
+ V^{\pi_{\theta'}}(s) > V^{\pi_{\theta}}(s), \forall s.
+ \end{equation} 
+\end{theorem}
+\emph{Proof}:
+It is easy to show,
+\begin{equation}
+\aligned 
+J(\pi_{\theta}) & = \int \d s\d a\rho^{b}(s)\pi_{\theta}(s,a)Q^{\pi_{\theta}}(s,a) \\
+& \le \int \d s \d a \rho^{b}(s)\pi_{\theta'}(s,a)Q^{\pi_{\theta}}(s,a). 
+\endaligned 
+\end{equation}
+Since we have $f(x+\alpha \nabla f) - f(x) = \alpha (\nabla f)^2 > 0$. Then we repeat applying the above inequality, we can find,
+\begin{align}
+J(\pi_{\theta}) & \le \E_{s\sim \rho^b, a\sim \pi_{\theta'}}Q^{\pi_{\theta}}(s,a) \\ 
+& = \E_{s\sim \rho^b}\E_{a\sim \pi_{\theta'}} [r_{t+1} + \gamma V^{\pi_{\theta}}(s_{t+1})] \\ 
+& \le \E_{s\sim \rho^b}\E_{a\sim \pi_{\theta'}}[r_{t+1}+\gamma r_{t+2}+\gamma V^{\pi_{\theta}(s_{t+2})}] \\ 
+& \ddots \\ 
+& = J(\pi_{\theta'}).
+\end{align}
+The second part is similar since
+\begin{equation}
+V^{\pi_{\theta}} = \int \d a \pi_{\theta}(s,a)Q^{\pi_{\theta}}(s,a) \le \int \d a \pi_{\theta'}(s,a)Q^{\pi}(s,a).
+\end{equation}
+By repeating the above formula, we can prove the second part.
+\begin{theorem}[Off Policy Gradient Theorem]
+Let $\Z = \{\theta|\nabla_{\theta}J(\pi_{\theta})=0\}$ and $\tilde{\Z}=\{\theta|g(\theta)=0\}$, which are both non-empty by some assumptions. If the value function can be represented by our function class, then,
+\begin{equation}
+\Z \in \tilde{\Z}.
+\end{equation}
+Moreover, if we use a tabular representation for policy $\pi$, then
+\begin{equation}
+\Z = \tilde{\Z}.
+\end{equation}
+\end{theorem}
+\emph{Proof}:
+This first part is very trivial because of off policy improvement theorem. More specificly, any $\theta^*$ such that $\nabla_{\theta}J(\pi_{\theta})|_{\theta^*}=0$ must means $g(\theta^*) =0$, otherwise there exists a direction $\frac{g(\theta^*)}{\|g(\theta^*)\|}$ such that $J(\theta)$ increases, which is contradict to $\nabla_{\theta} J(\theta)|_{\theta^*}=0$.\\ 
+For the second part, we have a tabular representation, which means each weight corresponds to exactly one state. Without loss of generality, weights $\theta_{s,1},\theta_{s,2},\ldots,\theta_{s,s_n}$ are relative to state $s$. Since $g(\theta^*) = 0$,
+\begin{equation}
+\label{eq:tabular1}
+\int \d s' \d a \rho^b(s)\partial_{\theta_{s,j}}\pi_{\theta}(s',a) Q^{\pi_{\theta}}(s',a)= \rho^{b}(s)\partial_{\theta_{s,j}}\pi_{\theta}(s,a) Q^{\pi_{\theta}}(s,a) = 0, \forall j=1,\ldots,s_n.
+\end{equation}
+If there exists $k$ such that,
+\begin{equation}
+\int \d s'\d a \pi_{\theta}(s',a)\partial_{\theta_{s,k}}Q^{\pi_{\theta}}(s',a) \neq 0,
+\end{equation}
+which means $J(\pi_{\theta})$ will increase for local increasement of $Q^{\pi_{\theta}}(s,a)$. In other words, we can change our policy a litte to increase our objective function, which means,
+\begin{equation}
+\sum_{j=1}^{n_s}\int \d s' \d a \partial_{\theta_{s,j}}\pi_{\theta}(s',a) Q^{\pi_{\theta}}(s',a) \neq 0.
+\end{equation}
+Contracted to Eq.(\ref{eq:tabular1}). \\ 
+Then, we can rewrite $g(\theta)$ as,
+\begin{align}
+g(\theta) & = \int \d s \rho^b(s) Q^{\pi_{\theta}}(s,a)\nabla_{\theta}\pi_{\theta}(a|s) \\ 
+& = \int \d s \rho^b(s)b(a|s)\rho(a|s)Q^{\pi_{\theta}}(s,a)\nabla \log \pi_{\theta}(a|s) \\ 
+& = \E[\rho(s,a)\psi(s,a)Q^{\pi_{\theta}}(s,a)].
+\end{align}
+There is a famous result that an arbitrary function of state can be introduced into these equations as a baseline without changing the expected value. Hence, we can write $g(\theta)$ as,
+\begin{equation}
+g(\theta) = \E[\rho(s,a)\psi(s,a)(Q^{\pi}(s,a)-V(s))] \approx \E[\rho(s,a)\psi(s,a)(R_t^{\lambda}-V(s))].
+\end{equation}
+where $R_t^\lambda$ is off-policy $\lambda-$return, defined as,
+\begin{equation}
+R_t^\lambda = r_{t+1} + \gamma (1-\lambda)V(s_{t+1}) + \gamma \lambda \rho_t R_{t+1}^\lambda 
+\end{equation}
+To find a backward-view implement, we need to find $e_t$ such that,
+\begin{equation}
+\E[\rho(s,a)\psi(s,a)(R_t^{\lambda}-V(s))] = \E[\delta_t e_t],
+\end{equation}
+where $\delta_t = r_{t+1} + \gamma V(s_{t+1}) - V(s_t)$. As shown in paper, updating rule of $e_t$ is given by,
+\begin{equation}
+e_t = \rho_t(\psi_t+\lambda\gamma e_{t-1}).
+\end{equation}
+\begin{tcolorbox}[title=Off-PAC algorithm]
+Initialize the vectors $e_v,e_u$ and $w$ to zero\par 
+Initialize the vectors $v, u$ arbitrarily \par 
+Initialize the state $s$ \par 
+For each step: \par 
+\hspace{1cm} Choose an action $a$, according to $b(a|s)$ \par 
+\hspace{1cm} Observer resultant reward $r$, and next state $s'$, \par 
+\begin{equation*}
+\aligned 
+& \delta \leftarrow r + \gamma v^T\phi_{s'} - v^T\phi_s \\ 
+& \rho \leftarrow \pi_{u}(a|s)/b(a|s)
+\endaligned
+\end{equation*}
+\hspace{1cm} Update the critic (GTD$(\lambda)$ algorithm):
+\hspace{2cm}
+\begin{equation*}
+\aligned 
+& e_v \leftarrow \rho(\phi_s + \gamma \lambda e_v) \\ 
+& v \leftarrow v + \alpha_v [\delta e_v - \gamma(1-\lambda)(w^Te_v)\phi_s] \\ 
+& w \leftarrow w + \alpha_w[\delta e_v - (w^T\phi_s)\phi_s]
+\endaligned
+\end{equation*}
+\hspace{1cm} Update the actor:
+\begin{equation*}
+\aligned 
+& e_u \leftarrow \rho[\frac{\nabla_u \pi_u(a|s)}{\pi_u(a|s)} + \gamma\lambda e_u] \\ 
+& u \leftarrow u + \alpha_u \delta e_u
+\endaligned
+\end{equation*}
+\hspace{1cm} $s \leftarrow s'$
+\end{tcolorbox}
+
+
+%----------------------------------------------------------
+
+\section{DDPG}
+\subsection{Determinisitic Policy Gradient Algorithms}
+In the previous paper, we have introduced policy gradient methods for stochastic policy. The author in this paper\cite{silver2014deterministic} show that the determinsitic policy gradient does indeed exist, and furthermore it has a simple model-free form that simply follows the gradient of the action-value function. In addition, they show that the deterministic policy gradient is the limiting case, as policy varinance trends to zero. of the stochastic policy gradient. In this paper, we use $\mu_{\theta}(s)$ denote a determinsitic policy, which means when we meet state $s$, we take action $\mu_{\theta}(s)$.
+\begin{theorem}[Deterministic Policy Gradient Theorem]
+Suppose that the MDP satisfies some conditions, these imply that $\nabla \mu_{\theta}$ and $\nabla_a Q^{\mu}(s,a)$ exist and that the determinsitic policy gradient exists. Then
+\begin{equation}
+\nabla_{\theta}V^{\mu_{\theta}} = \int \d s \rho^{\mu}(s)\nabla_{\theta}\mu_{\theta}(s)\nabla Q^{\mu}(s,a)|_{a=\mu(s)}.
+\end{equation}
+\end{theorem}
+\emph{Proof}:
+\begin{align}
+\nabla_{\theta}V^{\mu_{\theta}} & = \nabla_{\theta}Q^{\mu}(s,\mu(s)) \\ 
+& = \nabla_{\theta}\left(R_{s,\mu(s)}+\gamma \int \d s' p(s'|s,\mu(s))V^{\mu}(s')\right) \\ 
+& = \nabla_{\theta}\mu\nabla_a R_{s,a}+\gamma \int \d s'\nabla_{\theta}\mu\nabla_a p(s'|s,a)V^{\mu}(s')+p(s'|s,a)\nabla_{\theta}V^{\mu}(s') \\ 
+& = \nabla_{\theta}\mu \nabla_a \left(R_{s,a}+\gamma \int \d s'p(s'|s,a)V^{\mu}('s)\right) + \gamma \int \d s' p(s'|s,a)\nabla_{\theta}V^{\mu}(s') \\
+& = \nabla_\theta \mu \nabla_a Q^{\mu}(s,a) +  \gamma \int \d s' p(s'|s,a)\nabla_{\theta}V^{\mu}(s') 
+& \ddots \\ 
+& = \int \d s \rho^{\mu}(s)\nabla_{\theta}\mu \nabla_a Q^{\mu}(s,a)
+\end{align}
+
+\begin{theorem}
+Consider a stochastic policy $\pi_{\mu_{\theta},\sigma}$ such that $\pi_{\mu_{\theta},\sigma}(a|s) = \nu_{\sigma}(\mu_{\theta}(s),\sigma)$, where $\sigma$ controls variance and $\nu_{\sigma}$ satisfies some conditions, then
+\begin{equation}
+\lim_{\sigma \downarrow 0} \nabla_\theta V^{\pi_{\mu_{\theta},\sigma}} = \nabla_{\theta}V^{\mu_{\theta}}
+\end{equation}
+\end{theorem}
+Instead of author's proof, I use a more abstract notation to show the same thing. We can write the deterministic policy $\mu_{\theta}$ as the stochastic policy with density $\pi(a|s) =\delta(\mu(s)-a)$. Using the stochastic policy gradient theorem, we can have,
+\begin{align}
+\nabla_{\theta}V^{\mu_{\theta}} & = \int \d s \d a \rho^{\mu}(s) \nabla_{\theta}\delta(\mu_{\theta}(s)-a)Q^{\mu}(s,a)\\ 
+& = -\int \d s \d a \rho^{\mu}(s) \nabla_{\theta}\mu \nabla_a \delta(a-\mu(s))Q^{\mu}(s,a) \\ 
+& = \int \d s \rho^{\mu}(s) \nabla_{\theta}\mu \nabla_a Q^{\mu}(s,\mu(s)),
+\end{align}
+where we use integral by parts to obtain the last equality. To implement, we use $Q^{w}$ to approximate $Q^{\mu}$ with parameters $w$. If we use the on-policy to choose action, then updating rule is,
+\begin{algorithm}[OPDAC(on-policy deterministic actor-critic)]
+\begin{equation}
+\aligned 
+& \delta_t = r_{t+1} + \gamma Q^{w}(s_{t+1},a_{t+1}) - Q^w(s_t,a_t), \\ 
+& w_{t+1} = w_t + \alpha_w \delta_t \nabla_w Q^w(s_t,a_t), \\ 
+& \theta_{t+1} = \theta_t + \alpha_\theta \nabla_{\theta}\mu_{\theta}(s_t)\nabla_aQ^{w}(s_t,a_t)|_{a=\mu_{\theta}(s_t)}.
+\endaligned
+\end{equation}
+\end{algorithm}
+\begin{algorithm}[OPDAC(off-policy deterministic actor-critic)]
+In this algorithm, we use Q-leanring to update critic, then 
+\begin{equation}
+\aligned 
+& \delta_t = r_{t+1} + \gamma Q^{w}(s_{t+1},\mu_{\theta}(s_{t+1})) - Q^w(s_t,a_t), \\ 
+& w_{t+1} = w_t + \alpha_w \delta_t \nabla_w Q^w(s_t,a_t), \\ 
+& \theta_{t+1} = \theta_t + \alpha_\theta \nabla_{\theta}\mu_{\theta}(s_t)\nabla_aQ^{w}(s_t,a_t)|_{a=\mu_{\theta}(s_t)}.
+\endaligned
+\end{equation}
+\end{algorithm}
+Here, we should notice a problem that we can not use arbitrary approximator $Q^w$ to approximate $Q^{\mu}$, since $\nabla_{a}Q^w(s,a)$ may be different with $\nabla_a Q^{\mu}(s,a)$. The following theorem resolve this problem.
+\begin{theorem}
+A function approximator $Q^w$ is compatible with a deterministic policy $\mu_\theta$, $\nabla_\theta J(\theta) = \E_b[\nabla_\theta \mu_\theta(s)\nabla_a Q^w(s,a)|_{a=\mu_{\theta}(s)}]$,
+\begin{itemize}
+\item 
+\begin{equation}
+\nabla_a Q^w(s,a)|_{a=\mu_{\theta}(s)} = \nabla_{\theta}\mu_{\theta}(s)^T w
+\end{equation}
+\item 
+$w$ minimises the mean-squared error, $\mathrm{MSE}(\theta,w)=\E[\epsilon(s;\theta,w)^T\epsilon(s;\theta,w)]$, where $\epsilon(s;,\theta,w) = \nabla_a Q^w(s,a) -\nabla_a Q^{\mu}(s,a)$.
+\end{itemize}
+\end{theorem}
+\emph{Proof}:
+The proof is very simple. To minimize MSE, we wish
+\begin{equation}
+0 = \nabla_w \E[\epsilon^T\epsilon] = \E[\nabla_{\theta}\mu_{\theta}(s)^Tw \epsilon],
+\end{equation}
+which means,
+\begin{equation}
+\E[\nabla_{\theta}\mu_{\theta}(s)^T\nabla_a Q^w(s,a)] = \E[\nabla_{\theta}\mu_{\theta}(s)^T \nabla_a Q^{\mu}(s,a)] = \nabla_\theta J(\theta).
+\end{equation}
+QED. \\ 
+And now, we should construct $Q^w(s,a)$ satisfying the first condition, the simple choice is,
+\begin{equation}
+Q^w(s,a) = (a-\mu_{\theta}(s))^T\nabla_{\theta}\mu_\theta(s)^Tw + V^v(s),
+\end{equation}
+where $V^v(s) = v^T\phi_s$ is a baseline only depending on $s$ such that $Q^w$ looks like an advantage function. For convenience, we denote $\phi(s,a) = \nabla_{\theta}\mu_{\theta}(s)(a-\mu_{\theta})$. Hence, 
+\begin{equation}
+Q^w = \phi(s,a)^T w + v^T \phi_s.
+\end{equation}
+The second condition is very difficult to satifies in practice. Instead, we just use $Q-$learning, SARSA, or other algorithms to update $w$.
+\begin{algorithm}[COPDAC-Q]
+Compatible off policy deterministic actor-critic with Q-learning critic updates as,
+\begin{align}
+& \delta_t = r_t + \gamma Q^w(s_{t+1},\mu_{\theta}(s_{t+1}))-Q^w(s_t,\mu_{\theta}(s_t)), \\ 
+& \theta_{t+1} = \theta_t + \alpha_{\theta} \nabla_{\theta}\mu_{\theta}(s)(\nabla_{\theta}\mu_{\theta}(s)^Tw), \\ 
+& w_{t+1} = w_t + \alpha_w \delta_t \nabla_w Q^w = w_t + \alpha_w \delta_t \phi(s_t,a_t), \\
+& v_{t+1} = v_t + \alpha_v \delta_t \phi_{s_t}
+\end{align}
+\end{algorithm}
+It is well-known that off-policy Q-learning may diverage using linear function approximation. Hence, we use GTD to update critic by the following algorithm,
+\begin{algorithm}[COPDAC-GQ]
+Compatible off policy deterministic actor-critic with gradient Q-leanring algorithm(TDC) updates as,
+\begin{align}
+& \delta_t = r_t + \gamma Q^w(s_{t+1},\mu_{\theta}(s_{t+1}))-Q^w(s_t,\mu_{\theta}(s_t)), \\ 
+& \theta_{t+1} = \theta_t + \alpha_{\theta} \nabla_{\theta}\mu_{\theta}(s)(\nabla_{\theta}\mu_{\theta}(s)^Tw), \\
+& w_{t+1} = w_t + \alpha_w \delta_t \phi(s_t,a_t)-\alpha_w \gamma \phi(s_{t+1},\mu_{\theta}(s_{t+1}))(\phi(s_t,a_t)^Tu_t), \\ 
+& v_{t+1} = v_t + \alpha_v \delta_t \phi(s_t) - \alpha_v \gamma \phi(s_{t+1})(\phi(s_t,a_t)^Tu_t), \\ 
+& u_{t+1} = u_t + \alpha_u(\delta_t - \phi(s_t,a_t)^Tu_t)\phi(s_t,a_t). 
+\end{align}
+\end{algorithm}
+
+
+
+
+
 
 
 

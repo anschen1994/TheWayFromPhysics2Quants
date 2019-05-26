@@ -1,1 +1,8 @@
 \contentsline {section}{\numberline {1}Policy Gradient Methods for Reinforcement Learning with Function Approximation}{1}{section.1}
+\contentsline {section}{\numberline {2}GTD--gradient temporal difference}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1} Policy gradient methods for reinforcement learning with function approximation}{4}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Fast Gradient-Descent Methods for Temporal-Difference Learning with Linear Function Approximation}{5}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}GTD$(\lambda )$}{6}{subsection.2.3}
+\contentsline {section}{\numberline {3}Off Policy Actor-Critic}{9}{section.3}
+\contentsline {section}{\numberline {4}DDPG}{12}{section.4}
+\contentsline {subsection}{\numberline {4.1}Determinisitic Policy Gradient Algorithms}{12}{subsection.4.1}

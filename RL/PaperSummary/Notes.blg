@@ -3,44 +3,46 @@ Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: Notes.aux
 The style file: unsrt.bst
 Database file #1: RL.bib
-You've used 1 entry,
+Warning--empty journal in maei2011gradient
+You've used 6 entries,
             1791 wiz_defined-function locations,
-            451 strings with 3750 characters,
-and the built_in function-call counts, 442 in all, are:
-= -- 41
-> -- 14
-< -- 1
-+ -- 5
-- -- 4
-* -- 26
-:= -- 61
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 1
+            480 strings with 4813 characters,
+and the built_in function-call counts, 1899 in all, are:
+= -- 164
+> -- 97
+< -- 3
++ -- 34
+- -- 28
+* -- 115
+:= -- 284
+add.period$ -- 20
+call.type$ -- 6
+change.case$ -- 6
 chr.to.int$ -- 0
-cite$ -- 1
-duplicate$ -- 23
-empty$ -- 42
-format.name$ -- 4
-if$ -- 105
+cite$ -- 7
+duplicate$ -- 96
+empty$ -- 176
+format.name$ -- 28
+if$ -- 442
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 1
-newline$ -- 8
-num.names$ -- 1
-pop$ -- 6
+int.to.str$ -- 6
+missing$ -- 6
+newline$ -- 33
+num.names$ -- 8
+pop$ -- 33
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 19
+skip$ -- 59
 stack$ -- 0
-substring$ -- 40
-swap$ -- 13
-text.length$ -- 1
+substring$ -- 115
+swap$ -- 39
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
-warning$ -- 0
-while$ -- 4
-width$ -- 2
-write$ -- 13
+warning$ -- 1
+while$ -- 16
+width$ -- 7
+write$ -- 66
+(There was 1 warning)
