@@ -722,6 +722,31 @@ Compatible off policy deterministic actor-critic with gradient Q-leanring algori
 \end{align}
 \end{algorithm}
 
+\begin{tcolorbox}[title=DDPG algorithm]
+Randomly initialize critic network $Q^w(s,a)$ and $\pi_{\theta}(s)$ with weights $w$ and $\theta$.\par 
+Initialize target networl $Q_{\mathrm{target}}$ and $\pi_{\mathrm{target}}$ with $w^{-} \leftarrow w$ and $\theta^{-} \leftarrow \theta$; \par 
+Initialize replay buffer $B$ \par 
+for episode $=1,M$ do \par 
+\hspace{1cm} Initialise a noisy random process $\N$ for action exploration \par 
+\hspace{1cm} Receive initial observation states $s_1$ \par 
+\hspace{1cm} for $t=1, T$ do \par 
+\hspace{2cm} Select action $a_t = \pi(s_t,\theta) +\N$ \par 
+\hspace{2cm} Store transition $(s_t,a_t,r_t,s_{t+1})$ in $B$. \par 
+\hspace{2cm} Sample random mini-batch of $N$ transitions $(s_i,a_i,r_i,s_{i+1})$ from $B$ \par 
+\hspace{2cm} Set $y_i = r_i + \gamma Q_{\mathrm{target}}(s_{i+1}, \pi_{\mathrm{target}}(s_{i+1}))$. \par 
+\hspace{2cm} Update critic by minimising the loss $L(w) = \frac{1}{N}\sum_{i=1}^N(y_i -Q^w(s_i,a_i))^2$. \par 
+\hspace{2cm} Update actor policy using the sampled policy gradient:
+\begin{equation*}
+\nabla_{\theta} J(\theta) \approx \frac{1}{N}\sum_q \nabla_a Q^(w)(s,a)|_{s=s_i,a=a_i}\nabla_{\theta}\pi_{\theta}(s)|_{s=s_i}.
+\end{equation*}
+\hspace{2cm} Update target networks following soft updates:
+\begin{equation*}
+\aligned 
+& w^{-1} \leftarrow \tau w + (1-\tau) w^{-} \\ 
+& \theta^{-1} \leftarrow \tau \theta + (1-\tau) \theta^{-}.
+\endaligned
+\end{equation*}
+\end{tcolorbox}
 
 
 
