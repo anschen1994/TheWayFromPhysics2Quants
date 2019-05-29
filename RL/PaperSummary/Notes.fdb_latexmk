@@ -1,12 +1,14 @@
 # Fdb version 3
-["bibtex Notes"] 1558851464 "Notes.aux" "Notes.bbl" "Notes" 1559103572
+["bibtex Notes"] 1558851464 "Notes.aux" "Notes.bbl" "Notes" 1559106829
   "/usr/local/texlive/2017/texmf-dist/bibtex/bst/base/unsrt.bst" 1480098433 18030 1376b4b231b50c66211e47e42eda2875 ""
-  "Notes.aux" 1559103572 2498 fccfca02462d092dbaa8d089635c28b2 ""
+  "Notes.aux" 1559106829 2498 fccfca02462d092dbaa8d089635c28b2 ""
   "RL.bib" 1558766470 2245 e589f87cd7733be9c6a27cdc3561067a ""
   (generated)
   "Notes.bbl"
   "Notes.blg"
-["pdflatex"] 1559103571 "Notes.tex" "Notes.pdf" "Notes" 1559103572
+["pdflatex"] 1559106828 "/Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.tex" "/Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.pdf" "Notes" 1559106829
+  "/Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.aux" 1559106829 2498 fccfca02462d092dbaa8d089635c28b2 ""
+  "/Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.tex" 1559103777 38119 33a6e03f922f268ac25f9fb6c6ababf1 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/map/fontname/texfonts.map" 1480098670 3287 e6b82fe08f5336d4d5ebc73fb1152e87 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/adobe/helvetic/phvbc7t.tfm" 1480098688 2672 88159036c64e674fcd9515bc9c7052d4 ""
   "/usr/local/texlive/2017/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1480098698 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
@@ -190,16 +192,18 @@
   "/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1495593472 2350277 a699055bee05bf8a40b0504752487295 ""
   "/usr/local/texlive/2017/texmf-var/web2c/pdftex/pdflatex.fmt" 1523511174 4129592 20a98953942bdb286fbea64fda6887fd ""
   "/usr/local/texlive/2017/texmf.cnf" 1495593465 577 2b71d4d888f9e5560b2e99985915a9fa ""
-  "Notes.aux" 1559103572 2498 fccfca02462d092dbaa8d089635c28b2 ""
+  "Notes.aux" 1559106829 2498 fccfca02462d092dbaa8d089635c28b2 ""
   "Notes.bbl" 1558851464 1620 c0e6844bc28cfcf7452394d1edf0e637 "bibtex Notes"
-  "Notes.out" 1559103572 700 d7d97957d99d08b0471d71a473a511cc ""
-  "Notes.tex" 1559103571 38122 3bab156329d413d5c484772a0ccfe2bc ""
-  "Notes.toc" 1559103572 852 0512fc68043f69d3d21334807c7a0e26 ""
+  "Notes.out" 1559106829 700 d7d97957d99d08b0471d71a473a511cc ""
+  "Notes.tex" 1559103777 38119 33a6e03f922f268ac25f9fb6c6ababf1 ""
+  "Notes.toc" 1559106829 852 0512fc68043f69d3d21334807c7a0e26 ""
   "jheppub.sty" 1525765427 11789 efb5920f7ab0665487d8dcc345ec2575 ""
   (generated)
-  "Notes.aux"
-  "Notes.sol"
+  "/Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.log"
   "Notes.log"
-  "Notes.toc"
+  "Notes.aux"
   "Notes.out"
+  "/Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.pdf"
   "Notes.pdf"
+  "Notes.sol"
+  "Notes.toc"
