@@ -17,7 +17,7 @@ s_dim = env.observation_space.shape[0]
 a_dim = env.action_space.shape[0]
 gnet = Net(s_dim, a_dim)
 gnet.share_memory()
-opt = SharedAdam(gnet.parameters(), lr=0.00002)
+opt = SharedAdam(gnet.parameters(), lr=0.0002)
 global_ep, global_ep_r, res_queue, = mp.Value('i', 0), mp.Value('d', 0), mp.Queue()
 
 workers = [Worker(args, gnet, opt, global_ep, global_ep_r, res_queue, i, s_dim, a_dim) for i in range(mp.cpu_count())]
@@ -35,4 +35,5 @@ import matplotlib.pyplot as plt
 plt.plot(res)
 plt.ylabel('Moving average ep reward')
 plt.xlabel('Step')
+plt.savefig('training.png')
 plt.show()

@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F 
 import numpy as np 
 import torch.multiprocessing as mp 
-from utils import v_wrap, push_and_pull, record
+from utils import v_wrap, push_and_pull, record, set_init
 import gym 
 
 xvaier_init = lambda x: nn.init.xavier_uniform_(x, gain=1)
@@ -11,22 +11,23 @@ xvaier_init = lambda x: nn.init.xavier_uniform_(x, gain=1)
 class Net(nn.Module):
     def __init__(self, s_dim, a_dim):
         super(Net, self).__init__()
-        self.a = nn.Linear(s_dim, 200)
-        self.mu = nn.Linear(200, a_dim)
-        self.sigma = nn.Linear(200, a_dim)
-        self.c = nn.Linear(200, 100)
-        self.v = nn.Linear(100, 1)
-        xvaier_init(self.a.weight)
-        xvaier_init(self.mu.weight)
-        xvaier_init(self.sigma.weight)
-        xvaier_init(self.c.weight)
-        xvaier_init(self.v.weight)
+        self.a = nn.Linear(s_dim, 512)
+        self.mu = nn.Linear(512, a_dim)
+        self.sigma = nn.Linear(512, a_dim)
+        self.c = nn.Linear(s_dim, 256)
+        self.v = nn.Linear(256, 1)
+        # xvaier_init(self.a.weight)
+        # xvaier_init(self.mu.weight)
+        # xvaier_init(self.sigma.weight)
+        # xvaier_init(self.c.weight)
+        # xvaier_init(self.v.weight)
+        set_init([self.a, self.mu, self.sigma, self.c, self.v])
         self.distribution = torch.distributions.Normal
 
     def forward(self, x):
-        x = F.relu6(self.a(x))
-        mu = 2*torch.tanh(self.mu(x))
-        sigma = F.softplus(self.sigma(x)) + 0.001
+        y = F.relu6(self.a(x))
+        mu = 2*torch.tanh(self.mu(y))
+        sigma = F.softplus(self.sigma(y)) + 0.001
         c1 = F.relu6(self.c(x))
         v = self.v(c1)
         return mu, sigma, v
@@ -40,7 +41,7 @@ class Net(nn.Module):
     def loss_func(self, s, a, v_t):
         self.train()
         mu, sigma, values = self.forward(s)
-        td = values - v_t 
+        td = v_t - values  
         c_loss = td.pow(2)
         m = self.distribution(mu, sigma)
         log_prob = m.log_prob(a)
@@ -73,7 +74,7 @@ class Worker(mp.Process):
             buffer_s, buffer_a, buffer_r = [], [], []
             ep_r = 0
             for t in range(self.args.MAXSTEP):
-                if self.name == 'woker0':
+                if self.name == 'worker0':
                     self.env.render()
                 a = self.lnet.choose_action(v_wrap(s[None,:]))
                 s_, r, done, _ = self.env.step(a.clip(-2,2))
@@ -83,6 +84,7 @@ class Worker(mp.Process):
                 buffer_s.append(s)
                 buffer_a.append(a)
                 buffer_r.append((r+8.1)/8.1)
+
                 if total_step % self.args.updateperiod == 0 or done:
                     # print(total_step)
                     push_and_pull(self.opt, self.lnet, self.gnet, done, s_, buffer_s, buffer_a, buffer_r, self.args.gamma)
