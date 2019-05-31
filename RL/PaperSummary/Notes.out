@@ -6,3 +6,4 @@
 \BOOKMARK [1][-]{section.3}{Off Policy Actor-Critic}{}% 6
 \BOOKMARK [1][-]{section.4}{DDPG}{}% 7
 \BOOKMARK [2][-]{subsection.4.1}{Determinisitic Policy Gradient Algorithms}{section.4}% 8
+\BOOKMARK [1][-]{section.5}{Asynchronous Methods for Deep Reinforcement Learning}{}% 9

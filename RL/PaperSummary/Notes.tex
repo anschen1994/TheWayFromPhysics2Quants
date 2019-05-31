@@ -748,7 +748,40 @@ for episode $=1,M$ do \par
 \end{equation*}
 \end{tcolorbox}
 
+\section{Asynchronous Methods for Deep Reinforcement Learning}
+Deep neural networks give sufficient representations to value function and policy, but which causes training process quite
+unstable. There are many approaches raised to solve this problem, and they share the same idea: the sequence of observed 
+data and encounted by an online RL agents is non-stationary, and online RL updates are strongly correlated. By storing the 
+agent in an experience replay memory, the data can be batched or randomly sampled from different time-steps. Aggregating over memory in this way reduces non-stationary and decorrelates updateds, but at the same time limits method to off-policy reinforment learning algorithms. In this paper, author provide a very different paradigm for deep reinforcement learning. Instead of experience replay, we asynchronously excute multiple agents in parallel, on multiple instances of environment. This parallelism also decorrelates the agents' data into a more stationary process. since at any given time-step the parallel agents will be experiencing a variety of different state.
 
+\begin{tcolorbox}[title=A3C algorithm]
+Initialise $\theta,\theta_v, T=0$.\par 
+Initialise thread step $t \leftarrow 1$ \par 
+Repeat:\par 
+\hspace{1cm} Reset gradients: $d\theta \leftarrow 0, d\theta_v \leftarrow 0$. \par 
+\hspace{1cm} Synchronize thread-specificc parameters $\theta' =\theta, \theta_v'=\theta_v$\par 
+\hspace{1cm} $t_{\mathrm{start}} = t$ \par 
+\hspace{1cm} Get state $s_t$ \par 
+\hspace{1cm} Repeat:\par 
+\hspace{2cm} Perform $a_t$ according to $\pi_{\theta}(a_t|s_t)$ \par 
+\hspace{2cm} Receieve $r_t$ and new state $s_{t+1}$\par
+\hspace{2cm} $t \leftarrow t+1, T \leftarrow T+1 $ \par 
+\hspace{1cm} Until terminal $s_t$ or $t-t_{\mathrm{start}} == t_{\max}$ \par 
+\hspace{1cm} 
+\begin{equation}
+    R = \left\{\begin{array}{cc}
+        0, & \mathrm{for terminal state} \\ 
+        V(s_t, \theta_v') & \mathrm{otherwise}
+    \end{array}\right.
+\end{equation}
+\hspace{1cm} for $i \in \{1,2,\cdots,t_{\mathrm{start}}\}$ do\par 
+\hspace{2cm} $R \leftarrow r_i + \gamma R$ \par 
+\hspace{2cm} Accumlate gradient wrt $\theta'$: $d\theta \leftarrow d\theta + \nabla_{\theta'} \log \pi(a_i|s_i;\theta')(R-V(s_i;\theta_v'))$ \par 
+\hspace{2cm} Accumlate gradient wrt $\theta_v'$: $d\theta_v \leftarrow d\theta_v + \nabla_{\theta_v'}(R-V(s_i;\theta_v'))^2$\par 
+\hspace{1cm} end for\par 
+\hspace{1cm} Perform asynchronous update $\theta$ using $d\theta$ and $\theta_v$ using $d\theta_v$. \par 
+Until $T > T_{\max}$. 
+\end{tcolorbox}
 
 
 
