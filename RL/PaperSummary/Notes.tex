@@ -748,7 +748,6 @@ for episode $=1,M$ do \par
 \end{equation*}
 \end{tcolorbox}
 
-<<<<<<< HEAD
 \section{PPO}
 PPO\cite{schulman2017proximal} is the simplified version of TRPO, since the latter is very computionally complex. In Policy gradient methods, the most commonly used gradient estimator has the form:
 \begin{equation}
@@ -781,7 +780,6 @@ And now, we can combine everything together, the final objective is,
 L_{t}^{\mathrm{CLIP}+\mathrm{VF}+\mathrm{entropy}} = \E_t[L_t^{\mathrm{CLIP}}-c_1L_t^{\mathrm{VF}}(\theta)+c_2S[\pi_{\theta}](s_t)],
 \end{equation}
 where $c_1,c_2$ are coefficients, and $S$ denotes an entropy bonus, and $L_t^{\mathrm{VF}}$ is a squared-error loss $(V_{\theta}(s_t) - V_t^{\mathrm{target}})^2$.
-=======
 \section{Asynchronous Methods for Deep Reinforcement Learning}
 Deep neural networks give sufficient representations to value function and policy, but which causes training process quite
 unstable. There are many approaches raised to solve this problem, and they share the same idea: the sequence of observed 
@@ -820,7 +818,6 @@ Until $T > T_{\max}$.
 
 
 
->>>>>>> 8f985ae130994796775c2254331b972368bdc5d7
 
 \clearpage
 \bibliographystyle{unsrt}
