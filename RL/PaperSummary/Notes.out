@@ -6,9 +6,6 @@
 \BOOKMARK [1][-]{section.3}{Off Policy Actor-Critic}{}% 6
 \BOOKMARK [1][-]{section.4}{DDPG}{}% 7
 \BOOKMARK [2][-]{subsection.4.1}{Determinisitic Policy Gradient Algorithms}{section.4}% 8
-<<<<<<< HEAD
 \BOOKMARK [1][-]{section.5}{PPO}{}% 9
 \BOOKMARK [2][-]{subsection.5.1}{clipped Surrogate Objective}{section.5}% 10
-=======
-\BOOKMARK [1][-]{section.5}{Asynchronous Methods for Deep Reinforcement Learning}{}% 9
->>>>>>> 8f985ae130994796775c2254331b972368bdc5d7
+\BOOKMARK [1][-]{section.6}{Asynchronous Methods for Deep Reinforcement Learning}{}% 11
