@@ -11,6 +11,11 @@ def v_wrap(np_array, dtype=np.float32):
     return torch.from_numpy(np_array)
 
 
+def normalized_columns_initializer(weights, std=1.0):
+    out = torch.randn(weights.size())
+    out *= std / torch.sqrt(out.pow(2).sum(1, keepdim=True))
+    return out 
+
 def set_init(layers):
     for layer in layers:
         nn.init.normal_(layer.weight, mean=0, std=0.1)

@@ -39,4 +39,9 @@ David Silver, Guy Lever, Nicolas Heess, Thomas Degris, Daan Wierstra, and
 \newblock Deterministic policy gradient algorithms.
 \newblock In {\em ICML}, 2014.
 
+\bibitem{schulman2017proximal}
+John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
+\newblock Proximal policy optimization algorithms.
+\newblock {\em arXiv preprint arXiv:1707.06347}, 2017.
+
 \end{thebibliography}

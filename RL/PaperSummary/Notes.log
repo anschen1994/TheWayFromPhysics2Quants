@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.4.12)  29 MAY 2019 13:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.4.12)  12 JUN 2019 20:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.tex
+**/Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes
 (/Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.tex
 LaTeX2e <2017-04-15>
 Babel <3.10> and hyphenation patterns for 84 language(s) loaded.
@@ -23,7 +23,7 @@ File: size11.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
-) (/Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/jheppub.sty
+) (./jheppub.sty
 Package: jheppub 2013/03/21 r534
  (/usr/local/texlive/2017/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2016/11/05 v2.16a AMS math features
@@ -679,7 +679,7 @@ Package: etoolbox 2017/01/02 v2.4 e-TeX tools for LaTeX (JAW)
 \c@definition=\count197
 \c@problem=\count198
 \c@algorithm=\count199
- (/Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.aux)
+ (./Notes.aux)
 \openout1 = `Notes.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 159.
@@ -722,7 +722,7 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 159.
 LaTeX Info: Redefining \pageref on input line 159.
 LaTeX Info: Redefining \nameref on input line 159.
- (/Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.out) (/Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.out)
+ (./Notes.out) (./Notes.out)
 \@outlinefile=\write7
 \openout7 = `Notes.out'.
 
@@ -743,7 +743,7 @@ Non-PDF special ignored!
 
 Non-PDF special ignored!
 Non-PDF special ignored!
-Non-PDF special ignored!{/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (/Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.toc)
+Non-PDF special ignored!{/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] (./Notes.toc)
 \tf@toc=\write8
 \openout8 = `Notes.toc'.
 
@@ -767,30 +767,30 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10.95> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 678.
- [14] [15] (/Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.bbl) [16
+ [14] [15] [16] (./Notes.bbl) [17
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 782.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 782.
- (/Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 782.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 782.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 809.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 809.
+ (./Notes.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 809.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 809.
 Package rerunfilecheck Info: File `Notes.out' has not changed.
-(rerunfilecheck)             Checksum: D7D97957D99D08B0471D71A473A511CC;700.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 782.
+(rerunfilecheck)             Checksum: 16A8B8E95AB91C6F717DB76637453D41;815.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 809.
  ) 
 Here is how much of TeX's memory you used:
- 19021 strings out of 492995
- 336795 string characters out of 6132704
+ 19036 strings out of 492995
+ 336039 string characters out of 6132704
  435798 words of memory out of 5000000
- 22032 multiletter control sequences out of 15000+600000
+ 22037 multiletter control sequences out of 15000+600000
  17976 words of font info for 64 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 53i,12n,73p,1005b,442s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 53i,12n,73p,1001b,442s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on /Users/anschen/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.pdf (17 pages, 295720 bytes).
+Output written on Notes.pdf (18 pages, 306966 bytes).
 PDF statistics:
- 395 PDF objects out of 1000 (max. 8388607)
- 183 named destinations out of 1000 (max. 500000)
- 77 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 419 PDF objects out of 1000 (max. 8388607)
+ 193 named destinations out of 1000 (max. 500000)
+ 93 words of extra memory for PDF output out of 10000 (max. 10000000)
 

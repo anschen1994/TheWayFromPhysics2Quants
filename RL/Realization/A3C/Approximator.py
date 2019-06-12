@@ -45,8 +45,12 @@ class Net(nn.Module):
         c_loss = td.pow(2)
         m = self.distribution(mu, sigma)
         log_prob = m.log_prob(a)
+        print('log_prob size:', log_prob.size())
+        print('td size:', td.size())
+        print('log_prob * td size:', (log_prob * td).size())
         # entropy of Gaussian distribution
         entropy = 0.5 + 0.5 * np.log(2*np.pi) + torch.log(m.scale)
+        print('entropy size:', entropy.size())
         exp_v = log_prob * td.detach() + 0.005 * entropy 
         a_loss = -exp_v 
         total_loss = (a_loss + c_loss).mean()

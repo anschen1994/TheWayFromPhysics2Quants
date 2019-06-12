@@ -4,45 +4,45 @@ The top-level auxiliary file: Notes.aux
 The style file: unsrt.bst
 Database file #1: RL.bib
 Warning--empty journal in maei2011gradient
-You've used 6 entries,
+You've used 7 entries,
             1791 wiz_defined-function locations,
-            480 strings with 4813 characters,
-and the built_in function-call counts, 1899 in all, are:
-= -- 164
-> -- 97
+            485 strings with 4997 characters,
+and the built_in function-call counts, 2085 in all, are:
+= -- 176
+> -- 114
 < -- 3
-+ -- 34
-- -- 28
-* -- 115
-:= -- 284
-add.period$ -- 20
-call.type$ -- 6
-change.case$ -- 6
++ -- 40
+- -- 33
+* -- 127
+:= -- 320
+add.period$ -- 23
+call.type$ -- 7
+change.case$ -- 7
 chr.to.int$ -- 0
-cite$ -- 7
-duplicate$ -- 96
-empty$ -- 176
-format.name$ -- 28
-if$ -- 442
+cite$ -- 8
+duplicate$ -- 104
+empty$ -- 190
+format.name$ -- 33
+if$ -- 480
 int.to.chr$ -- 0
-int.to.str$ -- 6
-missing$ -- 6
-newline$ -- 33
-num.names$ -- 8
-pop$ -- 33
+int.to.str$ -- 7
+missing$ -- 7
+newline$ -- 38
+num.names$ -- 9
+pop$ -- 36
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 59
+skip$ -- 62
 stack$ -- 0
 substring$ -- 115
-swap$ -- 39
+swap$ -- 40
 text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 16
-width$ -- 7
-write$ -- 66
+while$ -- 17
+width$ -- 8
+write$ -- 76
 (There was 1 warning)
