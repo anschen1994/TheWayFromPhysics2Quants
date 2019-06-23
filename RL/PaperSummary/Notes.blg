@@ -1,48 +1,48 @@
-This is BibTeX, Version 0.99d (TeX Live 2017)
+This is BibTeX, Version 0.99d (TeX Live 2019/W32TeX)
 Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
 The top-level auxiliary file: Notes.aux
 The style file: unsrt.bst
 Database file #1: RL.bib
 Warning--empty journal in maei2011gradient
-You've used 7 entries,
+You've used 8 entries,
             1791 wiz_defined-function locations,
-            485 strings with 4997 characters,
-and the built_in function-call counts, 2085 in all, are:
-= -- 176
-> -- 114
-< -- 3
-+ -- 40
-- -- 33
-* -- 127
-:= -- 320
-add.period$ -- 23
-call.type$ -- 7
-change.case$ -- 7
+            491 strings with 5196 characters,
+and the built_in function-call counts, 2520 in all, are:
+= -- 217
+> -- 131
+< -- 4
++ -- 46
+- -- 38
+* -- 153
+:= -- 375
+add.period$ -- 26
+call.type$ -- 8
+change.case$ -- 8
 chr.to.int$ -- 0
-cite$ -- 8
-duplicate$ -- 104
-empty$ -- 190
-format.name$ -- 33
-if$ -- 480
+cite$ -- 9
+duplicate$ -- 127
+empty$ -- 231
+format.name$ -- 38
+if$ -- 586
 int.to.chr$ -- 0
-int.to.str$ -- 7
-missing$ -- 7
-newline$ -- 38
-num.names$ -- 9
-pop$ -- 36
+int.to.str$ -- 8
+missing$ -- 8
+newline$ -- 43
+num.names$ -- 10
+pop$ -- 42
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 62
+skip$ -- 81
 stack$ -- 0
-substring$ -- 115
-swap$ -- 40
-text.length$ -- 3
+substring$ -- 155
+swap$ -- 53
+text.length$ -- 4
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 17
-width$ -- 8
-write$ -- 76
+while$ -- 21
+width$ -- 9
+write$ -- 87
 (There was 1 warning)

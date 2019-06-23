@@ -1,11 +1,15 @@
-\contentsline {section}{\numberline {1}Policy Gradient Methods for Reinforcement Learning with Function Approximation}{1}{section.1}
-\contentsline {section}{\numberline {2}GTD--gradient temporal difference}{4}{section.2}
-\contentsline {subsection}{\numberline {2.1} Policy gradient methods for reinforcement learning with function approximation}{4}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Fast Gradient-Descent Methods for Temporal-Difference Learning with Linear Function Approximation}{5}{subsection.2.2}
-\contentsline {subsection}{\numberline {2.3}GTD$(\lambda )$}{6}{subsection.2.3}
-\contentsline {section}{\numberline {3}Off Policy Actor-Critic}{9}{section.3}
-\contentsline {section}{\numberline {4}DDPG}{12}{section.4}
-\contentsline {subsection}{\numberline {4.1}Determinisitic Policy Gradient Algorithms}{12}{subsection.4.1}
-\contentsline {section}{\numberline {5}PPO}{15}{section.5}
-\contentsline {subsection}{\numberline {5.1}clipped Surrogate Objective}{16}{subsection.5.1}
-\contentsline {section}{\numberline {6}Asynchronous Methods for Deep Reinforcement Learning}{16}{section.6}
+\contentsline {section}{\numberline {1}Policy Gradient Methods for Reinforcement Learning with Function Approximation}{1}{section.1}% 
+\contentsline {section}{\numberline {2}GTD--gradient temporal difference}{4}{section.2}% 
+\contentsline {subsection}{\numberline {2.1} Policy gradient methods for reinforcement learning with function approximation}{4}{subsection.2.1}% 
+\contentsline {subsection}{\numberline {2.2}Fast Gradient-Descent Methods for Temporal-Difference Learning with Linear Function Approximation}{5}{subsection.2.2}% 
+\contentsline {subsection}{\numberline {2.3}GTD$(\lambda )$}{6}{subsection.2.3}% 
+\contentsline {section}{\numberline {3}Off Policy Actor-Critic}{9}{section.3}% 
+\contentsline {section}{\numberline {4}DDPG}{12}{section.4}% 
+\contentsline {subsection}{\numberline {4.1}Determinisitic Policy Gradient Algorithms}{12}{subsection.4.1}% 
+\contentsline {section}{\numberline {5}TRPO}{15}{section.5}% 
+\contentsline {section}{\numberline {6}PPO}{17}{section.6}% 
+\contentsline {subsection}{\numberline {6.1}clipped Surrogate Objective}{18}{subsection.6.1}% 
+\contentsline {section}{\numberline {7}Asynchronous Methods for Deep Reinforcement Learning}{18}{section.7}% 
+\contentsline {section}{\numberline {A}Lists of Proofs}{20}{appendix.A}% 
+\contentsline {subsection}{\numberline {A.1}TRPO}{20}{subsection.A.1}% 
+\contentsline {subsubsection}{\numberline {A.1.1}Proof Th.\ref {th:TRPO_lowerbound}}{20}{subsubsection.A.1.1}% 
