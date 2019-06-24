@@ -803,6 +803,7 @@ Hence, the optimization problem can be stated as,
 \end{equation}
 But if we directly take $C=\frac{4\epsilon\gamma}{(1-\gamma)^2}$ and do optimization, it can be shown that step size is too small. Hence, author modify this problem slightly: 1) give a constraint on KL divergence; 2) replace $D_{KL}^{\max}$ by an averaged KL divergence $\bar{D}_{KL}^{\rho} = \E_{s\sim \rho}[D_{KL}(\pi(\cdot|s), \tilde{\pi}(\cdot|s))]$.
 \begin{equation}
+\label{eq:TRPO_problem}
 \aligned 
 & \max_{\theta}L_{\theta_{old}}(\theta) \\ 
 & \mathrm{s.t.} \bar{D}_{KL}^{\theta_{old}}(\theta,\theta_{old}) \le \delta.
@@ -815,6 +816,22 @@ We can make it more practical by using importance sampling, with an off policy $
 & \mathrm{s.t.} \E_{s\sim \rho_{old}}[D_{KL}(\pi_{old}(\cdot|s), \pi(\cdot|s))] \le \delta.
 \endaligned
 \end{equation}
+And now, we can discuss how to solve optimization problem Eq.(\ref{eq:TRPO_problem}), at least for a local region. Hence, we can expand the objective and constraint,
+\begin{equation}
+\aligned 
+    & \max_{\delta\theta} g^T \delta\theta \\ 
+    & \frac{1}{2}\delta\theta^T F \delta\theta \le \delta. 
+\endaligned
+\end{equation}
+where $g = \nabla L(\theta)$, $F$ is fisher information matrix of KL divergence, and we ignore the Hessian of $L$. we can reformulate this problem by adding a Lagrangian multipier as, 
+\begin{equation}
+\min_{\delta \theta} \frac{1}{2}\delta\theta^T F \delta\theta - g^T\delta\theta,
+\end{equation}
+which can solved by conjugate gradient algorithm because of $F$ is semi-positive definite.
+
+
+
+
 
 %-----------------------------------------------------------------------------------------------------------------
 \section{PPO}

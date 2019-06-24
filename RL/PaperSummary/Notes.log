@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.6.17)  23 JUN 2019 22:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/W32TeX) (preloaded format=pdflatex 2019.6.17)  24 JUN 2019 14:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -784,28 +784,28 @@ Package pdftex.def Info: TRPO.png  used on input line 756.
  [15] [16 <c:/Users/AnsCh/Documents/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/TRPO.png>] [17] [18] [19] (c:/Users/AnsCh/Documents/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.bbl) [20
 
 ] [21]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 968.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 968.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 985.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 985.
  (c:/Users/AnsCh/Documents/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 968.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 968.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 985.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 985.
 Package rerunfilecheck Info: File `Notes.out' has not changed.
 (rerunfilecheck)             Checksum: 020F123CA2912F5861C263EAA7C055B1;1124.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 968.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 985.
  ) 
 Here is how much of TeX's memory you used:
- 19444 strings out of 492609
- 343431 string characters out of 6132818
+ 19447 strings out of 492609
+ 343474 string characters out of 6132818
  447825 words of memory out of 5000000
- 22767 multiletter control sequences out of 15000+600000
+ 22768 multiletter control sequences out of 15000+600000
  18284 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  53i,12n,73p,1015b,470s stack positions out of 5000i,500n,10000p,200000b,80000s
 <c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb><c:/texlive/2019/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on c:/Users/AnsCh/Documents/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.pdf (22 pages, 301705 bytes).
+Output written on c:/Users/AnsCh/Documents/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.pdf (22 pages, 303002 bytes).
 PDF statistics:
- 512 PDF objects out of 1000 (max. 8388607)
- 463 compressed objects within 5 object streams
- 226 named destinations out of 1000 (max. 500000)
+ 515 PDF objects out of 1000 (max. 8388607)
+ 466 compressed objects within 5 object streams
+ 228 named destinations out of 1000 (max. 500000)
  138 words of extra memory for PDF output out of 10000 (max. 10000000)
 
