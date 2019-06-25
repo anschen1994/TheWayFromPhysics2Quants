@@ -1,15 +1,20 @@
 \BOOKMARK [1][-]{section.1}{Policy Gradient Methods for Reinforcement Learning with Function Approximation}{}% 1
-\BOOKMARK [1][-]{section.2}{GTD\205gradient temporal difference}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{ Policy gradient methods for reinforcement learning with function approximation}{section.2}% 3
-\BOOKMARK [2][-]{subsection.2.2}{Fast Gradient-Descent Methods for Temporal-Difference Learning with Linear Function Approximation}{section.2}% 4
-\BOOKMARK [2][-]{subsection.2.3}{GTD\(\)}{section.2}% 5
-\BOOKMARK [1][-]{section.3}{Off Policy Actor-Critic}{}% 6
-\BOOKMARK [1][-]{section.4}{DDPG}{}% 7
-\BOOKMARK [2][-]{subsection.4.1}{Determinisitic Policy Gradient Algorithms}{section.4}% 8
-\BOOKMARK [1][-]{section.5}{TRPO}{}% 9
-\BOOKMARK [1][-]{section.6}{PPO}{}% 10
-\BOOKMARK [2][-]{subsection.6.1}{clipped Surrogate Objective}{section.6}% 11
-\BOOKMARK [1][-]{section.7}{Asynchronous Methods for Deep Reinforcement Learning}{}% 12
-\BOOKMARK [1][-]{appendix.A}{Lists of Proofs}{}% 13
-\BOOKMARK [2][-]{subsection.A.1}{TRPO}{appendix.A}% 14
-\BOOKMARK [3][-]{subsubsection.A.1.1}{Proof Th.5.0.1}{subsection.A.1}% 15
+\BOOKMARK [1][-]{section.2}{Eligibility Traces}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{On policy}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Off policy}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{GTD\205gradient temporal difference}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{ Policy gradient methods for reinforcement learning with function approximation}{section.3}% 6
+\BOOKMARK [2][-]{subsection.3.2}{Fast Gradient-Descent Methods for Temporal-Difference Learning with Linear Function Approximation}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.3}{GTD\(\)}{section.3}% 8
+\BOOKMARK [1][-]{section.4}{Off Policy Actor-Critic}{}% 9
+\BOOKMARK [1][-]{section.5}{DDPG}{}% 10
+\BOOKMARK [2][-]{subsection.5.1}{Determinisitic Policy Gradient Algorithms}{section.5}% 11
+\BOOKMARK [1][-]{section.6}{TRPO}{}% 12
+\BOOKMARK [1][-]{section.7}{PPO}{}% 13
+\BOOKMARK [2][-]{subsection.7.1}{clipped Surrogate Objective}{section.7}% 14
+\BOOKMARK [1][-]{section.8}{A3C}{}% 15
+\BOOKMARK [1][-]{appendix.A}{Lists of Proofs}{}% 16
+\BOOKMARK [2][-]{subsection.A.1}{Eligibility Traces}{appendix.A}% 17
+\BOOKMARK [3][-]{subsubsection.A.1.1}{Equivalence between forward and backward}{subsection.A.1}% 18
+\BOOKMARK [2][-]{subsection.A.2}{TRPO}{appendix.A}% 19
+\BOOKMARK [3][-]{subsubsection.A.2.1}{Proof Th.6.0.1}{subsection.A.2}% 20

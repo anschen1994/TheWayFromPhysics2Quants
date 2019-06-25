@@ -255,6 +255,38 @@ converges such that $\lim_{k\to \infty}\frac{\partial V^{\pi_k}(s)}{\partial \th
 \end{theorem}
 
 %-------------------------------------------------------
+\section{Eligibility Traces}
+\subsection{On policy}
+Eligibility traces is a technique to find an intermedia between MC and DP. As we known, DP use one step approximation, i.e. $V_{t+1} = V_t +\Delta V_t$, where $\Delta V_t = G_{t}^{t+1} - V_t := r_{t+1} + \gamma V_t(S_{t+1}) - V_t(S_t)$. And MC use the whole epoch information, i.e. $G_{t}^{T} = r_{t+1} + \gamma r_{t+2} + \gamma^{T-t}r_{T-t+1}$. Hence, we can define a $n$ step approximation $G_{t}^{t+n}$ as,
+\begin{equation}
+G_{t}^{t+n} = r_{t+1} + \gamma r_{t+2} + \gamma^{n-1}r_{t+n} + \gamma^n V_t(S_{t+n}).
+\end{equation}
+Or, more generally, we can linearly combine these $G_{t}^{t+n}, \forall n =1,2,3\cdots$ with exponentially decayed discount.
+\begin{equation}
+G_{t}^{\lambda} = (1-\lambda) \sum_{n=1}^{+\infty} \lambda^{n-1} G_t^{t+n}.
+\end{equation}
+If the epoch terminates at finite time $T$, we can use 
+\begin{equation}
+G_t^{\lambda} = (1-\lambda)\sum_{n=1}^{T-t-1}\lambda^{n-1}G_t^{t+n} + \lambda^{T-t-1}G_t.
+\end{equation}
+So far, everything is just theoretically nice, since implementation seems that we need to whole information of epoch for $n =1,2,3\cdots$. Fortunately, we can use backward view to find a practical algorithm. To this end, people introduced a new varibale--\emph{eligibility trace}, which is defined as,
+\begin{eqnarray}
+& E_t(s) = \gamma \lambda E_{t-1}(s), \forall s \neq S_t, \\ 
+& E_t(S_t) = \gamma \lambda E_{t-1}(S_{t-1}) + 1.
+\end{eqnarray}
+And TD error is defined as, 
+\begin{equation}
+    \delta_t = r_{t+1} + \gamma V_t(S_{t+1}) - V_t(S_t),
+\end{equation}
+which is always one-step. And then we can find $\Delta V_t$ is,
+
+
+\subsection{Off policy}
+
+
+
+
+%-------------------------------------------------------------------------------------------------------
 
 \section{GTD--gradient temporal difference}
 \subsection{ Policy gradient methods for reinforcement learning with function approximation}
@@ -866,7 +898,7 @@ And now, we can combine everything together, the final objective is,
 L_{t}^{\mathrm{CLIP}+\mathrm{VF}+\mathrm{entropy}} = \E_t[L_t^{\mathrm{CLIP}}-c_1L_t^{\mathrm{VF}}(\theta)+c_2S[\pi_{\theta}](s_t)],
 \end{equation}
 where $c_1,c_2$ are coefficients, and $S$ denotes an entropy bonus, and $L_t^{\mathrm{VF}}$ is a squared-error loss $(V_{\theta}(s_t) - V_t^{\mathrm{target}})^2$.
-\section{Asynchronous Methods for Deep Reinforcement Learning}
+\section{A3C}
 Deep neural networks give sufficient representations to value function and policy, but which causes training process quite
 unstable. There are many approaches raised to solve this problem, and they share the same idea: the sequence of observed 
 data and encounted by an online RL agents is non-stationary, and online RL updates are strongly correlated. By storing the 
@@ -912,6 +944,16 @@ Until $T > T_{\max}$.
 
 \appendix
 \section{Lists of Proofs}
+\subsection{Eligibility Traces}
+\subsubsection{Equivalence between forward and backward}
+We prove equivalence for off-line update, which means $V_t$ keeps invariant during one epoch. For this case, we can easily represent $G_{t}^{t+n}$ by $\delta_{t+k}, k=0,1,2\cdots$.
+\begin{equation}
+    G_{t}^{t+n} - V_t(S_t) = \sum_{k=0}\gamma^k \delta_{t+k}
+\end{equation} 
+
+
+
+
 \subsection{TRPO}
 \subsubsection{Proof Th.\ref{th:TRPO_lowerbound}}
 Defined average advantage over a different policy as,
