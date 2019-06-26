@@ -39,6 +39,13 @@ David Silver, Guy Lever, Nicolas Heess, Thomas Degris, Daan Wierstra, and
 \newblock Deterministic policy gradient algorithms.
 \newblock In {\em ICML}, 2014.
 
+\bibitem{schulman2015trust}
+John Schulman, Sergey Levine, Pieter Abbeel, Michael Jordan, and Philipp
+  Moritz.
+\newblock Trust region policy optimization.
+\newblock In {\em International Conference on Machine Learning}, pages
+  1889--1897, 2015.
+
 \bibitem{schulman2017proximal}
 John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
 \newblock Proximal policy optimization algorithms.
