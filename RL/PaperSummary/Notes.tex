@@ -279,8 +279,98 @@ And TD error is defined as,
     \delta_t = r_{t+1} + \gamma V_t(S_{t+1}) - V_t(S_t),
 \end{equation}
 which is always one-step. And then we can find $\Delta V_t$ is,
-
-
+\begin{equation}
+    \Delta V_t = \alpha E_t(S_t) \delta_t.
+\end{equation}
+The above is for tabular method. If we use function approximation, then we want to minimize the loss $(G_t^{\lambda} - V(S_t,\theta))^2$, then we can update $\theta$ as,
+\begin{equation}
+    \theta \leftarrow \theta + \alpha (G_t^\lambda - V(S_t, \theta)) \nabla_\theta V(S_t,\theta).
+\end{equation}
+Hence, eligibility trace algorithm can be defined as,
+\begin{eqnarray}
+    & e \leftarrow e + \nabla_\theta V(S_t, \theta) \\ 
+    & \theta \leftarrow \theta + \alpha e \delta_t \\ 
+    & e \leftarrow \gamma\lambda e.
+\end{eqnarray}
+Can we use more information in this whole process? In the above setting, $TD(\lambda)$ is from time $t$ to terminal state $T$ or $\infty$. Maybe we regard each state $S_t$ we meet as a terminal state, and introduce a new variable $G_{t:t+n}^{\lambda}$ instead of $G_t^{\lambda} = G_{t:\infty}^{\lambda}$ by definition,
+\begin{equation}
+    G_{t:t+n}^{\lambda} = (1-\lambda)\sum_{k=1}^{n-1}\lambda^{k-1}G_{t:t+k} + \lambda^{n-1}G_{t:t+n}.
+\end{equation}
+We need to compute the TD of this $G$,
+\begin{equation}
+    \aligned 
+    G_{t:t+n+1}^{\lambda} - G_{t:t+n}^{\lambda} & = (1-\lambda) \lambda^{n-1} G_{t:t+n} + \lambda^n G_{t:t+n+1} - \lambda^{n-1} G_{t:t+n} \\ 
+    & = \lambda^n(G_{t:t+n+1}-G_{t:t+n}) \\ 
+    & = \lambda^n \gamma^n (r_{t+n+1} + \gamma V(S_{t+n+1}) - V(S_{t+n})) \\ 
+    & = \lambda^n \gamma^n \delta_{t+n}
+    \endaligned 
+\end{equation}
+We expand the whole process in detail. For example, you stay at time $t$, with current parameter $\theta_{t-1}$, you can update parameters by,
+\begin{equation}
+\aligned 
+& \theta_{t,0} = \theta_0, \\ 
+& \theta_{t,1} = \theta_{t,0} + \alpha (G_{0:t}^{\lambda} - V(S_1, \theta_{t, 0})) \nabla_{\theta}V(S_1, \theta_{t, 0}), \\ 
+& \theta_{t,2} = \theta_{t,1} + \alpha(G_{1:t}^{\lambda} - V(S_2, \theta_{t, 1})) \nabla_{\theta}V(S_2, \theta_{t,1}), \\ 
+& \cdots , \\ 
+& \theta_{t,t} = \theta_{t,t-1} + \alpha(G_{t-1:t}^{\lambda} - V(S_t, \theta_{t,t-1})) \nabla_{\theta}V(S_t, \theta_{t,t-1}), \\ 
+& \theta_t = \theta_{t,t}.
+\endaligned 
+\end{equation}
+After that, we reach time $t+1$, do the similar update, 
+\begin{equation}
+    \aligned 
+    & \theta_{t+1,0} = \theta_0, \\ 
+    & \theta_{t+1,1} = \theta_{t+1,0} + \alpha (G_{0:t+1}^{\lambda} - V(S_1, \theta_{t+1, 0})) \nabla_{\theta}V(S_1, \theta_{t+1, 0}), \\ 
+    & \theta_{t+1,2} = \theta_{t+1,1} + \alpha(G_{1:t+1}^{\lambda} - V(S_2, \theta_{t+1, 1})) \nabla_{\theta}V(S_2, \theta_{t+1,1}), \\ 
+    & \cdots , \\ 
+    & \theta_{t+1,t+1} = \theta_{t+1,t} + \alpha(G_{t:t+1}^{\lambda} - V(S_{t+1}, \theta_{t+1,t})) \nabla_{\theta}V(S_t, \theta_{t+1,t}), \\ 
+    & \theta_{t+1} = \theta_{t+1,t+1}.
+    \endaligned 
+\end{equation}
+Since we only focus the total update in each step, that is from $\theta_t$ to $\theta_{t+1}$. Hence we can define $y_k := \theta_{t+1, k} - \theta_{t,k}$, and the recursive relation of $y_k$ is obvious, 
+\begin{equation}
+\aligned 
+y_{k} & = y_{k-1} + \alpha(\lambda^{t-k+1}\gamma^{t-k+1}\delta_t - V(S_{k-1}, \theta_{t+1,k-1}) + V(S_{k-1}, \theta_{t,k-1}))\nabla_{\theta}V(S_{k-1}, \theta_{t+1,k-1}) + \alpha(G_{k-1,t}^{\lambda}-V(S_{k-1}, \theta_{t, k-1}))(\nabla_\theta V(S_{k-1}, \theta_{t+1, k-1})-\nabla_\theta V(S_{k-1}, \theta_{t, k-1})) \\ 
+& \approx y_{k-1} + \alpha(\lambda^{t-k+1}\gamma^{t-k+1}\delta_t - \nabla_{\theta}V(S_{k-1}, \theta_{t,k-1})y_{k-1}^T) \nabla_\theta V(S_{k-1}, \theta_{t, k}) 
+\endaligned 
+\end{equation}
+where we have used the first order approximation and ignore the second term since it is the second order error. For simiplicity, we define eligibility trace $e_{k-1} = y_k \lambda^{k-t-1}\gamma^{k-t-1}/\delta_t$, then, 
+\begin{equation}
+    \label{eq: trace}
+    e_k = \lambda\gamma e_{k-1} + \alpha \nabla_{\theta}V(S_{k}, \theta_{t,k}) - \alpha \lambda \gamma \nabla_{\theta}^TV(S_{k},\theta_{t,k}) e_{k-1} \nabla_{\theta}V(S_{k}, \theta_{t,k-1})
+\end{equation}
+But we can find $e_k$ depends on $\theta_{t, k-1}$, which is opposite to our wish. We need to do some approximation later.
+Since our interest is $\theta_{t+1,t+1}$ instead of $\theta_{t+1,t}$, we should compute $\theta_{t+1,t+1}$,
+\begin{equation}
+    \aligned 
+    \theta_{t+1,t+1} & = \theta_{t+1,t} + \alpha (G_{t,t+1}^{\lambda} - V(S_{t}, \theta_{t+1, t}))\nabla_\theta V(S_t,\theta_{t+1,t}) \\ 
+    & = y_t + \theta_t + \alpha (G_{t,t+1}^{\lambda} - V(S_{t}, \theta_{t+1, t}))\nabla_\theta V(S_t,\theta_{t+1,t}) \\ 
+    & = \theta_t + \lambda \gamma e_{t-1} \delta_t + \alpha (G_{t,t+1}^{\lambda} - V(S_{t}, \theta_{t+1, t}))\nabla_\theta V(S_t,\theta_{t+1,t}) \\ 
+    \endaligned
+\end{equation}
+By using the facts,
+\begin{equation}
+    \aligned 
+    G_{t,t+1}^\lambda - V(S_t, \theta_{t+1,t}) & = \delta_t + V(S_t, \theta_{t-1}) - V(S_t, \theta_{t+1,t}) \\
+    & = \delta_t - \left(V(S_t, \theta_{t+1,t}) - V(S_t, \theta_{t}) + V(S_t, \theta_t) - V(S_t, \theta_{t-1})\right) \\ 
+    & = \delta_t - \nabla_\theta V(S_t, \bar{\theta}_{t+1,t}) \lambda \gamma e_{t-1} \delta_t + V(S_t, \theta_t) - V(S_t, \theta_{t-1}).
+    \endaligned 
+\end{equation}
+Combining these two with Eq.(\ref{eq: trace}), we can obtain,
+\begin{equation}
+    \theta_{t+1} = \theta_t + e_t \delta_t + \alpha (V(S_t, \theta_{t-1}) - V(S_t, \theta_t))\nabla V(S_t, \theta_{t-1})
+\end{equation}
+Repalcing above $\theta_{t, k}$ with information we have, we obtain the following algorithm:
+\begin{tcolorbox}{On-line eligibility trace with approximator}
+    Initialise $e = 0, S, \theta$, and $V_{prev} = V(S,\theta)$ \par
+    Reapeat:\par
+    \hspace{1cm} Choose action, make transition $\rightarrow (S', R)$ \par
+    \hspace{1cm} $V_{curr} = V(S',\theta)$, \par
+    \hspace{1cm} $\delta = \gamma V_{curr} + R - V_{prev}$ \par
+    \hspace{1cm} $e = \lambda\gamma e + \alpha \nabla_{\theta} V(S, \theta) - \alpha \lambda\gamma \nabla_{\theta}^TV(S,\theta)e\nabla_{\theta}V(S, \theta)$, \par
+    \hspace{1cm} $\theta = \theta + \delta e + \alpha (v_{prev} - V(S, \theta)) \nabla_{\theta} V(S,\theta)$ \par
+    \hspace{1cm} $v_{prev} = v_{curr}, S= S'$
+\end{tcolorbox}
 \subsection{Off policy}
 
 
@@ -948,8 +1038,15 @@ Until $T > T_{\max}$.
 \subsubsection{Equivalence between forward and backward}
 We prove equivalence for off-line update, which means $V_t$ keeps invariant during one epoch. For this case, we can easily represent $G_{t}^{t+n}$ by $\delta_{t+k}, k=0,1,2\cdots$.
 \begin{equation}
-    G_{t}^{t+n} - V_t(S_t) = \sum_{k=0}\gamma^k \delta_{t+k}
+    G_{t}^{t+n} - V_t(S_t) = \sum_{k=0}^{n-1}\gamma^k \delta_{t+k}
 \end{equation} 
+And then,
+\begin{equation}
+    \aligned 
+    G_{t}^{\lambda} - V_t(S_t) & = (1-\lambda)\sum_{n=1}^{\infty}\lambda^{n-1}G_{t}^{t+n}  \\ & = (1-\lambda)\sum_{n=1}^{\infty}\lambda^{n-1}\sum_{k=0}^{n-1}\gamma^k\delta_{t+k} \\ & = \sum_{k=0}^{+\infty} (\lambda\gamma)^k\delta_{t+k}.  
+    \endaligned
+\end{equation}
+QED. \\ 
 
 
 
