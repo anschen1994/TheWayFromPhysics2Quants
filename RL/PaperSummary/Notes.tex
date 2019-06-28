@@ -257,7 +257,7 @@ converges such that $\lim_{k\to \infty}\frac{\partial V^{\pi_k}(s)}{\partial \th
 %-------------------------------------------------------
 \section{Eligibility Traces}
 \subsection{On policy}
-Eligibility traces is a technique to find an intermedia between MC and DP. As we known, DP use one step approximation, i.e. $V_{t+1} = V_t +\Delta V_t$, where $\Delta V_t = G_{t}^{t+1} - V_t := r_{t+1} + \gamma V_t(S_{t+1}) - V_t(S_t)$. And MC use the whole epoch information, i.e. $G_{t}^{T} = r_{t+1} + \gamma r_{t+2} + \gamma^{T-t}r_{T-t+1}$. Hence, we can define a $n$ step approximation $G_{t}^{t+n}$ as,
+Eligibility traces\cite{sutton1998introduction} is a technique to find an intermedia between MC and DP. As we known, DP use one step approximation, i.e. $V_{t+1} = V_t +\Delta V_t$, where $\Delta V_t = G_{t}^{t+1} - V_t := r_{t+1} + \gamma V_t(S_{t+1}) - V_t(S_t)$. And MC use the whole epoch information, i.e. $G_{t}^{T} = r_{t+1} + \gamma r_{t+2} + \gamma^{T-t}r_{T-t+1}$. Hence, we can define a $n$ step approximation $G_{t}^{t+n}$ as,
 \begin{equation}
 G_{t}^{t+n} = r_{t+1} + \gamma r_{t+2} + \gamma^{n-1}r_{t+n} + \gamma^n V_t(S_{t+n}).
 \end{equation}
@@ -292,7 +292,7 @@ Hence, eligibility trace algorithm can be defined as,
     & \theta \leftarrow \theta + \alpha e \delta_t \\ 
     & e \leftarrow \gamma\lambda e.
 \end{eqnarray}
-Can we use more information in this whole process? In the above setting, $TD(\lambda)$ is from time $t$ to terminal state $T$ or $\infty$. Maybe we regard each state $S_t$ we meet as a terminal state, and introduce a new variable $G_{t:t+n}^{\lambda}$ instead of $G_t^{\lambda} = G_{t:\infty}^{\lambda}$ by definition,
+Can we use more information in this whole process? In the above setting, $TD(\lambda)$ is from time $t$ to terminal state $T$ or $\infty$. Maybe we regard each state $S_t$ we meet as a terminal state, and introduce a new variable $G_{t:t+n}^{\lambda}$ instead of $G_t^{\lambda} = G_{t:\infty}^{\lambda}$ by definition\cite{seijen2014true},
 \begin{equation}
     G_{t:t+n}^{\lambda} = (1-\lambda)\sum_{k=1}^{n-1}\lambda^{k-1}G_{t:t+k} + \lambda^{n-1}G_{t:t+n}.
 \end{equation}
@@ -361,7 +361,7 @@ Combining these two with Eq.(\ref{eq: trace}), we can obtain,
     \theta_{t+1} = \theta_t + e_t \delta_t + \alpha (V(S_t, \theta_{t-1}) - V(S_t, \theta_t))\nabla V(S_t, \theta_{t-1})
 \end{equation}
 Repalcing above $\theta_{t, k}$ with information we have, we obtain the following algorithm:
-\begin{tcolorbox}{On-line eligibility trace with approximator}
+\begin{tcolorbox}[title=On-line eligibility trace with approximator]
     Initialise $e = 0, S, \theta$, and $V_{prev} = V(S,\theta)$ \par
     Reapeat:\par
     \hspace{1cm} Choose action, make transition $\rightarrow (S', R)$ \par
@@ -371,10 +371,61 @@ Repalcing above $\theta_{t, k}$ with information we have, we obtain the followin
     \hspace{1cm} $\theta = \theta + \delta e + \alpha (v_{prev} - V(S, \theta)) \nabla_{\theta} V(S,\theta)$ \par
     \hspace{1cm} $v_{prev} = v_{curr}, S= S'$
 \end{tcolorbox}
+
 \subsection{Off policy}
+We move our discussion to off policy. As we known, the bridge between on policy and off policy can build by importance sampling. If we want estimate $\E_d[x]$, but our samples are from the other distribution $d'$, then we use $\E_d[x] \approx = \frac{1}{n}\sum_{i=1}^n x_i\frac{d(x_i)}{d'(x_i)}$, or $\E_d[x] = \sum_{i=1}^n \frac{x_i\frac{d(x_i)}{d'(x_i)}}{\sum_{i=1}^n \frac{d(x_i)}{d'(x_i)}}$. Hence, if we meet pair $(s,a)$ in $M$ episodes, and in each episode the first time we meet is denoted as $t_m$, then we can estimate $Q(s,a)$ by 
+\begin{equation}
+    Q^{IS}(s,a) = \frac{1}{M}\sum_{m=1}^M R_m w_m,
+\end{equation}
+where,
+\begin{eqnarray}
+    & R_m = r_{t_m + 1} + \gamma r_{t_m+2} + \cdots + \gamma^{T_m - t_m - 1} r_{T_m}, \\ 
+    & w_m = \frac{\pi_{t_m+1} \cdots  \pi_{T_m-1}}{b_{t_m+1} \cdots b_{T_m-1}}.
+\end{eqnarray}
+This paper\cite{precup2000eligibility} raises two algorithms.
+\begin{tcolorbox}[title=Online Eligibility-Trace Version of Per-Decision Importance Sampling]
+\label{alg: online_et_op}
+1. Update the eligibility traces for all states:
+\begin{eqnarray}
+& e_t(s,a) = e_{t-1}(s,a) \gamma\lambda \frac{\pi(s_t,a_t)}{b(s_t,a_t)}, \forall s, a \\ 
+& e_t(s,a) = 1, t_m(s,a) = t,
+\end{eqnarray}
+where $\gamma \in [0,1]$ is an eligibility trace decay factor. \\ 
+2. Compute the TD error:
+\begin{equation}
+\delta_t = r_{t+1} + \gamma \frac{\pi(s_{t+1},a_{t+1})}{b(s_{t+1},a_{t+1})} Q_t(s_{t+1}, a_{t+1}) - Q_t(s_t,a_t)
+\end{equation}
+3. Update the action-value function:
+\begin{equation}
+Q_{t+1}(s,a) \leftarrow Q_t(s,a) + \alpha e_t(s,a) \delta_t.
+\end{equation}
+\end{tcolorbox}
+\begin{theorem}
+\label{th:et_th1}
+For any soft, stationary behavior policy $b$, and $\lambda \in [0,1]$ does not depend on the action $a_t$, Algorithm \ref{alg: online_et_op} with offline updating converges w.p.l to $Q^{\pi}$, under the usual step-size condition on $\alpha$.
+\end{theorem}
 
+\begin{tcolorbox}[title=Online Eligibility-Trace Version of Tree Backup]
+\label{alg: online_et_treebackup}
+1. Update the eligibility traces as:
+\begin{eqnarray}
+& e_t(s,a) = e_{t-1}(s,a)\gamma\lambda \pi(s_t,a_t), \forall s,a \\ 
+& e_t(s,a) = 1, t_m(s,a) = t
+\end{eqnarray}
+2. Compute TD error:
+\begin{equation}
+\delta_t = r_{t+1} + \gamma \sum_a \pi(s_{t+1}, a) Q(s_{t+1}, a) - Q(s_t, a_t)
+\end{equation}
+3. Update the action-value function:
+\begin{equation}
+Q_{t+1}(s,a) \leftarrow Q_t(s,a) + \alpha e_t(s,a) \delta_t
+\end{equation}
+\end{tcolorbox}
 
-
+\begin{theorem}
+\label{th:et_th2}
+For any non-starving behavior policy, for any choice of $\lambda \in [0,1]$ that does not depend on the actions chosen at each state, the offline version of Algorithm \ref{alg: online_et_treebackup} converges w.p.l to $Q^{\pi}$, under the usual conditions on $\alpha$.
+\end{theorem}
 
 %-------------------------------------------------------------------------------------------------------
 
@@ -1048,9 +1099,69 @@ And then,
 \end{equation}
 QED. \\ 
 
+\subsection{Proofs of Theorem \ref{th:et_th1}}
+Firstly, we should the fact the following $Q^{PD}$ is consistent unbiased estimator of $Q^{\pi}$.
+\begin{equation}
+Q^{PD} = \frac{1}{M}\sum_{i=1}^m \sum_{k=1}^{T_m-t_m}\gamma^{k-1}r_{t+k}\prod_{j=t_m+1}^{t_m+k-1}\frac{\pi_j}{b_j}
+\end{equation}
+Since $r_{t+1}$ should only depends on $s_0,a_0, \cdots, s_t, a_t$ and is independent of $s_{t+1}, a_{t+1}, \cdots$. To prove Theorem \ref{th:et_th1}, we firstly prove expectation of $R_t^{(n)}$ approaches to $Q^{\pi}(s,a)$, then by linear combination of $R_t^{(n)}$ also converges to $Q^{\pi}(s,a)$, where $R_t^{(n)}$ is defined as, 
+\begin{equation}
+    R_t^{(n)} = \sum_{k=1}^{n}\gamma^{k-1}r_{t+k}\prod_{j=t+1}^{t+k-1}\frac{\pi_j}{b_j} + \gamma^n \hat{Q}(s_{t+n}, a_{t+n})\prod_{j=t+1}^{t+n-1}\frac{\pi_j}{b_j}
+\end{equation} 
+To compute $\E[R_t^{(n)}]$, we denote the sample space of trajectory as $\Omega(s,a,k) = (s_0=s,a_0=a,s_1,a_1, \cdots,s_{k-1},a_{k-1})$, and one particular trajectory is $w$. Then,
+\begin{equation}
+    \aligned 
+    E_b[R_t^{(n)}|s_t=s,a_t=a] = & \sum_{k=1}^n \sum_{w\in \Omega(s,a,k)} P(w) \gamma^{k-1} r_{t+k} \prod_{j=t+1}^{t+k-1} \frac{\pi_j}{b_j} + \sum_{w\in \Omega(s,a,n)}P(w)\hat{Q}(s_{t+n},a_{t+n})\gamma^n \prod_{j=t+1}^{t+n-1}\frac{\pi_j}{b_j} \\ 
+    = & \sum_{k=1}^n\sum_{w\in\Omega(s,a,k)}\gamma^{k-1}r_{t+k}P(s_{t+k},r_{t+k}|s_{t+k-1},a_{t+k-1}) \prod_{j=t+1}^{t+k-1} \pi_j P(s_j|s_{j-1},a_{j-1}) \\ 
+    & + \sum_{w\in \Omega(s,a,n)} \gamma^n \hat{Q}(s_{t+n}, a_{t+n}) \prod_{j=t+1}^{t+n-1}\pi_j P(s_j|s_{j-1},a_{j-1})
+    \endaligned 
+\end{equation}
+Obviously, we can find if we apply Bellman operator to $Q^{\pi}(s,a)$ we can obtain the similar form, with only difference $Q^{\pi}(s_{t+n}, a_{t+n})$ instead of $\hat{Q}$. Hence, we can obtain, 
+\begin{equation}
+    |\E_b[R_t^{(n)}] - Q^{\pi}(s,a)| \le \gamma^n \max_{s,a} |\hat{Q}(s,a) - Q^\pi(s,a)|.
+\end{equation}
+And then this forward view is equivalent to backward view in Algorithm \ref{alg: online_et_op}. To this end, we assume at time $t$, we meet pair $(s,a)$, then, 
+\begin{equation}
+\aligned 
+\sum_{k=1}^n \delta_{t+k-1}e_{t+k-1} & = \sum_{k=1}^n (r_{t+k} + \gamma \frac{\pi_{t+k}}{b_{t+k}}Q(S_{t+k}, a_{t+k})-Q(S_{t+k-1}, a_{t+k-1}))\gamma^{k-1} \prod_{j=t+1}^{t+k-1} \frac{\pi_j}{b_j} \\
+& = \sum_{k=1}^n r_{t+k} \gamma^{k-1} \prod_{j=t+1}^{t+k-1} \frac{\pi_j}{b_j} + \gamma^k Q(S_{t+k}, a_{t+k}) \prod_{j=t+1}^{t+k}\frac{\pi_j}{b_j}-\gamma^{k-1}Q(S_{t+k-1},a_{t+k-1})\prod_{j=t+1}^{t+k-1}\frac{\pi_j}{b_j} \\ 
+& = \sum_{k=1}^n r_{t+k} \gamma^{k-1} \prod_{j=t+1}^{t+k-1} \frac{\pi_j}{b_j} + \gamma^n Q(s_{t+n},a_{t+n}) \prod_{j=t+1}^{t+n}\frac{\pi_j}{b_j} - Q(S_t,a_t) \\ 
+& = R_t^{(n)} - Q(S_t,a_t).
+\endaligned 
+\end{equation}
 
+\subsubsection{Proof of Theorem \ref{th:et_th2}}
+Tree-backup $Q$ function is defined as, 
+\begin{equation}
+Q^{TB}_n = \frac{1}{M} \sum_{m=1}^M \gamma^n Q(S_{t+n}, a_{t+n}) \prod_{j=t_m+1}^{t_m+n}\frac{\pi_j}{b_j} + \sum_{t_m+1}^{t_m+n} \gamma^{k-t_m-1}\prod_{i=t_m+1}^{k-1} \pi_i(r_k + \gamma \sum_{a\neq a_k}\pi(a|S_k)Q(S_k,a))
+\end{equation}
+The proof is by induction. Firstly,
+\begin{equation}
+    \aligned 
+    \E[Q^{TB}_1] - Q^{\pi}(s,a) & = \E[r + \gamma\sum_{a'} \pi(a'|s')Q(s',a')] -Q^{\pi}(s,a)\\ 
+    & = \sum P(r|s,a)r + \gamma\sum_{a'}P(s'|s,a)\pi(a'|s')Q(s',a') - \sum_r rP(r|s,a) + P(s'|s,a)V^{\pi}(s)\\ 
+    & = \gamma \sum_{a'}P(s'|s,a)\pi(a'|s')(Q(s',a') - Q^{\pi}(s',a')) 
+    \endaligned
+\end{equation}
+Hence,
+\begin{equation}
+    \max_{s,a}|\E[Q^{TB}_1] - Q^{\pi}(s,a)| \le \gamma \max_{s,a}|Q(s,a) - Q^{\pi}(s,a)|
+\end{equation}
+Assume $\max_{s,a}|\E[Q^{TB}_n] - Q^{\pi}(s,a)| \le \gamma \max_{s,a}|Q(s,a) - Q^{\pi}(s,a)|$, and we just need to qualify difference between $Q^{TB}_{n+1}$ and $Q^{TB}_n$. By the definition, we can write a recursive relation,
+\begin{equation}
+Q^{TB}_{n+1}(s_t,a_t) = r_{t+1} + \gamma \sum_{a\neq a_{t+1}} \pi(a|s_{t+1})Q(s_{t+1}, a) + \gamma \pi(a_{t+1}|s_{t+1})Q_{n}^{TB}(s_{t+1},a_{t+1}).
+\end{equation}
+And we know, 
+\begin{equation}
+Q^{\pi}(s_t,a_t) = \sum_r rP(r|s_t,a_t) + \sum P(s'|s_t,a_t)\pi(a'|s')Q^{\pi}(s',a')
+\end{equation}
+Henec, 
+\begin{equation}
+    \max_{s,a}|\E[Q^{TB}_{n+1}(s,a)] - Q^{\pi}(s,a)| = \gamma \max_{s,a} |Q(s,a) - Q^{\pi}(s,a)|
+\end{equation}
+And then we prove equivalence between forward view and backward view. It is obvious from the recursive relation of $Q^{TB}$.
 
-
+%------------------------------------------------------------------------------------------------------------------------
 \subsection{TRPO}
 \subsubsection{Proof Th.\ref{th:TRPO_lowerbound}}
 Defined average advantage over a different policy as,

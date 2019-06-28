@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{sutton2000policy}
 Richard~S Sutton, David~A McAllester, Satinder~P Singh, and Yishay Mansour.
@@ -6,6 +6,23 @@ Richard~S Sutton, David~A McAllester, Satinder~P Singh, and Yishay Mansour.
   approximation.
 \newblock In {\em Advances in neural information processing systems}, pages
   1057--1063, 2000.
+
+\bibitem{sutton1998introduction}
+Richard~S Sutton, Andrew~G Barto, et~al.
+\newblock {\em Introduction to reinforcement learning}, volume 135.
+\newblock MIT press Cambridge, 1998.
+
+\bibitem{seijen2014true}
+Harm Seijen and Rich Sutton.
+\newblock True online td (lambda).
+\newblock In {\em International Conference on Machine Learning}, pages
+  692--700, 2014.
+
+\bibitem{precup2000eligibility}
+Doina Precup.
+\newblock Eligibility traces for off-policy policy evaluation.
+\newblock {\em Computer Science Department Faculty Publication Series},
+  page~80, 2000.
 
 \bibitem{NIPS2008_3626}
 Richard~S Sutton, Hamid~R. Maei, and Csaba Szepesv\'{a}ri.

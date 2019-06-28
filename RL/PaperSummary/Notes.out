@@ -16,5 +16,7 @@
 \BOOKMARK [1][-]{appendix.A}{Lists of Proofs}{}% 16
 \BOOKMARK [2][-]{subsection.A.1}{Eligibility Traces}{appendix.A}% 17
 \BOOKMARK [3][-]{subsubsection.A.1.1}{Equivalence between forward and backward}{subsection.A.1}% 18
-\BOOKMARK [2][-]{subsection.A.2}{TRPO}{appendix.A}% 19
-\BOOKMARK [3][-]{subsubsection.A.2.1}{Proof Th.6.0.1}{subsection.A.2}% 20
+\BOOKMARK [2][-]{subsection.A.2}{Proofs of Theorem 2.2.1}{appendix.A}% 19
+\BOOKMARK [3][-]{subsubsection.A.2.1}{Proof of Theorem 2.2.2}{subsection.A.2}% 20
+\BOOKMARK [2][-]{subsection.A.3}{TRPO}{appendix.A}% 21
+\BOOKMARK [3][-]{subsubsection.A.3.1}{Proof Th.6.0.1}{subsection.A.3}% 22
