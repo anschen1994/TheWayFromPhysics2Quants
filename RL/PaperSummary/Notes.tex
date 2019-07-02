@@ -1074,6 +1074,93 @@ Repeat:\par
 Until $T > T_{\max}$. 
 \end{tcolorbox}
 
+%---------------------------------------------------------------------------------------------------------
+\section{ACER}
+ACER is short for actor-critic with experience replay \cite{wang2016sample}. Three designs: 
+\begin{itemize}
+    \item Use Retrace Q-value estimation
+    \item Truncate the importance weights with bias correction
+    \item Apply efficient TRPO
+\end{itemize}
+1)\\
+As we have shown above, we can know $\Delta Q$ for off-policy is 
+\begin{equation}
+    \Delta Q^{IS}(s_t,a_t) = \gamma^t \prod_{1\le \tau \le t} \frac{\pi(a_{\tau}|s_{\tau})}{\beta(a_{\tau}|s_{\tau})}\delta_t
+\end{equation}
+What retrace do is to truncate $\frac{\pi_\tau}{\beta_\tau}$ to avoid large variance caused by this ratio. That is,
+\begin{equation}
+    \Delta Q^{\mathrm{retrace}} =  \gamma^t \prod_{1\le \tau \le t} \min\{c,\frac{\pi(a_{\tau}|s_{\tau})}{\beta(a_{\tau}|s_{\tau})}\}\delta_t
+\end{equation}
+If we use function approximation method, we just need to minimize the loss $(Q^{\mathrm{Retrace}}-Q_{\theta}(s,a))^2$, which means gradient is $(Q^{\mathrm{Retrace}}-Q_{\theta}(s,a))\nabla_{\theta}Q_{\theta}(s,a)$. \\ 
+2)\\ 
+For policy update, we have the gradient for off-policy is,
+\begin{equation}
+    g = \E_{s_t\sim \rho^\beta, a_t\sim \beta}[\frac{\pi_t}{\beta_t} \nabla_\theta \log \pi_\theta(a_t|s_t) Q^{\theta}(s_t,a_t)]
+\end{equation}
+In this paper, the author also introduce the truncation to avoid large variance by the following method,
+\begin{equation}
+    g \approx \E_{s_t\sim \rho^\beta} \E_{a_t\sim \beta}[\bar{\rho}_t \nabla_\theta\pi_\theta(a_t|s_t)Q^{\theta}(s_t,a_t) + \E_{a\sim \pi}[(\frac{\rho_t-c}{\rho_t})_+ \nabla_\theta \log\pi_\theta(a|s_t) Q^{\theta}(s_t,a)]]
+\end{equation}
+where $\bar{\rho}_t = \min\{c, \frac{\pi_t}{\beta_t}\}$, and $\rho_t = \frac{\pi_t}{\beta_t}$.\\ 
+3)\\ 
+This paper has another contribution, by which we can simplify the implementation of TRPO. The author do optimization over $\phi_{\theta}(x)$ instead of $\theta$ directly, where $\phi_\theta(x)$ represents statistics. Then we find update direction by solving the following optimization problem:
+\begin{equation}
+    \aligned 
+    & \min_z \frac{1}{2}\|g - z\|^2 \\
+    & \nabla_{\phi_\theta} D_{KL}(f(\cdot|\phi_{\theta_a}),f(\cdot|\phi_\theta))^T z \le \delta   
+    \endaligned  
+\end{equation}
+where $\theta_a$ represents moving average. For example, after each update of $\theta$, we update $\theta_a$ as $\alpha \theta_a + (1-\alpha)\theta$.
+The solution of this problem is given as,
+\begin{equation}
+    z^* = g - \max\{0, \frac{k^Tg -\delta}{\|k\|^2}\}
+\end{equation}
+
+\begin{tcolorbox}[title=ACER for discrete actions]
+Reset gradient $d\theta \leftarrow 0, d\theta_v \leftarrow 0$. \par 
+Initialise parameters $\theta' \leftarrow \theta, \theta_v' \leftarrow \theta_v$. \par 
+if not On-policy then \par 
+\hspace{1cm} Sample the trajectory $\{x_0, a_0, r_0, \mu(\cdot|x_0) \cdots, x_k, a_k, r_k, \mu(\cdot|x_k)\}$ from memory replay. \par 
+else \par 
+\hspace{1cm} Get state $s_0$ \par 
+end if \par 
+for $i \in \{0, \cdots, k\}$ do \par 
+\hspace{1cm} Compute $f(\cdot|\phi_{\theta'}(x_i,)), Q_{\theta_v'}(x_i, \cdot)$ and $f(\cdot|\phi_{\theta_a}(x_i))$.\par 
+\hspace{1cm} if On-Policy then \par 
+\hspace{2cm} Peform $a_i$ according $f(\cdot|\phi_{\theta'}(x_i))$\par 
+\hspace{2cm} Receieve reward $r_i$ and $x_{i+1}$\par 
+\hspace{2cm} $\mu(\cdot|x_i) \leftarrow f(\cdot|\phi_{\theta'}(x_i))$ \par 
+\hspace{1cm} end if \par 
+\hspace{1cm} $\bar{\rho}_i \leftarrow \min\{1, \frac{f(a_i|\phi_{\theta'}(x_i))}{\mu(a_i|x_i)}\}$.\par 
+end for \par 
+\begin{equation}
+Q^{ret} \leftarrow \left\{\begin{array}{cc} 0 & \mathrm{terminal} x_k \\ \sum_a Q_{\theta_v'}(x_k,a)f(a|\phi_{\theta'}(x_i)) & \mathrm{otherwise}\end{array}\right.
+\end{equation}
+for $i \in \{k-1, \cdots, 0\}$ do \par 
+\hspace{1cm} $Q^{ret} \leftarrow r_i + \gamma Q^{ret}$ \par 
+\hspace{1cm} $V_i \leftarrow \sum_a Q_{\theta_v'}(x_i,a)f(a|\phi_{\theta'}(x_i))$\par 
+\hspace{1cm} Computing quantities needed for trust region updating:
+\begin{equation}
+\aligned 
+    g \leftarrow & \min\{c, \rho(a_i)\}\nabla_{\phi_{\theta'}(x_i)} \log f(a_i|\phi_{\theta'}(x_i))(Q^{ret}-V_i) \\
+    & + \sum_a [1-\frac{c}{\rho_i(a_i)}]_+ f(a|\phi_{\theta'}(x_i))\nabla_{\phi_{\theta'}(x_i)}\log f(a|\phi_{\theta'}(x_i))(Q_{\theta_v'}(x_i,a_i)-V_i) \\ 
+    k \leftarrow & \nabla_{\phi_{\theta'}(x_i)} D_{KL}[f(\cdot|\phi_{\theta_a}(x_i)), f(\cdot|\phi_{\theta'}(x_i))] \\
+\endaligned
+\end{equation}
+\hspace{1cm} Accumlate gradients wrt $\theta'$: $d\theta \leftarrow d\theta + \frac{\partial\phi_{\theta'}(x_i)}{\partial \theta'}(g-\max\{0,\frac{k^Tg -\delta}{\|k\|^2}\})$ \par 
+\hspace{1cm} Accumlate gradients wrt $\theta_v'$: $d\theta_v \leftarrow d\theta_v + \nabla_{\theta_v'}(Q^{ret}-Q_{\theta_v'}(x_i,a))^2$ \par 
+\hspace{1cm} Update Retrace target: $Q^{ret} \leftarrow \bar{\rho}_i(Q^{ret}-Q_{\theta_v'}(s))$ \par 
+end for \par 
+Perform asynchronous update of $\theta$ using $d\theta$ and of $\theta_v$ using $d\theta_v$ \par 
+Updating the average policy network: $\theta_a \leftarrow \alpha \theta_a + (1-\alpha) \theta$.
+
+\end{tcolorbox}
+
+
+
+
+
+
 
 
 

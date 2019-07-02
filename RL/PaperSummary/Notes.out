@@ -13,10 +13,11 @@
 \BOOKMARK [1][-]{section.7}{PPO}{}% 13
 \BOOKMARK [2][-]{subsection.7.1}{clipped Surrogate Objective}{section.7}% 14
 \BOOKMARK [1][-]{section.8}{A3C}{}% 15
-\BOOKMARK [1][-]{appendix.A}{Lists of Proofs}{}% 16
-\BOOKMARK [2][-]{subsection.A.1}{Eligibility Traces}{appendix.A}% 17
-\BOOKMARK [3][-]{subsubsection.A.1.1}{Equivalence between forward and backward}{subsection.A.1}% 18
-\BOOKMARK [2][-]{subsection.A.2}{Proofs of Theorem 2.2.1}{appendix.A}% 19
-\BOOKMARK [3][-]{subsubsection.A.2.1}{Proof of Theorem 2.2.2}{subsection.A.2}% 20
-\BOOKMARK [2][-]{subsection.A.3}{TRPO}{appendix.A}% 21
-\BOOKMARK [3][-]{subsubsection.A.3.1}{Proof Th.6.0.1}{subsection.A.3}% 22
+\BOOKMARK [1][-]{section.9}{ACER}{}% 16
+\BOOKMARK [1][-]{appendix.A}{Lists of Proofs}{}% 17
+\BOOKMARK [2][-]{subsection.A.1}{Eligibility Traces}{appendix.A}% 18
+\BOOKMARK [3][-]{subsubsection.A.1.1}{Equivalence between forward and backward}{subsection.A.1}% 19
+\BOOKMARK [2][-]{subsection.A.2}{Proofs of Theorem 2.2.1}{appendix.A}% 20
+\BOOKMARK [3][-]{subsubsection.A.2.1}{Proof of Theorem 2.2.2}{subsection.A.2}% 21
+\BOOKMARK [2][-]{subsection.A.3}{TRPO}{appendix.A}% 22
+\BOOKMARK [3][-]{subsubsection.A.3.1}{Proof Th.6.0.1}{subsection.A.3}% 23

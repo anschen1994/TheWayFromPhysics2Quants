@@ -1,20 +1,20 @@
 # Fdb version 3
-["bibtex Notes"] 1561715922 "Notes.aux" "Notes.bbl" "Notes" 1561715926
-  "Notes.aux" 1561715925 5582 4ff79f86d8d139c41febb86e50c93165 "pdflatex"
-  "RL.bib" 1561694043 3500 434f06b23bd456ce9fe114715c3894bf ""
+["bibtex Notes"] 1562049105 "Notes.aux" "Notes.bbl" "Notes" 1562071930
+  "Notes.aux" 1562050035 5751 cc687c0e18f54711b2a15f3b85ff0769 "pdflatex"
+  "RL.bib" 1562039434 3799 f7e901495c6462bd91416e6a3f37a471 ""
   "c:/texlive/2019/texmf-dist/bibtex/bst/base/unsrt.bst" 1560776050 18030 1376b4b231b50c66211e47e42eda2875 ""
   (generated)
-  "Notes.blg"
   "Notes.bbl"
-["pdflatex"] 1561715923 "c:/Users/AnsCh/Documents/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.tex" "c:/Users/AnsCh/Documents/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.pdf" "Notes" 1561715926
-  "Notes.aux" 1561715925 5582 4ff79f86d8d139c41febb86e50c93165 "pdflatex"
-  "Notes.bbl" 1561715922 2643 74bef361813e516775aacf18dae2e6c1 "bibtex Notes"
-  "Notes.out" 1561715925 1573 38b0704597124b1870777cc46230774b "pdflatex"
-  "Notes.tex" 1561715918 67539 fdefbe14c1a2cb20df73cfb6b25b4e93 ""
-  "Notes.toc" 1561715925 2052 5270b11bd110fef14f22917b474122b1 "pdflatex"
+  "Notes.blg"
+["pdflatex"] 1562050033 "c:/Users/AnsCh/Documents/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.tex" "c:/Users/AnsCh/Documents/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.pdf" "Notes" 1562071930
+  "Notes.aux" 1562050035 5751 cc687c0e18f54711b2a15f3b85ff0769 "pdflatex"
+  "Notes.bbl" 1562049106 2899 3fbe08033ab04bc862e3f9e81c8ab29d "bibtex Notes"
+  "Notes.out" 1562050035 1613 9e4c02da6f4de41637ecf1383991762f "pdflatex"
+  "Notes.tex" 1562071929 72735 b4e610d6ca2b1f4531752a1d0573e56c ""
+  "Notes.toc" 1562050035 2114 497d35352f3477bf0d02063057038d17 "pdflatex"
   "TRPO.png" 1561104312 12942 56d52a0d15226659a9dd336ac166f1de ""
-  "c:/Users/AnsCh/Documents/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.aux" 1561715925 5582 4ff79f86d8d139c41febb86e50c93165 ""
-  "c:/Users/AnsCh/Documents/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.tex" 1561715918 67539 fdefbe14c1a2cb20df73cfb6b25b4e93 ""
+  "c:/Users/AnsCh/Documents/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.aux" 1562050035 5751 cc687c0e18f54711b2a15f3b85ff0769 ""
+  "c:/Users/AnsCh/Documents/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.tex" 1562071929 72735 b4e610d6ca2b1f4531752a1d0573e56c ""
   "c:/texlive/2019/texmf-dist/fonts/map/fontname/texfonts.map" 1560777063 3332 103109f5612ad95229751940c61aada0 ""
   "c:/texlive/2019/texmf-dist/fonts/tfm/adobe/helvetic/phvbc7t.tfm" 1560777290 2672 88159036c64e674fcd9515bc9c7052d4 ""
   "c:/texlive/2019/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmbsy6.tfm" 1560775760 1124 14ccf5552bc7f77ca02a8a402bea8bfb ""
@@ -204,11 +204,11 @@
   "c:/texlive/2019/texmf.cnf" 1560779965 673 4ae7b2f49cee444c5343a45b5d0f169c ""
   "jheppub.sty" 1561101153 12163 efb5920f7ab0665487d8dcc345ec2575 ""
   (generated)
-  "Notes.pdf"
-  "Notes.sol"
-  "Notes.log"
   "c:/Users/AnsCh/Documents/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.pdf"
+  "Notes.log"
   "Notes.toc"
   "c:/Users/AnsCh/Documents/GitHub/TheWayFromPhysics2Quants/RL/PaperSummary/Notes.log"
-  "Notes.aux"
+  "Notes.pdf"
+  "Notes.sol"
   "Notes.out"
+  "Notes.aux"

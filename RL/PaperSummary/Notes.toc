@@ -13,10 +13,11 @@
 \contentsline {section}{\numberline {7}PPO}{21}{section.7}% 
 \contentsline {subsection}{\numberline {7.1}clipped Surrogate Objective}{22}{subsection.7.1}% 
 \contentsline {section}{\numberline {8}A3C}{22}{section.8}% 
-\contentsline {section}{\numberline {A}Lists of Proofs}{24}{appendix.A}% 
-\contentsline {subsection}{\numberline {A.1}Eligibility Traces}{24}{subsection.A.1}% 
-\contentsline {subsubsection}{\numberline {A.1.1}Equivalence between forward and backward}{24}{subsubsection.A.1.1}% 
-\contentsline {subsection}{\numberline {A.2}Proofs of Theorem \ref {th:et_th1}}{25}{subsection.A.2}% 
-\contentsline {subsubsection}{\numberline {A.2.1}Proof of Theorem \ref {th:et_th2}}{26}{subsubsection.A.2.1}% 
-\contentsline {subsection}{\numberline {A.3}TRPO}{27}{subsection.A.3}% 
-\contentsline {subsubsection}{\numberline {A.3.1}Proof Th.\ref {th:TRPO_lowerbound}}{27}{subsubsection.A.3.1}% 
+\contentsline {section}{\numberline {9}ACER}{23}{section.9}% 
+\contentsline {section}{\numberline {A}Lists of Proofs}{26}{appendix.A}% 
+\contentsline {subsection}{\numberline {A.1}Eligibility Traces}{26}{subsection.A.1}% 
+\contentsline {subsubsection}{\numberline {A.1.1}Equivalence between forward and backward}{26}{subsubsection.A.1.1}% 
+\contentsline {subsection}{\numberline {A.2}Proofs of Theorem \ref {th:et_th1}}{27}{subsection.A.2}% 
+\contentsline {subsubsection}{\numberline {A.2.1}Proof of Theorem \ref {th:et_th2}}{28}{subsubsection.A.2.1}% 
+\contentsline {subsection}{\numberline {A.3}TRPO}{29}{subsection.A.3}% 
+\contentsline {subsubsection}{\numberline {A.3.1}Proof Th.\ref {th:TRPO_lowerbound}}{29}{subsubsection.A.3.1}% 

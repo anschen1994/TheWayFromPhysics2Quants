@@ -68,4 +68,10 @@ John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
 \newblock Proximal policy optimization algorithms.
 \newblock {\em arXiv preprint arXiv:1707.06347}, 2017.
 
+\bibitem{wang2016sample}
+Ziyu Wang, Victor Bapst, Nicolas Heess, Volodymyr Mnih, Remi Munos, Koray
+  Kavukcuoglu, and Nando de~Freitas.
+\newblock Sample efficient actor-critic with experience replay.
+\newblock {\em arXiv preprint arXiv:1611.01224}, 2016.
+
 \end{thebibliography}
