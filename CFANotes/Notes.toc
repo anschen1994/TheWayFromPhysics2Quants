@@ -1,0 +1,3 @@
+\contentsline {section}{\numberline {1}Demand and Production}{1}{section.1}% 
+\contentsline {subsection}{\numberline {1.1}Demand}{1}{subsection.1.1}% 
+\contentsline {subsection}{\numberline {1.2}Product}{2}{subsection.1.2}% 
