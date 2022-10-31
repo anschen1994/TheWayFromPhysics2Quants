@@ -1,0 +1,68 @@
+# Data from file cdin.dat distributed with Introduction to
+# Time Series and Forecasting by Peter J. Brockwell and
+# Richard A. Davis, Springer 1996
+# (C) 1996 Springer-Verlag New York, Inc.
+# Input series vector(rep(0,15),rep(1,45)) rferenced in intervention
+# analysis example 10.2.1, p. 333 which describes it erroneously as
+# having 16 zeros.
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+1
+ 

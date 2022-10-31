@@ -1,0 +1,65 @@
+# Data from file oshorts.dat distributed with Introduction to
+# Time Series and Forecasting by Peter J. Brockwell and
+# Richard A. Davis, Springer 1996
+# (C) 1996 Springer-Verlag New York, Inc.
+# Overshorts data shown in Figure 3.5 on p. 95
+# 57 daily overshorts from an underground gasoline tank at a filling
+# station in Colarado
+   78
+  -58
+   53
+  -65
+   13
+   -6
+  -16
+  -14
+    3
+  -72
+   89
+  -48
+  -14
+   32
+   56
+  -86
+  -66
+   50
+   26
+   59
+  -47
+  -83
+    2
+   -1
+  124
+ -106
+  113
+  -76
+  -47
+  -32
+   39
+  -30
+    6
+  -73
+   18
+    2
+  -24
+   23
+  -38
+   91
+  -56
+  -58
+    1
+   14
+   -4
+   77
+ -127
+   97
+   10
+  -28
+  -17
+   23
+   -2
+   48
+ -131
+   65
+  -17
+ 
